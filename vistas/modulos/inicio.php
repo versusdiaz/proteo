@@ -6,7 +6,7 @@
             <div class="card p-4">
               <div class="card-body">
                 <h1>Login</h1>
-                <p class="text-muted">Sign In to your account</p>
+                <p class="text-muted">Ingrese con su cuenta</p>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
@@ -27,9 +27,6 @@
                   <div class="col-6">
                     <button class="btn btn-primary px-4" type="button">Login</button>
                   </div>
-                  <div class="col-6 text-right">
-                    <button class="btn btn-link px-0" type="button">Forgot password?</button>
-                  </div>
                 </div>
               </div>
             </div>
@@ -46,12 +43,6 @@
         </div>
       </div>
     </div>
-    <!-- <script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="node_modules/pace-progress/pace.min.js"></script>
-    <script src="node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
-    <script src="node_modules/@coreui/coreui/dist/js/coreui.min.js"></script> -->
     <script src="vistas/plugins/jquery/jquery.min.js"></script>
     <script src="vistas/plugins/jquery-ui/jquery-ui.min.js"></script>
     <script src="vistas/plugins/sweetalert/sweetalert.min.js"></script>
