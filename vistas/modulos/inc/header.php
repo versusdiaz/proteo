@@ -11,4 +11,5 @@
     <link rel="stylesheet" href="vistas/css/simple-line-icons.css">
     <link rel="stylesheet" href="vistas/css/style.css">
     <link rel="stylesheet" href="vistas/css/pace.min.css">
+    <link rel="stylesheet" href="vistas/plugins/sweetalert/sweetalert.css">
   </head>
