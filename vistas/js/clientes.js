@@ -10,7 +10,7 @@ function init(){
         } else {
             return false;   // PASS validation otherwise
         };
-    }, "Ruta no valida");
+    }, "Nombre no valido");
     
     $("#formulario").validate({
         rules:{
@@ -18,43 +18,42 @@ function init(){
                 required: true,
                 nombre:true
             },
-            montotsmp:{
+            nfiscal:{
                 required: true,
                 number: true,
-                min:1
+                maxlength:9,
+                minlength:9
             },
-            montotsmc:{
+            direccion:{
                 required: true,
-                number: true,
-                min:1
+                nombre:true
             },
-            montocaribec:{
-                required: true,
-                number: true,
-                min:1
+            telefono:{
+                digits: true,
+                minlength: 10,
+                maxlength: 10
             }
         },
         messages: {
             nombre:{
                 required: "Campo requerido"
             },
-            montotsmp:{
+            nfiscal:{
                 required: "Campo requerido",
                 min: "No se aceptan numeros negativos"
             },
-            montotsmc:{
-                required: "Campo requerido",
-                min: "No se aceptan numeros negativos"
+            direccion:{
+                required: "Campo requerido"
             },
-            montocaribec:{
-                required: "Campo requerido",
-                min: "No se aceptan numeros negativos"
-            }
+            telefono:{
+                minlength: "Minimo 10 Digitos / Ejem: 4249999999",
+                maxlength: "Maximo 10 Digitos / Ejem: 4249999999"
+            },
         },
-        errorElement: "em",
+        errorElement: "div",
         errorPlacement: function ( error, element ) {
             // Add the `help-block` class to the error element
-            error.addClass( "help-block" );
+            error.addClass( "invalid-feedback" );
 
             if ( element.prop( "type" ) === "checkbox" ) {
                 error.insertAfter( element.parent( "label" ) );
@@ -63,10 +62,11 @@ function init(){
             }
         },
         highlight: function ( element, errorClass, validClass ) {
-            $( element ).parents( ".col-sm-12" ).addClass( "has-error" ).removeClass( "has-success" );
+            // $( element ).parents( ".col-sm-12" ).addClass( "is-invalid" ).removeClass( "has-success" );
+            $( element ).addClass( "is-invalid" ).removeClass( "is-valid" );
         },
         unhighlight: function (element, errorClass, validClass) {
-            $( element ).parents( ".col-sm-12" ).addClass( "has-success" ).removeClass( "has-error" );
+            $( element ).addClass( "is-valid" ).removeClass( "is-invalid" );
         }
        });
 
@@ -79,11 +79,11 @@ function init(){
 }
 
 function limpiar(){
-    $("#idtarifa").val("");
+    $("#idcliente").val("");
     $("#nombre").val("");
-    $("#montotsmp").val("");
-    $("#montotsmc").val("");
-    $("#montocaribec").val("");
+    $("#nfiscal").val("");
+    $("#telefono").val("");
+    $("#direccion").val("");
     /*QUITAR CLASES A LOS ELEMENTOS*/
     $(".form-group").removeClass('has-success has-error');
 }
@@ -112,7 +112,7 @@ function listar(){
     tabla=$('#tbllistado').dataTable(
 	{
 		"aProcessing": true,//Activamos el procesamiento del datatables
-	    "aServerSide": true,//PaginaciÔö£Ôöén y filtrado realizados por el servidor
+	    "aServerSide": true,//Paginacion y filtrado realizados por el servidor
 	    dom: 'Bfrtip',//Definimos los elementos del control de tabla
 	    buttons: [
 		            'copyHtml5',
@@ -122,7 +122,7 @@ function listar(){
 		        ],
 		"ajax":
 				{
-					url: 'controllers/tarifas.php?op=listar',
+					url: 'controllers/clientes.php?op=listar',
 					type : "get",
 					dataType : "json",
 					error: function(e){
@@ -139,7 +139,7 @@ function guardaryeditar(e){
     e.preventDefault();
     var formData = new FormData($("#formulario")[0]);
     $.ajax({
-       url:"controllers/tarifas.php?op=guardaryeditar",
+       url:"controllers/clientes.php?op=guardaryeditar",
        type:"POST",
        data: formData,
        contentType: false,
@@ -152,31 +152,65 @@ function guardaryeditar(e){
     });
 }
 
-function mostrar(idtarifa){
-     $.post("controllers/tarifas.php?op=mostrar",{idtarifa:idtarifa},function(data,status){
+function mostrar(idcliente){
+     $.post("controllers/clientes.php?op=mostrar",{idcliente:idcliente},function(data,status){
           /*Convertir la cadena enviada desde PHP a un vector de objetos en JavaScript*/
          data = JSON.parse(data);
          mostrarform(true);
-        $("#idtarifa").val(data.idtarifa);
+        $("#idcliente").val(data.idcliente);
         $("#nombre").val(data.nombre);
-        $("#montotsmp").val(data.montotsmp);
-        $("#montotsmc").val(data.montotsmc);
-        $("#montocaribec").val(data.montocaribec);
+        $("#nfiscal").val(data.nfiscal);
+        $("#direccion").val(data.direccion);
+        $("#telefono").val(data.telefono);
      });
     }
 
- function eliminar(idtarifa){
+ function eliminar(idcliente){
     swal({
         title: "Esta seguro..?"
-        , text: "Al eliminar esta tarifa, no podra utilizarse en el sistema"
+        , text: "Al eliminar este cliente, no podra utilizarse en el sistema"
         , type: "warning"
         , showCancelButton: true
         , confirmButtonColor: "#da4f49"
         , confirmButtonText: "Si, deseo eliminarla!"
         , closeOnConfirm: false
         }, function () {
-            $.post('controllers/tarifas.php?op=eliminar',{idtarifa:idtarifa},function(e){
+            $.post('controllers/clientes.php?op=eliminar',{idcliente:idcliente},function(e){
             swal("Eliminada!", e , "success");  
+            tabla.ajax.reload();
+            });
+        });
+ }
+
+ function desactivar(idcliente){
+    swal({
+        title: "Esta seguro..?"
+        , text: "Al desactivar este cliente, no podra utilizarse en el sistema"
+        , type: "warning"
+        , showCancelButton: true
+        , confirmButtonColor: "#da4f49"
+        , confirmButtonText: "Si, deseo desactivarlo!"
+        , closeOnConfirm: false
+        }, function () {
+            $.post('controllers/clientes.php?op=desactivar',{idcliente:idcliente},function(e){
+            swal("Desactivado!", e , "success");  
+            tabla.ajax.reload();
+            });
+        });
+ }
+
+ function activar(idcliente){
+    swal({
+        title: "Esta seguro..?"
+        , text: "Al activar este cliente, podra utilizarse en el sistema"
+        , type: "warning"
+        , showCancelButton: true
+        , confirmButtonColor: "#da4f49"
+        , confirmButtonText: "Si, deseo activarlo!"
+        , closeOnConfirm: false
+        }, function () {
+            $.post('controllers/clientes.php?op=activar',{idcliente:idcliente},function(e){
+            swal("Activado!", e , "success");  
             tabla.ajax.reload();
             });
         });

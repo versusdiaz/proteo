@@ -23,7 +23,7 @@
                 <div class="col-sm-12 col-xl-12">
                     <div class="card">
                         <div class="card-header">
-                            <i class="fa fa-globe"></i> Portal
+                            <i class="fa fa-globe"></i> Clientes
                             <button class="float-right btn btn-success" id="btnagregar" onclick="mostrarform(true)">
                                 <i class="fa fa-plus-circle"></i> Agregar</button>
                         </div>
@@ -52,29 +52,29 @@
                             </div>
                             <div class="card-body" id="formularioregistros">
                             <form name="formulario" id="formulario" method="POST">
-                                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <label class="col-sm-12 control-label">Ruta *:</label>
-                                <input type="hidden" name="idtarifa" id="idtarifa">
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <label class="col-sm-12 control-label">Nombre *:</label>
+                                <input type="hidden" name="idcliente" id="idcliente">
                                 <div class="col-sm-12">
-                                <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Ruta" required>
+                                <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" required>
                                 </div>
                                 </div>
-                                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <label class="col-sm-12 control-label">Monto Chofer *:</label>
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <label class="col-sm-12 control-label">Id. Fiscal *:</label>
                                 <div class="col-sm-12">
-                                <input type="number" class="form-control" name="montotsmp" id="montotsmp" required>
+                                <input type="number" class="form-control" name="nfiscal" id="nfiscal" required>
                                 </div>
                                 </div>
-                                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <label class="col-sm-12 control-label">Monto TSM *:</label>
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <label class="col-sm-12 control-label">Direccion *:</label>
                                 <div class="col-sm-12">
-                                <input type="number" class="form-control" name="montotsmc" id="montotsmc" required>
+                                <input type="text" class="form-control" name="direccion" id="direccion" required>
                                 </div>
                                 </div>
-                                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <label class="col-sm-12 control-label">Monto CARIBBEAN *:</label>
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <label class="col-sm-12 control-label">Telefono *:</label>
                                 <div class="col-sm-12">
-                                <input type="number" class="form-control" name="montocaribec" id="montocaribec" required>
+                                <input type="number" class="form-control" name="telefono" id="telefono" required>
                                 </div>
                                 </div>
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -82,9 +82,6 @@
                                     <i class="fa fa-save"></i> Guardar</button>
                                 <button class="btn btn-danger" type="button" onclick="cancelarform()">
                                     <i class="fa fa-arrow-circle-left"></i> Cancelar</button>
-                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-primary">
-                                    Ayuda
-                                </button>
                                 </div>
                             </form>
                             </div>

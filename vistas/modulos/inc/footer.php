@@ -17,3 +17,4 @@
 <script src="vistas/plugins/perfect.scrollbar.min.js"></script>
 <script src="vistas/plugins/coreui.min.js"></script>
 <script src="vistas/plugins/main.js"></script>
+<script src="vistas/plugins/jsvalidate/jquery.validate.min.js"></script>
