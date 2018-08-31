@@ -5,7 +5,7 @@ class EnlacesModels{
 
   public static function enlacesModels($enlaces){
     if($enlaces == "escritorio" ||
-       $enlaces == "perfilchofer" ||
+       $enlaces == "clientes" ||
        $enlaces == "imprimirc"){
        /*MODULO A CARGAR SERA*/
        $module = "vistas/modulos/".$enlaces.".php";
