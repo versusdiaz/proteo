@@ -11,5 +11,8 @@
     <link rel="stylesheet" href="vistas/css/simple-line-icons.css">
     <link rel="stylesheet" href="vistas/css/style.css">
     <link rel="stylesheet" href="vistas/css/pace.min.css">
+    <link rel="stylesheet" href="vistas/plugins/datatables/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="vistas/plugins/datatables/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="vistas/plugins/datatables/responsive.dataTables.min.css">
     <link rel="stylesheet" href="vistas/plugins/sweetalert/sweetalert.css">
   </head>
