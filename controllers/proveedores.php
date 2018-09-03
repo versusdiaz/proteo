@@ -61,12 +61,12 @@ switch ($_GET["op"]){
 
     case 'desactivar':
       $rspta = $proveedor->desactivar($idproveedor);
-      echo $rspta ? "Proveedor desativado": "El cliente no se puede desactivar";
+      echo $rspta ? "Proveedor desativado": "El Proveedor no se puede desactivar";
     break;
 
     case 'activar':
     $rspta = $proveedor->activar($idproveedor);
-    echo $rspta ? "Cliente activado": "El cliente no se puede activar";
+    echo $rspta ? "Proveedor activado": "El Proveedor no se puede activar";
     break;
     
     case 'listarc':
@@ -79,7 +79,7 @@ switch ($_GET["op"]){
 
     case 'eliminar':
     $rspta = $proveedor->eliminar($idproveedor);
-    echo $rspta ? "Cliente eliminado": "El cliente no se puede eliminar, verifique que no este vinculado";
+    echo $rspta ? "Proveedor eliminado": "El Proveedor no se puede eliminar, verifique que no este vinculado";
     break;
         
 

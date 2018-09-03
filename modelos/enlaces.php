@@ -7,6 +7,7 @@ class EnlacesModels{
     if($enlaces == "escritorio" ||
        $enlaces == "clientes" ||
        $enlaces == "proveedores" ||
+       $enlaces == "items" ||
        $enlaces == "imprimirc"){
        /*MODULO A CARGAR SERA*/
        $module = "vistas/modulos/".$enlaces.".php";
