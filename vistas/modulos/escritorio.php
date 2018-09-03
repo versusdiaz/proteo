@@ -1,5 +1,5 @@
 <?php
-  if(!$_SESSION['validarTSM']){
+  if(!$_SESSION['validarPTR']){
       header("location:inicio");
       exit();
   } else {

@@ -23,7 +23,7 @@
                 <div class="col-sm-12 col-xl-12">
                     <div class="card">
                         <div class="card-header">
-                            <i class="fa fa-globe"></i> Clientes
+                            <i class="fa fa-globe"></i> Proveedores
                             <button class="float-right btn btn-success" id="btnagregar" onclick="mostrarform(true)">
                                 <i class="fa fa-plus-circle"></i> Agregar</button>
                         </div>
@@ -54,7 +54,7 @@
                             <form name="formulario" id="formulario" method="POST">
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <label class="col-sm-12 control-label">Nombre *:</label>
-                                <input type="hidden" name="idcliente" id="idcliente">
+                                <input type="hidden" name="idproveedor" id="idproveedor">
                                 <div class="col-sm-12">
                                 <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" required>
                                 </div>
@@ -103,5 +103,5 @@
 <script src="vistas/plugins/datatables/jszip.min.js"></script>
 <script src="vistas/plugins/datatables/pdfmake.min.js"></script>
 <script src="vistas/plugins/datatables/vfs_fonts.js"></script> 
-<script type="text/javascript" src="vistas/js/clientes.js"></script>
+<script type="text/javascript" src="vistas/js/proveedores.js"></script>
 <?php ob_end_flush(); ?>
