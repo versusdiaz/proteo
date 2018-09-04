@@ -14,5 +14,6 @@
     <link rel="stylesheet" href="vistas/plugins/datatables/jquery.dataTables.min.css">
     <link rel="stylesheet" href="vistas/plugins/datatables/buttons.dataTables.min.css">
     <link rel="stylesheet" href="vistas/plugins/datatables/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="vistas/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="vistas/plugins/sweetalert/sweetalert.css">
   </head>

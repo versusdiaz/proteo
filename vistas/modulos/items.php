@@ -6,8 +6,6 @@
         include_once("vistas/modulos/inc/aside.php");
  }
 ?>
-<!-- INICIO DEL ESCRITORIO USUARIOS COMUNES -->
-<!-- FIN DEL BODY -->
 <main class="main">
     <!-- Breadcrumb-->
     <ol class="breadcrumb">
@@ -34,8 +32,9 @@
                                     <thead>
                                         <th>Opciones</th>
                                         <th>Nombre</th>
-                                        <th>Id. Fiscal</th>
-                                        <th>Tlf</th>
+                                        <th>Stock</th>
+                                        <th>Precio Nacional</th>
+                                        <th>Precio USD</th>
                                         <th>Status</th>
                                         </tfoot>
                                     </thead>
@@ -44,46 +43,88 @@
                                     <tfoot>
                                         <th>Opciones</th>
                                         <th>Nombre</th>
-                                        <th>Id. Fiscal</th>
-                                        <th>Tlf</th>
+                                        <th>Stock</th>
+                                        <th>Precio Nacional</th>
+                                        <th>Precio USD</th>
                                         <th>Status</th>
                                     </tfoot>
                                 </table>
                             </div>
                             <div class="card-body" id="formularioregistros">
                             <form name="formulario" id="formulario" method="POST">
-                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <label class="col-sm-12 control-label">Nombre *:</label>
-                                <input type="hidden" name="iditem" id="iditem">
-                                <div class="col-sm-12">
-                                <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" required>
-                                </div>
-                                </div>
-                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <label class="col-sm-12 control-label">Id. Fiscal *:</label>
-                                <div class="col-sm-12">
-                                <input type="number" class="form-control" name="nfiscal" id="nfiscal" required>
-                                </div>
-                                </div>
-                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <label class="col-sm-12 control-label">Direccion *:</label>
-                                <div class="col-sm-12">
-                                <input type="text" class="form-control" name="direccion" id="direccion" required>
-                                </div>
-                                </div>
-                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <label class="col-sm-12 control-label">Telefono *:</label>
-                                <div class="col-sm-12">
-                                <input type="number" class="form-control" name="telefono" id="telefono" required>
-                                </div>
-                                </div>
-                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <button class="btn btn-primary" type="submit" id="btnGuardar">
-                                    <i class="fa fa-save"></i> Guardar</button>
-                                <button class="btn btn-danger" type="button" onclick="cancelarform()">
-                                    <i class="fa fa-arrow-circle-left"></i> Cancelar</button>
-                                </div>
-                            </form>
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <label class="col-sm-12 control-label">Nombre *:</label>
+                        <input type="hidden" name="iditems" id="iditems">
+                        <div class="col-sm-12">
+                        <input type="text" class="form-control" name="nombre" id="nombre">
+                        </div>
+                        </div>
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <label class="col-sm-12 control-label">Precio Nacional *:</label>
+                        <div class="col-sm-12">
+                        <input type="number" class="form-control" name="precio_nac" id="precio_nac" step="0.01" required>                       
+                        </div>
+                        </div>
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <label class="col-sm-12 control-label">Precio USD *:</label>
+                        <div class="col-sm-12">
+                        <input type="number" class="form-control" name="precio_usd" id="precio_usd" step="0.01" required>                                               
+                        </div>
+                        </div>
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <label class="col-sm-12 control-label">Stock *:</label>
+                        <div class="col-sm-12">
+                        <input type="number" class="form-control" name="stock" id="stock" step="0.01" required>
+                        </div>
+                        </div>
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <label class="col-sm-12 control-label">Stock Minimo *:</label>
+                        <div class="col-sm-12">
+                        <input type="number" class="form-control" name="stock_min" id="stock_min" step="0.01" required>
+                        </div>
+                        </div>
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <label class="col-sm-12 control-label">Stock Maximo *:</label>
+                        <div class="col-sm-12">
+                        <input type="number" class="form-control" name="stock_max" id="stock_max" step="0.01" required>
+                        </div>
+                        </div>
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <label class="col-sm-12 control-label">Unidad *:</label>
+                        <div class="col-sm-12">
+                        <select class="form-control selectpicker" data-live-search="true" name="unidad" id="unidad">
+                        <option value="">SELECCIONE</option>
+                        <option value="UND">UND</option>
+                        <option value="PAQ">PAQUETE</option>
+                        <option value="ROLLO">ROLLO</option>
+                        <option value="LTS">LTS</option>
+                        <option value="MTS">MTS</option>
+                        </select>
+                        </div>
+                        </div>
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <label class="col-sm-12 control-label">Decimales *:</label>
+                        <div class="col-sm-12">
+                        <select class="form-control selectpicker" data-live-search="true" name="decimales" id="decimales">
+                            <option value="">SELECCIONE</option>
+                            <option value="1">NO</option>
+                            <option value="0">SI</option>
+                        </select>
+                        </div>
+                        </div>
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <label class="col-sm-12 control-label">Detalle *:</label>
+                        <div class="col-sm-12">
+                        <input type="text" class="form-control" name="detalle" id="detalle" >
+                        </div>
+                        </div>
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <button class="btn btn-primary" type="submit" id="btnGuardar">
+                            <i class="fa fa-save"></i> Guardar</button>
+                        <button class="btn btn-danger" type="button" onclick="cancelarform()">
+                            <i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                        </div>
+                  </form>
                             </div>
                         </div>
                     </div>

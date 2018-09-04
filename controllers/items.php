@@ -6,7 +6,7 @@ $item = new Items();
 
 /*INICIALIZO VARIABLES*/
 
-$iditem=isset($_POST['iditem'])? limpiarCadena($_POST['iditem']):"";
+$iditems=isset($_POST['iditems'])? limpiarCadena($_POST['iditems']):"";
 
 $nombre=isset($_POST["nombre"])? limpiarCadena($_POST["nombre"]):"";
 
@@ -22,16 +22,18 @@ $stock_max=isset($_POST['stock_max'])? limpiarCadena($_POST['stock_max']):"";
 
 $unidad=isset($_POST['unidad'])? limpiarCadena($_POST['unidad']):"";
 
+$decimales=isset($_POST['decimales'])? limpiarCadena($_POST['decimales']):"";
+
 $detalle=isset($_POST['detalle'])? limpiarCadena($_POST['detalle']):"";
 
 switch ($_GET["op"]){
     case 'guardaryeditar':
-		if (empty($iditem)){
-            $rspta=$item->insertar($nombre,$precio_nac,$precio_usd,$stock,$stock_min,$stock_max,$unidad,$detalle);
+		if (empty($iditems)){
+            $rspta=$item->insertar($nombre,$precio_nac,$precio_usd,$stock,$stock_min,$stock_max,$unidad,$decimales,$detalle);
             echo $rspta ? "Item registrado con exito":"No se pudieron registrar todos los datos del Item";
 		}
 		else {
-            $rspta=$item->editar($nombre,$precio_nac,$precio_usd,$stock,$stock_min,$stock_max,$unidad,$detalle);
+            $rspta=$item->editar($iditems,$nombre,$precio_nac,$precio_usd,$stock,$stock_min,$stock_max,$unidad,$decimales,$detalle);
 			echo $rspta ? "Item actualizado con exito":"No se pudieron actualizar los datos del Item";
 		}
     break;
@@ -41,13 +43,14 @@ switch ($_GET["op"]){
         $data = Array();
         while($reg = $rspta->fetch_object()){
            $data[]=array(
-               "0"=>($reg->condicion)?'<button class="btn btn-warning" onclick="mostrar('.$reg->iditem.')"><i class="nav-icon icon-pencil" style="color:white" ></i></button> <button class="btn btn-danger" onclick="eliminar('.$reg->iditem.')"><i class="fa fa-trash"></i></button>'.
- 					' <button class="btn btn-danger" onclick="desactivar('.$reg->iditem.')"><i class="fa fa-times"></i></button>':'<button class="btn btn-warning" onclick="mostrar('.$reg->iditem.')"><i class="nav-icon icon-pencil"  style="color:white" ></i></button> <button class="btn btn-danger" onclick="eliminar('.$reg->iditem.')"><i class="fa fa-trash"></i></button>'.
- 					' <button class="btn btn-primary" onclick="activar('.$reg->iditem.')"><i class="fa fa-check"></i></button>',
+               "0"=>($reg->condicion)?'<button class="btn btn-warning" onclick="mostrar('.$reg->iditems.')"><i class="nav-icon icon-pencil" style="color:white" ></i></button> <button class="btn btn-danger" onclick="eliminar('.$reg->iditems.')"><i class="fa fa-trash"></i></button>'.
+ 					' <button class="btn btn-danger" onclick="desactivar('.$reg->iditems.')"><i class="fa fa-times"></i></button>':'<button class="btn btn-warning" onclick="mostrar('.$reg->iditems.')"><i class="nav-icon icon-pencil"  style="color:white" ></i></button> <button class="btn btn-danger" onclick="eliminar('.$reg->iditems.')"><i class="fa fa-trash"></i></button>'.
+ 					' <button class="btn btn-primary" onclick="activar('.$reg->iditems.')"><i class="fa fa-check"></i></button>',
                "1"=>$reg->nombre,
-               "2"=>$reg->precio_nac,
-               "3"=>$reg->precio_usd,
-               "4"=>($reg->condicion)?'<span class="badge badge-success">Activado</span>':'<span class="badge badge-danger">Desactivado</span>'
+               "2"=>$reg->stock.' '.$reg->unidad,
+               "3"=>$reg->precio_nac.' Bs.S',
+               "4"=>$reg->precio_usd.' $ ',
+               "5"=>($reg->condicion)?'<span class="badge badge-success">Activado</span>':'<span class="badge badge-danger">Desactivado</span>'
            );
         }
         /*CARGAMOS LA DATA EN LA VARIABLE USADA PARA EL DATATABLE*/
@@ -61,17 +64,17 @@ switch ($_GET["op"]){
 
     case 'mostrar':
         /*ID USUARIO SE ENVIA POR POST ESTA DECLARADO EN LA INICIALIACION*/
-        $rspta = $item->mostrar($iditem);
+        $rspta = $item->mostrar($iditems);
         echo json_encode($rspta);
     break;
 
     case 'desactivar':
-      $rspta = $item->desactivar($iditem);
-      echo $rspta ? "Item desativado": "El Item no se puede desactivar";
+      $rspta = $item->desactivar($iditems);
+      echo $rspta ? "Item desactivado": "El Item no se puede desactivar";
     break;
 
     case 'activar':
-    $rspta = $item->activar($iditem);
+    $rspta = $item->activar($iditems);
     echo $rspta ? "Item activado": "El Item no se puede activar";
     break;
     
