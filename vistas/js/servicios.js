@@ -27,27 +27,6 @@ function init(){
                 required: true,
                 number: true,
                 min: 0
-            },
-            stock:{
-                required: true,
-                number: true,
-                min: 0
-            },
-            stock_min:{
-                required: true,
-                number: true,
-                min: 0
-            },
-            stock_max:{
-                required: true,
-                number:true,
-                min: 0
-            },
-            unidad:{
-                required: true,
-            },
-            decimales:{
-                required: true,
             }
         },
         messages: {
@@ -84,19 +63,10 @@ function init(){
 }
 
 function limpiar(){
-    $("#iditems").val("");
+    $("#idservicios").val("");
     $("#nombre").val("");
     $("#precio_nac").val("");
     $("#precio_usd").val("");
-    $("#stock").val("");
-    $("#stock_min").val("");
-    $("#stock_max").val("");
-    $("#unidad").val("");
-    $("#detalle").val("");
-    $("#unidad").selectpicker('refresh');
-    $("#decimales").val("");
-    $("#decimales").selectpicker('refresh');
-    /*QUITAR CLASES A LOS ELEMENTOS*/
     $(".form-group").removeClass('has-success has-error');
 }
 
@@ -134,7 +104,7 @@ function listar(){
 		        ],
 		"ajax":
 				{
-					url: 'controllers/items.php?op=listar',
+					url: 'controllers/servicios.php?op=listar',
 					type : "get",
 					dataType : "json",
 					error: function(e){
@@ -151,7 +121,7 @@ function guardaryeditar(e){
     e.preventDefault();
     var formData = new FormData($("#formulario")[0]);
     $.ajax({
-       url:"controllers/items.php?op=guardaryeditar",
+       url:"controllers/servicios.php?op=guardaryeditar",
        type:"POST",
        data: formData,
        contentType: false,
@@ -164,71 +134,63 @@ function guardaryeditar(e){
     });
 }
 
-function mostrar(iditems){
-     $.post("controllers/items.php?op=mostrar",{iditems:iditems},function(data,status){
+function mostrar(idservicios){
+     $.post("controllers/servicios.php?op=mostrar",{idservicios:idservicios},function(data,status){
           /*Convertir la cadena enviada desde PHP a un vector de objetos en JavaScript*/
          data = JSON.parse(data);
          mostrarform(true);
-        $("#iditems").val(data.iditems);
+        $("#idservicios").val(data.idservicios);
         $("#nombre").val(data.nombre);
         $("#precio_nac").val(data.precio_nac);
         $("#precio_usd").val(data.precio_usd);
-        $("#stock").val(data.stock);
-        $("#stock_min").val(data.stock_min);
-        $("#stock_max").val(data.stock_max);
-        $("#unidad").val(data.unidad);
-        $("#unidad").selectpicker('refresh');
-        $("#decimales").val(data.decimales);
-        $("#decimales").selectpicker('refresh');
-        $("#detalle").val(data.detalle);
      });
     }
 
- function eliminar(iditems){
+ function eliminar(idservicios){
     swal({
         title: "Esta seguro..?"
-        , text: "Al eliminar este item, no podra utilizarse en el sistema"
+        , text: "Al eliminar este servicio, no podra utilizarse en el sistema"
         , type: "warning"
         , showCancelButton: true
         , confirmButtonColor: "#da4f49"
-        , confirmButtonText: "Si, deseo eliminarla!"
+        , confirmButtonText: "Si, deseo eliminarlO!"
         , closeOnConfirm: false
         }, function () {
-            $.post('controllers/items.php?op=eliminar',{iditems:iditems},function(e){
+            $.post('controllers/servicios.php?op=eliminar',{idservicios:idservicios},function(e){
             swal("Eliminada!", e , "success");  
             tabla.ajax.reload();
             });
         });
  }
 
- function desactivar(iditems){
+ function desactivar(idservicios){
     swal({
         title: "Esta seguro..?"
-        , text: "Al desactivar este item, no podra utilizarse en el sistema"
+        , text: "Al desactivar este servicio, no podra utilizarse en el sistema"
         , type: "warning"
         , showCancelButton: true
         , confirmButtonColor: "#da4f49"
         , confirmButtonText: "Si, deseo desactivarlo!"
         , closeOnConfirm: false
         }, function () {
-            $.post('controllers/items.php?op=desactivar',{iditems:iditems},function(e){
+            $.post('controllers/servicios.php?op=desactivar',{idservicios:idservicios},function(e){
             swal("Desactivado!", e , "success");  
             tabla.ajax.reload();
             });
         });
  }
 
- function activar(iditems){
+ function activar(idservicios){
     swal({
         title: "Esta seguro..?"
-        , text: "Al activar este item, podra utilizarse en el sistema"
+        , text: "Al activar este servicio, podra utilizarse en el sistema"
         , type: "warning"
         , showCancelButton: true
         , confirmButtonColor: "#da4f49"
         , confirmButtonText: "Si, deseo activarlo!"
         , closeOnConfirm: false
         }, function () {
-            $.post('controllers/items.php?op=activar',{iditems:iditems},function(e){
+            $.post('controllers/servicios.php?op=activar',{idservicios:idservicios},function(e){
             swal("Activado!", e , "success");  
             tabla.ajax.reload();
             });

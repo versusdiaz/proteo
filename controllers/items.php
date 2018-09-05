@@ -82,12 +82,12 @@ switch ($_GET["op"]){
     $rspta = $item->listarc();
     while ($reg = $rspta->fetch_object())
         {
-            echo '<option value=' .$reg->iditem. '>' .$reg->nombre. '</option>';
+            echo '<option value=' .$reg->iditems. '>' .$reg->nombre. '</option>';
         }
     break;
 
     case 'eliminar':
-    $rspta = $item->eliminar($iditem);
+    $rspta = $item->eliminar($iditems);
     echo $rspta ? "Item eliminado": "El Item no se puede eliminar, verifique que no este vinculado";
     break;
         

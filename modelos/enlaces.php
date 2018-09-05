@@ -8,6 +8,7 @@ class EnlacesModels{
        $enlaces == "clientes" ||
        $enlaces == "proveedores" ||
        $enlaces == "items" ||
+       $enlaces == "servicios" ||
        $enlaces == "imprimirc"){
        /*MODULO A CARGAR SERA*/
        $module = "vistas/modulos/".$enlaces.".php";
