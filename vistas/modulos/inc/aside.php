@@ -55,10 +55,10 @@
             </li>
             <li class="nav-item nav-dropdown">
               <a class="nav-link nav-dropdown-toggle" href="#">
-                <i class="nav-icon icon-layers"></i> Request OP</a>
+                <i class="nav-icon icon-layers"></i> Request </a>
               <ul class="nav-dropdown-items">
                 <li class="nav-item">
-                  <a class="nav-link" href="buttons/buttons.html">
+                  <a class="nav-link" href="request_m">
                     <i class="nav-icon icon-control-play"></i> Send Request</a>
                 </li>
                 <li class="nav-item">

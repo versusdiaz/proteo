@@ -9,6 +9,7 @@ class EnlacesModels{
        $enlaces == "proveedores" ||
        $enlaces == "items" ||
        $enlaces == "servicios" ||
+       $enlaces == "request_m" ||
        $enlaces == "centro" ||
        $enlaces == "imprimirc"){
        /*MODULO A CARGAR SERA*/
