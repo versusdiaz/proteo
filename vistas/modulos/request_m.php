@@ -31,30 +31,31 @@
                             <table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
                                 <thead>
                                     <th>Opciones</th>
-                                    <th>Nombre</th>
-                                    <th>Stock</th>
-                                    <th>Precio Nacional</th>
-                                    <th>Precio USD</th>
+                                    <th>Departamento</th>
+                                    <th>Centro</th>
+                                    <th>Creada Por</th>
+                                    <th>Fecha</th>
                                     <th>Status</th>
-                                    </tfoot>
                                 </thead>
                                 <tbody>
                                 </tbody>
                                 <tfoot>
                                     <th>Opciones</th>
-                                    <th>Nombre</th>
-                                    <th>Stock</th>
-                                    <th>Precio Nacional</th>
-                                    <th>Precio USD</th>
+                                    <th>Departamento</th>
+                                    <th>Centro</th>
+                                    <th>Creada Por</th>
+                                    <th>Fecha</th>
                                     <th>Status</th>
                                 </tfoot>
                             </table>
                         </div>
                         <div class="card-body" id="formularioregistros">
-                            <form name="formulario" id="formulario" method="POST">
-                            <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <form name="formulario" id="formulario" method="POST">
+                            <div class="row">
+                                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                     <label class="col-sm-12 control-label">Departamento *:</label>
                                     <div class="col-sm-12">
+                                        <input type="hidden" name="idrequest_temp" id="idrequest_temp">
                                         <select class="form-control selectpicker" data-live-search="true" name="departamento" id="departamento">
                                             <option value="">SELECCIONE</option>
                                             <option value="1">MANTENIMIENTO</option>
@@ -62,26 +63,35 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                    <label class="col-sm-12 control-label">Centro *:</label>
+                                    <div class="col-sm-12">
+                                        <select class="form-control selectpicker" data-live-search="true" name="centro" id="centro">
+                                            <option value="">SELECCIONE</option>
+                                            <option value="1">MARA III</option>
+                                            <option value="2">SHAHLA</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                     <label class="col-sm-12 control-label">Responsable *:</label>
                                     <div class="col-sm-12">
                                         <input type="text" class="form-control" name="responsable" id="responsable">
                                     </div>
                                 </div>
-                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                     <label class="col-sm-12 control-label">Supervisor *:</label>
                                     <div class="col-sm-12">
                                         <input type="text" class="form-control" name="supervisor" id="supervisor">
                                     </div>
                                 </div>
-                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                     <label class="col-sm-12 control-label">Fecha *:</label>
                                     <div class="col-sm-12">
                                         <input type="date" class="form-control" name="fecha" id="fecha" required>
                                     </div>
                                 </div>
-
-                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                     <label class="col-sm-12 control-label">Mantenimiento *:</label>
                                     <div class="col-sm-12">
                                         <select class="form-control selectpicker" data-live-search="true" name="mantenimiento" id="mantenimiento">
@@ -91,8 +101,7 @@
                                         </select>
                                     </div>
                                 </div>
-
-                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                     <label class="col-sm-12 control-label">Calidad *:</label>
                                     <div class="col-sm-12">
                                         <select class="form-control selectpicker" data-live-search="true" name="calidad" id="calidad">
@@ -102,7 +111,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                     <label class="col-sm-12 control-label">Prioridad *:</label>
                                     <div class="col-sm-12">
                                         <select class="form-control selectpicker" data-live-search="true" name="prioridad" id="prioridad">
@@ -113,19 +122,20 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                     <label class="col-sm-12 control-label">Comentario *:</label>
                                     <div class="col-sm-12">
                                         <input type="text" class="form-control" name="comentario" id="comentario">
                                     </div>
                                 </div>
-                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <button class="btn btn-primary" type="submit" id="btnGuardar">
-                                        <i class="fa fa-save"></i> Guardar</button>
-                                    <button class="btn btn-danger" type="button" onclick="cancelarform()">
-                                        <i class="fa fa-arrow-circle-left"></i> Cancelar</button>
-                                </div>
-                            </form>
+                            </div><!-- FIN DEL ROW -->
+                            <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <button class="btn btn-primary" type="submit" id="btnGuardar">
+                                    <i class="fa fa-save"></i> Guardar</button>
+                                <button class="btn btn-danger" type="button" onclick="cancelarform()">
+                                    <i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                            </div>
+                        </form>
                         </div>
                     </div>
                 </div>
@@ -154,7 +164,7 @@
                             <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <button class="btn btn-primary" type="submit" id="btnGuardar">
                                     <i class="fa fa-download"></i> Cargar</button>
-                                <button class="btn btn-danger" type="button" onclick="cancelarform()">
+                                <button class="btn btn-danger" type="button" onclick="cancelarformP()">
                                     <i class="fa fa-eraser"></i> Limpiar</button>
                             </div>
                         </div>
@@ -201,11 +211,11 @@
 <?php include_once("vistas/modulos/inc/footer.php"); ?>
 <!-- SCRIPT UNICOS-->
 <script src="vistas/plugins/datatables/jquery.dataTables.min.js"></script>    
-<script src="vistas/plugins/datatables/dataTables.buttons.min.js"></script>
-<script src="vistas/plugins/datatables/buttons.html5.min.js"></script>
+<!-- <script src="vistas/plugins/datatables/dataTables.buttons.min.js"></script> -->
+<!-- <script src="vistas/plugins/datatables/buttons.html5.min.js"></script> -->
 <script src="vistas/plugins/datatables/buttons.colVis.min.js"></script>
-<script src="vistas/plugins/datatables/jszip.min.js"></script>
-<script src="vistas/plugins/datatables/pdfmake.min.js"></script>
-<script src="vistas/plugins/datatables/vfs_fonts.js"></script> 
-<script type="text/javascript" src="vistas/js/items.js"></script>
+<!-- <script src="vistas/plugins/datatables/jszip.min.js"></script> -->
+<!-- <script src="vistas/plugins/datatables/pdfmake.min.js"></script> -->
+<!-- <script src="vistas/plugins/datatables/vfs_fonts.js"></script>  -->
+<script type="text/javascript" src="vistas/js/request_m.js"></script>
 <?php ob_end_flush(); ?>
