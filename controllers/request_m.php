@@ -8,6 +8,8 @@ $request_temp = new Request_m();
 
 $idrequest_temps=isset($_POST['idrequest_temp'])? limpiarCadena($_POST['idrequest_temp']):"";
 
+$idrequest = isset($_GET['idrequest'])? limpiarCadena($_GET['idrequest']):"";
+
 $idusuario = isset($_SESSION['idusuario'])? $_SESSION['idusuario']: "";
 
 $iddepartamento=isset($_POST["departamento"])? limpiarCadena($_POST["departamento"]):"";
@@ -91,6 +93,26 @@ switch ($_GET["op"]){
     $rspta = $request_temp->eliminar($idrequest_temps);
     echo $rspta ? "Item eliminado": "El Item no se puede eliminar, verifique que no este vinculado";
     break;
+
+    case 'listarP':
+    $rspta = $request_temp->listarP($idrequest);
+    $data = Array();
+    while($reg = $rspta->fetch_object()){
+       $data[]=array(
+           "0"=>'<button class="btn btn-danger" onclick="eliminarItem('.$reg->idrequest_temp.')"><i class="fa fa-trash"></i></button>',
+           "1"=>$reg->nombre,
+           "2"=>$reg->cantidad
+       );
+    }
+    /*CARGAMOS LA DATA EN LA VARIABLE USADA PARA EL DATATABLE*/
+    $results = array(
+         "sEcho"=>1, //Informacion para el datatables
+         "iTotalRecords"=>count($data), //enviamos el total registros al datatable
+         "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+         "aaData"=>$data);
+    echo json_encode($results);
+break;
+
         
 
 }

@@ -221,11 +221,27 @@ function mostrar(idrequest_temp){
     }
 
 function mostrarP(idrequest_temp){
-    $.post("controllers/request_m.php?op=mostrar",{idrequest_temp:idrequest_temp},function(data,status){
-        /*Convertir la cadena enviada desde PHP a un vector de objetos en JavaScript*/
-        data = JSON.parse(data);
-        mostrarformP(true);
-    });
+    $("#idrequest_tempP").val(idrequest_temp); // ASIGNO ID AL PURCHASE
+    mostrarformP(true);
+    tabla=$('#tbllistadoPurchase').dataTable(
+        {
+            "aProcessing": true,//Activamos el procesamiento del datatables
+            "aServerSide": true,//Paginacion y filtrado realizados por el servidor
+            dom: 'Bfrtip',//Definimos los elementos del control de tabla
+            "ajax":
+                    {
+                        url: 'controllers/request_m.php?op=listarP&idrequest='+idrequest_temp,
+                        type : "get",
+                        dataType : "json",
+                        error: function(e){
+                            console.log(e.responseText);
+                        }
+                    },
+            "bDestroy": true,
+            "iDisplayLength": 10,//Paginacion
+            "order": [[ 1, "desc" ]]//Ordenar (columna,orden)
+        }).DataTable();
+    
     }
 
  function eliminar(idrequest_temp){

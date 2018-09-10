@@ -146,6 +146,7 @@
                     <form name="formulario" id="formularioP" method="POST">
                         <div class="row">
                             <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <input type="hidden" name="idrequest_tempP" id="idrequest_tempP">
                                 <label class="col-sm-12 control-label">Nombre *:</label>
                                 <input type="hidden" name="iditems" id="iditems">
                                 <div class="col-sm-12">
