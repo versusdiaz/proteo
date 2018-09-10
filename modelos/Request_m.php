@@ -35,7 +35,7 @@ class Request_m{
     }
     
     public static function listar(){
-        $sql = "SELECT * FROM request_temp";
+        $sql = "SELECT T1.idrequest_temp, T2.nombre AS usuario, T3.nombre AS depto, T4.nombre AS buque, T1.fecha, T1.condicion FROM request_temp as T1 LEFT JOIN usuarios as T2 ON T1.idusuario = T2.idusuario LEFT JOIN departamento as T3 ON T1.iddepartamento = T3.iddepartamento LEFT JOIN centro AS T4 ON T1.idcentro = T4.idcentro";
         return Consulta($sql);
     }
     

@@ -67,9 +67,6 @@
                                     <label class="col-sm-12 control-label">Centro *:</label>
                                     <div class="col-sm-12">
                                         <select class="form-control selectpicker" data-live-search="true" name="centro" id="centro">
-                                            <option value="">SELECCIONE</option>
-                                            <option value="1">MARA III</option>
-                                            <option value="2">SHAHLA</option>
                                         </select>
                                     </div>
                                 </div>
@@ -152,17 +149,18 @@
                                 <label class="col-sm-12 control-label">Nombre *:</label>
                                 <input type="hidden" name="iditems" id="iditems">
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control" name="nombre" id="nombre">
+                                    <select class="form-control selectpicker" data-live-search="true" name="nombreItem" id="nombreItem">
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                 <label class="col-sm-12 control-label">Cantidad *:</label>
                                 <div class="col-sm-12">
-                                    <input type="number" class="form-control" name="cantidad" id="cantidad">
+                                    <input type="number" class="form-control" name="cantidad" id="cantidad" min='1' >
                                 </div>
                             </div>
                             <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <button class="btn btn-primary" type="submit" id="btnGuardar">
+                                <button class="btn btn-primary" type="submit" id="btnGuardarP">
                                     <i class="fa fa-download"></i> Cargar</button>
                                 <button class="btn btn-danger" type="button" onclick="cancelarformP()">
                                     <i class="fa fa-eraser"></i> Limpiar</button>

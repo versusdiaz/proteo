@@ -2,6 +2,7 @@ var tabla;
 var bandera;
 function init(){
     mostrarform(false);
+    mostrarformP(false);
     listar();
     
     jQuery.validator.addMethod("nombre", function(value, element){
@@ -68,6 +69,16 @@ function init(){
         }
        });
 
+    $.post("controllers/centro.php?op=listarc",function(respuesta){
+    $("#centro").html(respuesta);
+    $("#centro").selectpicker('refresh');
+    });
+
+    $.post("controllers/items.php?op=listarc",function(respuesta){
+    $("#nombreItem").html(respuesta);
+    $("#nombreItem").selectpicker('refresh');
+    });    
+
     $("#formulario").on("submit",function(e){
         if ($("#formulario").validate().form() == true){
             guardaryeditar(e);
@@ -115,6 +126,20 @@ function mostrarform(flag){
     }else{
         $("#listadoregistros").show();
         $("#formulario").hide();
+        $("#btnagregar").show();
+    }
+}
+
+function mostrarformP(flag){
+    limpiar();
+    if(flag){
+        $("#listadoregistrosPurchase").show();
+        $("#formularioPurchase").show('fast');
+        $("#btnGuardarP").prop("disabled",false);
+        
+    }else{
+        $("#listadoregistrosPurchase").hide();
+        $("#formularioPurchase").hide();
         $("#btnagregar").show();
     }
 }
@@ -178,10 +203,13 @@ function mostrar(idrequest_temp){
          data = JSON.parse(data);
          mostrarform(true);
         $("#idrequest_temp").val(data.idrequest_temp);
-        $("#departamento").val(data.departamento);
+        $("#departamento").val(data.iddepartamento);
         $("#departamento").selectpicker('refresh');
+        $("#centro").val(data.idcentro);
+        $("#centro").selectpicker('refresh');
         $("#responsable").val(data.responsable);
         $("#supervisor").val(data.supervisor);
+        $("#comentario").val(data.comentario);
         $("#fecha").val(data.fecha);
         $("#mantenimiento").val(data.mantenimiento);
         $("#mantenimiento").selectpicker('refresh');
@@ -190,6 +218,14 @@ function mostrar(idrequest_temp){
         $("#prioridad").val(data.prioridad);
         $("#prioridad").selectpicker('refresh');
      });
+    }
+
+function mostrarP(idrequest_temp){
+    $.post("controllers/request_m.php?op=mostrar",{idrequest_temp:idrequest_temp},function(data,status){
+        /*Convertir la cadena enviada desde PHP a un vector de objetos en JavaScript*/
+        data = JSON.parse(data);
+        mostrarformP(true);
+    });
     }
 
  function eliminar(idrequest_temp){

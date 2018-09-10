@@ -35,8 +35,8 @@ switch ($_GET["op"]){
             echo $rspta ? "Requisicion registrada con exito":"No se pudieron registrar todos los datos de la Requisicion";
 		}
 		else {
-            $rspta=$request_temp->editar($idrequest_temps,$nombre,$precio_nac,$precio_usd,$stock,$stock_min,$stock_max,$unidad,$decimales,$detalle);
-			echo $rspta ? "Item actualizado con exito":"No se pudieron actualizar los datos del Item";
+            $rspta=$request_temp->editar($idrequest_temps,$idusuario,$iddepartamento,$idcentro,$comentario,$responsable,$supervisor,$prioridad,$calidad,$mantenimiento,$fecha);
+			echo $rspta ? "Requisicion actualizada con exito":"No se pudieron actualizar los datos de la requisicion";
 		}
     break;
 
@@ -45,14 +45,13 @@ switch ($_GET["op"]){
         $data = Array();
         while($reg = $rspta->fetch_object()){
            $data[]=array(
-               "0"=>($reg->condicion)?'<button class="btn btn-warning" onclick="mostrar('.$reg->idrequest_temp.')"><i class="nav-icon icon-pencil" style="color:white" ></i></button> <button class="btn btn-danger" onclick="eliminar('.$reg->idrequest_temp.')"><i class="fa fa-trash"></i></button>'.
- 					' <button class="btn btn-danger" onclick="desactivar('.$reg->idrequest_temp.')"><i class="fa fa-times"></i></button>':'<button class="btn btn-warning" onclick="mostrar('.$reg->idrequest_temp.')"><i class="nav-icon icon-pencil"  style="color:white" ></i></button> <button class="btn btn-danger" onclick="eliminar('.$reg->idrequest_temp.')"><i class="fa fa-trash"></i></button>'.
- 					' <button class="btn btn-primary" onclick="activar('.$reg->idrequest_temp.')"><i class="fa fa-check"></i></button>',
-               "1"=>$reg->iddepartamento,
-               "2"=>$reg->idcentro,
-               "3"=>$reg->idusuario,
+               "0"=>'<button class="btn btn-warning" onclick="mostrar('.$reg->idrequest_temp.')"><i class="nav-icon icon-pencil" style="color:white" ></i></button> <button class="btn btn-danger" onclick="eliminar('.$reg->idrequest_temp.')"><i class="fa fa-trash"></i></button>'.
+ 					' <button class="btn btn-primary" onclick="mostrarP('.$reg->idrequest_temp.')"><i class="fa fa-cart-arrow-down"></i></button>',
+               "1"=>$reg->depto,
+               "2"=>$reg->buque,
+               "3"=>$reg->usuario,
                "4"=>$reg->fecha,
-               "5"=>($reg->condicion)?'<span class="badge badge-success">Activado</span>':'<span class="badge badge-danger">Desactivado</span>'
+               "5"=>($reg->condicion)?'<span class="badge badge-success">Pendiente</span>':'<span class="badge badge-danger">Desactivado</span>'
            );
         }
         /*CARGAMOS LA DATA EN LA VARIABLE USADA PARA EL DATATABLE*/
