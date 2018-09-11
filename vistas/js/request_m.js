@@ -1,4 +1,5 @@
 var tabla;
+var tabla2;
 var bandera;
 function init(){
     mostrarform(false);
@@ -83,6 +84,10 @@ function init(){
         if ($("#formulario").validate().form() == true){
             guardaryeditar(e);
         }
+    });
+
+    $("#formularioP").on("submit",function(e){
+            guardaryeditarP(e);
     });
     
 }
@@ -197,6 +202,23 @@ function guardaryeditar(e){
     });
 }
 
+function guardaryeditarP(e){
+    e.preventDefault();
+     var formData = new FormData($("#formularioP")[0]);
+     $.ajax({
+        url:"controllers/request_m.php?op=guardaryeditarP",
+        type:"POST",
+        data: formData,
+        contentType: false,
+	    processData: false,
+        success: function(respuesta){
+          swal(respuesta, "Presione OK para continuar");
+          limpiarP();
+	      tabla2.ajax.reload();
+        }
+     });
+}
+
 function mostrar(idrequest_temp){
      $.post("controllers/request_m.php?op=mostrar",{idrequest_temp:idrequest_temp},function(data,status){
           /*Convertir la cadena enviada desde PHP a un vector de objetos en JavaScript*/
@@ -223,7 +245,7 @@ function mostrar(idrequest_temp){
 function mostrarP(idrequest_temp){
     $("#idrequest_tempP").val(idrequest_temp); // ASIGNO ID AL PURCHASE
     mostrarformP(true);
-    tabla=$('#tbllistadoPurchase').dataTable(
+    tabla2=$('#tbllistadoPurchase').dataTable(
         {
             "aProcessing": true,//Activamos el procesamiento del datatables
             "aServerSide": true,//Paginacion y filtrado realizados por el servidor
@@ -256,7 +278,24 @@ function mostrarP(idrequest_temp){
         }, function () {
             $.post('controllers/request_m.php?op=eliminar',{idrequest_temp:idrequest_temp},function(e){
             swal("Eliminada!", e , "success");  
-            tabla.ajax.reload();
+            tabla2.ajax.reload();
+            });
+        });
+ }
+
+ function eliminarItem(idrequest_item){
+    swal({
+        title: "Esta seguro..?"
+        , text: "Al eliminar este item, no podra utilizarse en el sistema"
+        , type: "warning"
+        , showCancelButton: true
+        , confirmButtonColor: "#da4f49"
+        , confirmButtonText: "Si, deseo eliminarlo!"
+        , closeOnConfirm: false
+        }, function () {
+            $.post('controllers/request_m.php?op=eliminarItem',{idrequest_item:idrequest_item},function(e){
+            swal("Eliminada!", e , "success");  
+            tabla2.ajax.reload();
             });
         });
  }

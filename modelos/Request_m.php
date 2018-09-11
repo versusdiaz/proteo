@@ -40,7 +40,7 @@ class Request_m{
     }
 
     public static function listarP($idrequest_temp){
-        $sql = "SELECT T1.idrequest_temp, T2.nombre, T1.cantidad FROM request_items_temp AS T1 LEFT JOIN items AS T2 ON T1.iditem = T2.iditems WHERE T1.idrequest_temp = $idrequest_temp";
+        $sql = "SELECT T1.idrequest_items_temp, T2.nombre, T1.cantidad FROM request_items_temp AS T1 LEFT JOIN items AS T2 ON T1.iditem = T2.iditems WHERE T1.idrequest_temp = $idrequest_temp";
         return Consulta($sql);
     }
     
@@ -52,6 +52,18 @@ class Request_m{
     public static function eliminar($idrequest_temp){
         $sql = "DELETE FROM request_temp WHERE idrequest_temp='$idrequest_temp'";
         return Consulta($sql);
+    }
+
+    public static function eliminarItem($idrequest_item){
+        $sql = "DELETE FROM request_items_temp WHERE idrequest_items_temp='$idrequest_item'";
+        return Consulta($sql);
+    }
+
+    public static function insertarItem($idrequest_tempP,$nombreItem,$cantidad){
+        $sql = "INSERT INTO request_items_temp (idrequest_temp,iditem,cantidad) VALUES ('$idrequest_tempP','$nombreItem','$cantidad')";
+        $sw = true;
+        Consulta($sql) or $sw = false;
+        return $sw;
     }
     
 }

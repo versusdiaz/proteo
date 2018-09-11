@@ -8,13 +8,21 @@ $request_temp = new Request_m();
 
 $idrequest_temps=isset($_POST['idrequest_temp'])? limpiarCadena($_POST['idrequest_temp']):"";
 
+$idrequest_tempP=isset($_POST['idrequest_tempP'])? limpiarCadena($_POST['idrequest_tempP']):"";
+
 $idrequest = isset($_GET['idrequest'])? limpiarCadena($_GET['idrequest']):"";
+
+$idrequest_item = isset($_POST['idrequest_item'])? limpiarCadena($_POST['idrequest_item']):"";
 
 $idusuario = isset($_SESSION['idusuario'])? $_SESSION['idusuario']: "";
 
 $iddepartamento=isset($_POST["departamento"])? limpiarCadena($_POST["departamento"]):"";
 
 $responsable=isset($_POST['responsable'])? limpiarCadena($_POST['responsable']):"";
+
+$nombreItem=isset($_POST['nombreItem'])? limpiarCadena($_POST['nombreItem']):"";
+
+$cantidad=isset($_POST['cantidad'])? limpiarCadena($_POST['cantidad']):"";
 
 $supervisor=isset($_POST['supervisor'])? limpiarCadena($_POST['supervisor']):"";
 
@@ -41,6 +49,11 @@ switch ($_GET["op"]){
 			echo $rspta ? "Requisicion actualizada con exito":"No se pudieron actualizar los datos de la requisicion";
 		}
     break;
+
+    case 'guardaryeditarP':
+        $rspta=$request_temp->insertarItem($idrequest_tempP,$nombreItem,$cantidad);
+        echo $rspta ? "Item cargado con exito":"No se pudieron registrar todos los item de la Requisicion";
+break;
 
     case 'listar':
         $rspta = $request_temp->listar();
@@ -94,12 +107,17 @@ switch ($_GET["op"]){
     echo $rspta ? "Item eliminado": "El Item no se puede eliminar, verifique que no este vinculado";
     break;
 
+    case 'eliminarItem':
+    $rspta = $request_temp->eliminarItem($idrequest_item);
+    echo $rspta ? "Item eliminado": "El Item no se puede eliminar, verifique que no este vinculado";
+    break;
+
     case 'listarP':
     $rspta = $request_temp->listarP($idrequest);
     $data = Array();
     while($reg = $rspta->fetch_object()){
        $data[]=array(
-           "0"=>'<button class="btn btn-danger" onclick="eliminarItem('.$reg->idrequest_temp.')"><i class="fa fa-trash"></i></button>',
+           "0"=>'<button class="btn btn-danger" onclick="eliminarItem('.$reg->idrequest_items_temp.')"><i class="fa fa-trash"></i></button>',
            "1"=>$reg->nombre,
            "2"=>$reg->cantidad
        );
