@@ -61,12 +61,12 @@ break;
         while($reg = $rspta->fetch_object()){
            $data[]=array(
                "0"=>'<button class="btn btn-warning" onclick="mostrar('.$reg->idrequest_temp.')"><i class="nav-icon icon-pencil" style="color:white" ></i></button> <button class="btn btn-danger" onclick="eliminar('.$reg->idrequest_temp.')"><i class="fa fa-trash"></i></button>'.
- 					' <button class="btn btn-primary" onclick="mostrarP('.$reg->idrequest_temp.')"><i class="fa fa-cart-arrow-down"></i></button>',
+ 					' <button class="btn btn-primary" onclick="mostrarP('.$reg->idrequest_temp.')"><i class="fa fa-cart-arrow-down"></i></button> <button class="btn btn-success" onclick="confirmarP('.$reg->idrequest_temp.')"><i class="fa fa fa-check"></i></button>',
                "1"=>$reg->depto,
                "2"=>$reg->buque,
                "3"=>$reg->usuario,
                "4"=>$reg->fecha,
-               "5"=>($reg->condicion)?'<span class="badge badge-success">Pendiente</span>':'<span class="badge badge-danger">Desactivado</span>'
+               "5"=>'<span class="badge badge-dark">Numero: '.$reg->idrequest_temp.'</span>'
            );
         }
         /*CARGAMOS LA DATA EN LA VARIABLE USADA PARA EL DATATABLE*/
@@ -104,7 +104,7 @@ break;
 
     case 'eliminar':
     $rspta = $request_temp->eliminar($idrequest_temps);
-    echo $rspta ? "Item eliminado": "El Item no se puede eliminar, verifique que no este vinculado";
+    echo $rspta ? "Requisicion eliminada": "La Requisicion no se puede eliminar, verifique que no este vinculada";
     break;
 
     case 'eliminarItem':
@@ -129,8 +129,40 @@ break;
          "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
          "aaData"=>$data);
     echo json_encode($results);
-break;
+    break;
 
-        
+    case 'confirmarP':
+    $rspta = $request_temp->mostrarObj($idrequest_temps);
+    while($reg = $rspta->fetch_object() ){
+        switch ($reg->iddepartamento) {
+            case 1:
+                # MTTO
+                $dpto = 'request_mtto';
+                $rspta2 = $request_temp->insertR($reg->idrequest_temp,$dpto,$reg->fecha);
+                if( $rspta2 != "0" ){
+                    $codigo = 'COMP-000'.$rspta2; /* AGREGAR IF DE 00 */
+                    $rspta3 = $request_temp->updateR($reg->idrequest_temp,$dpto,$codigo);
+                    echo $rspta3;
+                } else {
+                    echo 'Error al insertar requisicion ya existe';
+                }
+
+                break;
+            
+            case 2:
+                # OPERACIONES
+                $dpto = 'request_op';
+                $rspta2 = $request_temp->insertR($reg->idrequest_temp,$dpto,$reg->fecha);
+                $codigo = 'OPER-000'.$rspta2; /* AGREGAR IF DE 00 */
+                $rspta3 = $request_temp->updateR($reg->idrequest_temp,$dpto,$codigo);
+                echo $rspta3;
+                break;
+            
+        }
+    }
+
+    // $rspta2 = $request_temp->insertR($idrequest_temps);
+    // echo $rspta ? "Item activado": "El Item no se puede activar";
+    break;        
 
 }

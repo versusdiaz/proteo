@@ -33,6 +33,11 @@ class Request_m{
         $sql = "SELECT * FROM request_temp WHERE idrequest_temp='$idrequest_temp'";
         return ConsultaFila($sql);
     }
+
+    public static function mostrarObj($idrequest_temp){
+        $sql = "SELECT * FROM request_temp WHERE idrequest_temp='$idrequest_temp'";
+        return Consulta($sql);
+    }
     
     public static function listar(){
         $sql = "SELECT T1.idrequest_temp, T2.nombre AS usuario, T3.nombre AS depto, T4.nombre AS buque, T1.fecha, T1.condicion FROM request_temp as T1 LEFT JOIN usuarios as T2 ON T1.idusuario = T2.idusuario LEFT JOIN departamento as T3 ON T1.iddepartamento = T3.iddepartamento LEFT JOIN centro AS T4 ON T1.idcentro = T4.idcentro";
@@ -65,5 +70,14 @@ class Request_m{
         Consulta($sql) or $sw = false;
         return $sw;
     }
+
+    public static function insertR($idrequest_temp,$dpto,$fecha){
+        $sql = "INSERT INTO $dpto (idrequest_temp,fecha) VALUES ('$idrequest_temp','$fecha')";
+        return Consulta_retornarID($sql);
+    }
     
+    public static function updateR($idrequest_temp,$dpto,$codigo){
+        $sql = "UPDATE $dpto SET codigo = '$codigo' WHERE idrequest_temp = '$idrequest_temp'";
+        echo $sql;
+    }
 }

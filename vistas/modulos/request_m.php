@@ -35,7 +35,7 @@
                                     <th>Centro</th>
                                     <th>Creada Por</th>
                                     <th>Fecha</th>
-                                    <th>Status</th>
+                                    <th>Temporal</th>
                                 </thead>
                                 <tbody>
                                 </tbody>
@@ -45,7 +45,7 @@
                                     <th>Centro</th>
                                     <th>Creada Por</th>
                                     <th>Fecha</th>
-                                    <th>Status</th>
+                                    <th>Temporal</th>
                                 </tfoot>
                             </table>
                         </div>
@@ -141,6 +141,8 @@
             <div class="card">
                 <div class="card-header">
                     <i class="fa fa-cart-arrow-down"></i> Purchase Item
+                    <button class="float-right btn btn-success" id="btnInfo" >
+                            Numero</button>
                 </div>
                 <div class="card-body" id="formularioPurchase">
                     <form name="formulario" id="formularioP" method="POST">

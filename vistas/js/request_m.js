@@ -244,6 +244,7 @@ function mostrar(idrequest_temp){
 
 function mostrarP(idrequest_temp){
     $("#idrequest_tempP").val(idrequest_temp); // ASIGNO ID AL PURCHASE
+    $("#btnInfo").text('Nro: '+idrequest_temp);
     mostrarformP(true);
     tabla2=$('#tbllistadoPurchase').dataTable(
         {
@@ -276,9 +277,9 @@ function mostrarP(idrequest_temp){
         , confirmButtonText: "Si, deseo eliminarla!"
         , closeOnConfirm: false
         }, function () {
-            $.post('controllers/request_m.php?op=eliminar',{idrequest_temp:idrequest_temp},function(e){
-            swal("Eliminada!", e , "success");  
-            tabla2.ajax.reload();
+            $.post('controllers/request_m.php?op=eliminar',{idrequest_temp:idrequest_temp},function(respuesta){
+            swal(respuesta, "Presione OK para continuar");  
+            tabla.ajax.reload();
             });
         });
  }
@@ -329,6 +330,23 @@ function mostrarP(idrequest_temp){
         }, function () {
             $.post('controllers/request_m.php?op=activar',{idrequest_temp:idrequest_temp},function(e){
             swal("Activado!", e , "success");  
+            tabla.ajax.reload();
+            });
+        });
+ }
+
+ function confirmarP(idrequest_temp){
+    swal({
+        title: "Esta seguro..?"
+        , text: "Al procesar esta requisicion, sera enumerada"
+        , type: "warning"
+        , showCancelButton: true
+        , confirmButtonColor: "#da4f49"
+        , confirmButtonText: "Si, procesarla !"
+        , closeOnConfirm: false
+        }, function () {
+            $.post('controllers/request_m.php?op=confirmarP',{idrequest_temp:idrequest_temp},function(e){
+            swal("Procesada!", e , "success");  
             tabla.ajax.reload();
             });
         });
