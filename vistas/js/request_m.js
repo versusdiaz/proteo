@@ -346,8 +346,9 @@ function mostrarP(idrequest_temp){
         , closeOnConfirm: false
         }, function () {
             $.post('controllers/request_m.php?op=confirmarP',{idrequest_temp:idrequest_temp},function(e){
-            swal("Procesada!", e , "success");  
+            swal(e, "Presione OK para continuar");
             tabla.ajax.reload();
+            mostrarformP(false);            
             });
         });
  }
