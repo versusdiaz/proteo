@@ -61,14 +61,28 @@
                   <a class="nav-link" href="request_m">
                     <i class="nav-icon icon-control-play"></i> Send Request</a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <a class="nav-link" href="buttons/button-group.html">
-                    <i class="nav-icon icon-control-forward"></i> Request To File</a>
+                    <i class="nav-icon icon-control-forward"></i> Request in File</a>
+                </li> -->
+
+                <li class="nav-item nav-dropdown">
+                    <a class="nav-link nav-dropdown-toggle" href="#">
+                        <i class="nav-icon icon-control-forward"></i> Request in File</a>
+                    <ul class="nav-dropdown-items">
+                        <li class="nav-item">
+                            <a class="nav-link" href="request_mtto">
+                                <i class="nav-icon icon-control-forward"></i> Request MTTO
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="apps/invoicing/invoice.html">
+                                <i class="nav-icon icon-control-forward"></i> Request OP
+                            </a>
+                        </li>
+                    </ul>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="buttons/dropdowns.html">
-                    <i class="nav-icon fa fa-spinner fa-pulse"></i> Transform To</a>
-                </li>
+                
               </ul>
             </li>
             <li class="nav-item nav-dropdown">
@@ -82,10 +96,6 @@
                 <li class="nav-item">
                   <a class="nav-link" href="buttons/button-group.html">
                     <i class="nav-icon icon-control-forward"></i> Request To File</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="buttons/dropdowns.html">
-                    <i class="nav-icon fa fa-spinner fa-pulse"></i> Transform To</a>
                 </li>
               </ul>
             </li>
