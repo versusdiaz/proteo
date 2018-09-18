@@ -161,25 +161,28 @@ break;
             case 2:
                 # OPERACIONES
                 $dpto = 'request_op';
-                $rspta5 = $request_temp->validarFecha($reg->iddepartamento,$reg->fecha);
-                $rspta2 = $request_temp->insertR($reg->idrequest_temp,$dpto,$reg->fecha);
-                if( $rspta2 != "0" ){
-                    $codigo = 'OPER-000'.$rspta2; /* AGREGAR IF DE 00 */
-                    $rspta3 = $request_temp->updateR($reg->idrequest_temp,$dpto,$codigo);
-                    $rspta4 = $request_temp->vincular($reg->idrequest_temp);
-                    echo $rspta3 ? "Requisicion almacenada": "Requisicion no se puede almacenar";
-                    break;
-                    
+                $validarFecha = $request_temp->validarAnterior($reg->iddepartamento,$reg->fecha);
+                $validarFecha2 = $request_temp->validarSiguiente($reg->iddepartamento,$reg->fecha);
+                if( $validarFecha == 0 && $validarFecha2 == 0 ){
+
+                    $rspta2 = $request_temp->insertR($reg->idrequest_temp,$dpto,$reg->fecha);
+                    if( $rspta2 != "0" ){
+                        $codigo = 'OPER-000'.$rspta2; /* AGREGAR IF DE 00 */
+                        $rspta3 = $request_temp->updateR($reg->idrequest_temp,$dpto,$codigo);
+                        $rspta4 = $request_temp->vincular($reg->idrequest_temp);
+                        echo $rspta3 ? "Requisicion almacenada": "Requisicion no se puede almacenar";
+                        break;
+                       
+                    } else {
+                        echo 'Error al insertar requisicion ya existe';
+                    }
                 } else {
-                    echo 'Error al insertar requisicion ya existe';
+                    echo 'Error existe una requisicion pendiente para la fecha';
                 }
-                break;
-            
+                 break;
         }
     }
 
-    // $rspta2 = $request_temp->insertR($idrequest_temps);
-    // echo $rspta ? "Item activado": "El Item no se puede activar";
     break;        
 
 }

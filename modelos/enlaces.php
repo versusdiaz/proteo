@@ -11,6 +11,7 @@ class EnlacesModels{
        $enlaces == "servicios" ||
        $enlaces == "request_m" ||
        $enlaces == "request_mtto" ||
+       $enlaces == "request_op" ||
        $enlaces == "centro" ||
        $enlaces == "imprimirc"){
        /*MODULO A CARGAR SERA*/
