@@ -1,18 +1,20 @@
 <?php
 session_start();
-require_once("../modelos/Request_m.php");
+require_once("../modelos/Request_s.php");
 
-$request_temp = new Request_m();
+$request_temp = new Request_s();
 
 /*INICIALIZO VARIABLES*/
 
-$idrequest_temps=isset($_POST['idrequest_temp'])? limpiarCadena($_POST['idrequest_temp']):"";
+$idrequest_temps=isset($_POST['idrequestS_temp'])? limpiarCadena($_POST['idrequestS_temp']):"";
 
 $idrequest_tempP=isset($_POST['idrequest_tempP'])? limpiarCadena($_POST['idrequest_tempP']):"";
 
+$detalle=isset($_POST['detalle'])? limpiarCadena($_POST['detalle']):"";
+
 $idrequest = isset($_GET['idrequest'])? limpiarCadena($_GET['idrequest']):"";
 
-$idrequest_item = isset($_POST['idrequest_item'])? limpiarCadena($_POST['idrequest_item']):"";
+$idrequest_servicios = isset($_POST['idrequest_servicios'])? limpiarCadena($_POST['idrequest_servicios']):"";
 
 $idusuario = isset($_SESSION['idusuario'])? $_SESSION['idusuario']: "";
 
@@ -51,22 +53,22 @@ switch ($_GET["op"]){
     break;
 
     case 'guardaryeditarP':
-        $rspta=$request_temp->insertarItem($idrequest_tempP,$nombreItem,$cantidad);
+        $rspta=$request_temp->insertarItem($idrequest_tempP,$detalle,$nombreItem,$cantidad);
         echo $rspta ? "Item cargado con exito":"No se pudieron registrar todos los item de la Requisicion";
-break;
+    break;
 
     case 'listar':
         $rspta = $request_temp->listar();
         $data = Array();
         while($reg = $rspta->fetch_object()){
            $data[]=array(
-               "0"=>'<button class="btn btn-warning" onclick="mostrar('.$reg->idrequest_temp.')"><i class="nav-icon icon-pencil" style="color:white" ></i></button> <button class="btn btn-danger" onclick="eliminar('.$reg->idrequest_temp.')"><i class="fa fa-trash"></i></button>'.
- 					' <button class="btn btn-primary" onclick="mostrarP('.$reg->idrequest_temp.')"><i class="fa fa-cart-arrow-down"></i></button> <button class="btn btn-success" onclick="confirmarP('.$reg->idrequest_temp.')"><i class="fa fa fa-check"></i></button>',
+               "0"=>'<button class="btn btn-warning" onclick="mostrar('.$reg->idrequestS_temp.')"><i class="nav-icon icon-pencil" style="color:white" ></i></button> <button class="btn btn-danger" onclick="eliminar('.$reg->idrequestS_temp.')"><i class="fa fa-trash"></i></button>'.
+ 					' <button class="btn btn-primary" onclick="mostrarP('.$reg->idrequestS_temp.')"><i class="fa fa-cart-arrow-down"></i></button> <button class="btn btn-success" onclick="confirmarP('.$reg->idrequestS_temp.')"><i class="fa fa fa-check"></i></button>',
                "1"=>$reg->depto,
                "2"=>$reg->buque,
                "3"=>$reg->usuario,
                "4"=>$reg->fecha,
-               "5"=>'<span class="badge badge-dark">Numero: '.$reg->idrequest_temp.'</span>'
+               "5"=>'<span class="badge badge-dark">Numero: '.$reg->idrequestS_temp.'</span>'
            );
         }
         /*CARGAMOS LA DATA EN LA VARIABLE USADA PARA EL DATATABLE*/
@@ -98,7 +100,7 @@ break;
     $rspta = $request_temp->listarc();
     while ($reg = $rspta->fetch_object())
         {
-            echo '<option value=' .$reg->idrequest_temp. '>' .$reg->nombre. '</option>';
+            echo '<option value=' .$reg->idrequestS_temp. '>' .$reg->nombre. '</option>';
         }
     break;
 
@@ -108,7 +110,7 @@ break;
     break;
 
     case 'eliminarItem':
-    $rspta = $request_temp->eliminarItem($idrequest_item);
+    $rspta = $request_temp->eliminarItem($idrequest_servicios);
     echo $rspta ? "Item eliminado": "El Item no se puede eliminar, verifique que no este vinculado";
     break;
 
@@ -117,8 +119,8 @@ break;
     $data = Array();
     while($reg = $rspta->fetch_object()){
        $data[]=array(
-           "0"=>'<button class="btn btn-danger" onclick="eliminarItem('.$reg->idrequest_items_temp.')"><i class="fa fa-trash"></i></button>',
-           "1"=>$reg->nombre,
+           "0"=>'<button class="btn btn-danger" onclick="eliminarItem('.$reg->idrequest_services_temp.')"><i class="fa fa-trash"></i></button>',
+           "1"=>($reg->detalle) ? $reg->nombre.' '.$reg->detalle : $reg->nombre,
            "2"=>$reg->cantidad
        );
     }
@@ -144,7 +146,7 @@ break;
 
                     $rspta2 = $request_temp->insertR($reg->idrequest_temp,$dpto,$reg->fecha);
                     if( $rspta2 != "0" ){
-                        $codigo = 'RQ/GGO/MT-00'.$rspta2; /* AGREGAR IF DE 00 */
+                        $codigo = 'COMP-000'.$rspta2; /* AGREGAR IF DE 00 */
                         $rspta3 = $request_temp->updateR($reg->idrequest_temp,$dpto,$codigo);
                         $rspta4 = $request_temp->vincular($reg->idrequest_temp);
                         echo $rspta3 ? "Requisicion almacenada": "Requisicion no se puede almacenar";
@@ -167,7 +169,7 @@ break;
 
                     $rspta2 = $request_temp->insertR($reg->idrequest_temp,$dpto,$reg->fecha);
                     if( $rspta2 != "0" ){
-                        $codigo = 'RQ/GGO/OP-00'.$rspta2; /* AGREGAR IF DE 00 */
+                        $codigo = 'OPER-000'.$rspta2; /* AGREGAR IF DE 00 */
                         $rspta3 = $request_temp->updateR($reg->idrequest_temp,$dpto,$codigo);
                         $rspta4 = $request_temp->vincular($reg->idrequest_temp);
                         echo $rspta3 ? "Requisicion almacenada": "Requisicion no se puede almacenar";

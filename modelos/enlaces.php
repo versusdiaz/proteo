@@ -10,6 +10,7 @@ class EnlacesModels{
        $enlaces == "items" ||
        $enlaces == "servicios" ||
        $enlaces == "request_m" ||
+       $enlaces == "request_s" ||
        $enlaces == "request_mtto" ||
        $enlaces == "request_op" ||
        $enlaces == "centro" ||
