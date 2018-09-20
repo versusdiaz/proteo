@@ -38,20 +38,29 @@ $prioridad=isset($_POST['prioridad'])? limpiarCadena($_POST['prioridad']):"";
 
 $comentario=isset($_POST['comentario'])? limpiarCadena($_POST['comentario']):"";
 
+$detalle=isset($_POST['detalle'])? limpiarCadena($_POST['detalle']):"";
+
+$servicio=isset($_POST['servicio'])? limpiarCadena($_POST['servicio']):"";
+
+
 switch ($_GET["op"]){
     case 'guardaryeditar':
 		if (empty($idrequest_temps)){
-            $rspta=$request_temp->insertar($idusuario,$iddepartamento,$idcentro,$comentario,$responsable,$supervisor,$prioridad,$calidad,$mantenimiento,$fecha);
+            $rspta=$request_temp->insertar($idusuario,$iddepartamento,$idcentro,$comentario,$responsable,$supervisor,$prioridad,$calidad,$mantenimiento,$fecha,$servicio);
             echo $rspta ? "Requisicion registrada con exito":"No se pudieron registrar todos los datos de la Requisicion";
 		}
 		else {
-            $rspta=$request_temp->editar($idrequest_temps,$idusuario,$iddepartamento,$idcentro,$comentario,$responsable,$supervisor,$prioridad,$calidad,$mantenimiento,$fecha);
+            $rspta=$request_temp->editar($idrequest_temps,$idusuario,$iddepartamento,$idcentro,$comentario,$responsable,$supervisor,$prioridad,$calidad,$mantenimiento,$fecha,$servicio);
 			echo $rspta ? "Requisicion actualizada con exito":"No se pudieron actualizar los datos de la requisicion";
 		}
     break;
 
     case 'guardaryeditarP':
-        $rspta=$request_temp->insertarItem($idrequest_tempP,$nombreItem,$cantidad);
+        $rspta=$request_temp->insertarItem($idrequest_tempP,$detalle,$nombreItem,$cantidad);
+        // Pregunto si la propiedad del item
+        // uso un consultafila
+        
+        // Si es un servicio entonces, pregunto si la requisicion es de servicios, si no es de materiales
         echo $rspta ? "Item cargado con exito":"No se pudieron registrar todos los item de la Requisicion";
 break;
 
@@ -118,7 +127,7 @@ break;
     while($reg = $rspta->fetch_object()){
        $data[]=array(
            "0"=>'<button class="btn btn-danger" onclick="eliminarItem('.$reg->idrequest_items_temp.')"><i class="fa fa-trash"></i></button>',
-           "1"=>$reg->nombre,
+           "1"=>($reg->detalle) ? $reg->nombre.' '.$reg->detalle : $reg->nombre,
            "2"=>$reg->cantidad
        );
     }

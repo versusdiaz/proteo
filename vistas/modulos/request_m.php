@@ -125,6 +125,16 @@
                                         <input type="text" class="form-control" name="comentario" id="comentario">
                                     </div>
                                 </div>
+                                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                    <label class="col-sm-12 control-label">Tipo *:</label>
+                                    <div class="col-sm-12">
+                                    <select class="form-control selectpicker" data-live-search="true" name="servicio" id="servicio">
+                                            <option value="">SELECCIONE</option>
+                                            <option value="1">SERVICIOS</option>
+                                            <option value="0">MATERIALES</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div><!-- FIN DEL ROW -->
                             <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <button class="btn btn-primary" type="submit" id="btnGuardar">
@@ -149,11 +159,18 @@
                         <div class="row">
                             <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <input type="hidden" name="idrequest_tempP" id="idrequest_tempP">
+                            <input type="text" name="idservicio" id="idservicio">
                                 <label class="col-sm-12 control-label">Nombre *:</label>
                                 <input type="hidden" name="iditems" id="iditems">
                                 <div class="col-sm-12">
                                     <select class="form-control selectpicker" data-live-search="true" name="nombreItem" id="nombreItem">
                                     </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6 formDetalle">
+                                <label class="col-sm-12 control-label">Detalle *:</label>
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control" name="detalle" id="detalle" >
                                 </div>
                             </div>
                             <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">

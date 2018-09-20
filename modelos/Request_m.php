@@ -5,15 +5,15 @@ class Request_m{
     function __construct(){
         
     }
-    public static function insertar($idusuario,$iddepartamento,$idcentro,$comentario,$responsable,$supervisor,$prioridad,$calidad,$mantenimiento,$fecha){
-        $sql = "INSERT INTO request_temp (idusuario,iddepartamento,idcentro,comentario,responsable,supervisor,prioridad,calidad,mantenimiento,fecha,condicion) VALUES ('$idusuario','$iddepartamento','$idcentro','$comentario','$responsable','$supervisor','$prioridad','$calidad','$mantenimiento','$fecha',1)";
+    public static function insertar($idusuario,$iddepartamento,$idcentro,$comentario,$responsable,$supervisor,$prioridad,$calidad,$mantenimiento,$fecha,$servicio){
+        $sql = "INSERT INTO request_temp (idusuario,iddepartamento,idcentro,comentario,responsable,supervisor,prioridad,calidad,mantenimiento,fecha,servicio,condicion) VALUES ('$idusuario','$iddepartamento','$idcentro','$comentario','$responsable','$supervisor','$prioridad','$calidad','$mantenimiento','$fecha','$servicio',1)";
         $sw = true;
         Consulta($sql) or $sw = false;
         return $sw;
     }
     
-    public static function editar($idrequest_temp,$idusuario,$iddepartamento,$idcentro,$comentario,$responsable,$supervisor,$prioridad,$calidad,$mantenimiento,$fecha){
-        $sql = "UPDATE request_temp SET idusuario='$idusuario',iddepartamento='$iddepartamento',idcentro='$idcentro',comentario='$comentario',responsable='$responsable',supervisor='$supervisor',prioridad='$prioridad',calidad='$calidad',mantenimiento='$mantenimiento',fecha='$fecha' WHERE idrequest_temp = '$idrequest_temp'";
+    public static function editar($idrequest_temp,$idusuario,$iddepartamento,$idcentro,$comentario,$responsable,$supervisor,$prioridad,$calidad,$mantenimiento,$fecha,$servicio){
+        $sql = "UPDATE request_temp SET idusuario='$idusuario',iddepartamento='$iddepartamento',idcentro='$idcentro',comentario='$comentario',responsable='$responsable',supervisor='$supervisor',prioridad='$prioridad',calidad='$calidad',mantenimiento='$mantenimiento',fecha='$fecha',servicio='$servicio' WHERE idrequest_temp = '$idrequest_temp'";
         $sw = true;
         Consulta($sql) or $sw = false;
         return $sw;
@@ -45,7 +45,7 @@ class Request_m{
     }
 
     public static function listarP($idrequest_temp){
-        $sql = "SELECT T1.idrequest_items_temp, T2.nombre, T1.cantidad FROM request_items_temp AS T1 LEFT JOIN items AS T2 ON T1.iditem = T2.iditems WHERE T1.idrequest_temp = $idrequest_temp";
+        $sql = "SELECT T1.idrequest_items_temp, T1.detalle, T2.nombre, T1.cantidad FROM request_items_temp AS T1 LEFT JOIN items AS T2 ON T1.iditem = T2.iditems WHERE T1.idrequest_temp = $idrequest_temp";
         return Consulta($sql);
     }
     
@@ -64,8 +64,8 @@ class Request_m{
         return Consulta($sql);
     }
 
-    public static function insertarItem($idrequest_tempP,$nombreItem,$cantidad){
-        $sql = "INSERT INTO request_items_temp (idrequest_temp,iditem,cantidad) VALUES ('$idrequest_tempP','$nombreItem','$cantidad')";
+    public static function insertarItem($idrequest_tempP,$detalle,$nombreItem,$cantidad){
+        $sql = "INSERT INTO request_items_temp (idrequest_temp,detalle,iditem,cantidad) VALUES ('$idrequest_tempP','$detalle','$nombreItem','$cantidad')";
         $sw = true;
         Consulta($sql) or $sw = false;
         return $sw;

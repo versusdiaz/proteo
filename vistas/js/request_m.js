@@ -110,6 +110,9 @@ function limpiar(){
     $("#prioridad").val("");
     $("#prioridad").selectpicker('refresh');
 
+    $("#servicio").val("");
+    $("#servicio").selectpicker('refresh');
+
     $("#comentario").val("");
 
     $(".form-group").removeClass('has-success has-error');
@@ -118,6 +121,7 @@ function limpiar(){
 function limpiarP(){
     $("#nombre").val("");
     $("#cantidad").val("");
+    $("#detalle").val("");
 }
 
 function mostrarform(flag){
@@ -239,6 +243,8 @@ function mostrar(idrequest_temp){
         $("#calidad").selectpicker('refresh');
         $("#prioridad").val(data.prioridad);
         $("#prioridad").selectpicker('refresh');
+        $("#servicio").val(data.servicio);
+        $("#servicio").selectpicker('refresh');
      });
     }
 
