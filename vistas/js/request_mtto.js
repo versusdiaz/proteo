@@ -3,6 +3,7 @@ var bandera;
 function init(){
     mostrarform(false);
     listar();
+
 }
 
 function limpiar(){
@@ -84,7 +85,8 @@ function mostrar(idrequest_mtto){
           /*Convertir la cadena enviada desde PHP a un vector de objetos en JavaScript*/
          data = JSON.parse(data);
          mostrarform(true);
-        $("#idrequest_mtto").val(data.idrequest_mtto);
+         $("#idrequest_mtto").val(data.idrequest_mtto);
+         $("#idrequest_temp").val(data.idrequest_temp);
         $("#codigo").val(data.codigo);
      });
     }
@@ -139,5 +141,35 @@ function mostrar(idrequest_mtto){
             });
         });
  }
+
+ function convertirPresupuesto(){
+    var formData = new FormData($("#formulario")[0]);
+     $.ajax({
+        url:"controllers/request_mtto.php?op=convertirPresupuesto",
+        type:"POST",
+        data: formData,
+        contentType: false,
+	    processData: false,
+        success: function(respuesta){
+          swal(respuesta, "Presione OK para continuar");
+          mostrarform(false);
+        }
+     });
+}
+
+function convertirCompra(){
+    var formData = new FormData($("#formulario")[0]);
+     $.ajax({
+        url:"controllers/request_mtto.php?op=convertirCompra",
+        type:"POST",
+        data: formData,
+        contentType: false,
+	    processData: false,
+        success: function(respuesta){
+          swal(respuesta, "Presione OK para continuar");
+          mostrarform(false);
+        }
+     });
+}
 
 init();

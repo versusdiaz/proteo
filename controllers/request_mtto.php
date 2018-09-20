@@ -8,6 +8,8 @@ $request_mtto = new Request_mtto();
 
 $idrequest_mtto=isset($_POST['idrequest_mtto'])? limpiarCadena($_POST['idrequest_mtto']):"";
 
+$idrequest_temp=isset($_POST['idrequest_temp'])? limpiarCadena($_POST['idrequest_temp']):"";
+
 switch ($_GET["op"]){
 
     case 'listar':
@@ -53,8 +55,15 @@ switch ($_GET["op"]){
     break;
 
     case 'eliminar':
-    $rspta = $request_mtto->eliminar($idrequest_mttos);
+    $rspta = $request_mtto->eliminar($idrequest_mtto);
     echo $rspta ? "Requisicion eliminada": "La Requisicion no se puede eliminar, verifique que no este vinculada";
+    break;
+
+    case 'convertirPresupuesto':
+    // SE POSPONE SOLVENTAR FALLA EN REQUESTMTTO
+     //   $request_mtto->insertPresupuesto($idrequest_mtto);
+    // echo $rspta ? "Requisicion eliminada": "La Requisicion no se puede eliminar, verifique que no este vinculada";
+    echo $idrequest_temp;
     break;
 
 }

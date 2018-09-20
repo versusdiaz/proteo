@@ -72,6 +72,16 @@
                         </div>
                         </div>
                         <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <label class="col-sm-12 control-label">Es un servicio? *:</label>
+                        <div class="col-sm-12">
+                        <select class="form-control selectpicker" data-live-search="true" name="servicio" id="servicio">
+                        <option value="">SELECCIONE</option>
+                        <option value="1">SI</option>
+                        <option value="0">NO</option>
+                        </select>
+                        </div>
+                        </div>
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <label class="col-sm-12 control-label">Stock *:</label>
                         <div class="col-sm-12">
                         <input type="number" class="form-control" name="stock" id="stock" step="0.01" required>

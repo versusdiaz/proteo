@@ -26,14 +26,18 @@ $decimales=isset($_POST['decimales'])? limpiarCadena($_POST['decimales']):"";
 
 $detalle=isset($_POST['detalle'])? limpiarCadena($_POST['detalle']):"";
 
+$servicio=isset($_POST['servicio'])? limpiarCadena($_POST['servicio']):"";
+
+
 switch ($_GET["op"]){
     case 'guardaryeditar':
 		if (empty($iditems)){
-            $rspta=$item->insertar($nombre,$precio_nac,$precio_usd,$stock,$stock_min,$stock_max,$unidad,$decimales,$detalle);
-            echo $rspta ? "Item registrado con exito":"No se pudieron registrar todos los datos del Item";
+            $rspta=$item->insertar($nombre,$precio_nac,$precio_usd,$stock,$stock_min,$stock_max,$unidad,$decimales,$detalle,$servicio);
+            // echo $rspta ? "Item registrado con exito":"No se pudieron registrar todos los datos del Item";
+            echo $rspta;
 		}
 		else {
-            $rspta=$item->editar($iditems,$nombre,$precio_nac,$precio_usd,$stock,$stock_min,$stock_max,$unidad,$decimales,$detalle);
+            $rspta=$item->editar($iditems,$nombre,$precio_nac,$precio_usd,$stock,$stock_min,$stock_max,$unidad,$decimales,$detalle,$servicio);
 			echo $rspta ? "Item actualizado con exito":"No se pudieron actualizar los datos del Item";
 		}
     break;

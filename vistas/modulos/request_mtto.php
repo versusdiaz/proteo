@@ -53,26 +53,25 @@
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <label class="col-sm-12 control-label">Nombre *:</label>
                                     <input type="hidden" name="idrequest_mtto" id="idrequest_mtto">
+                                    <input type="hidden" name="idrequest_temp" id="idrequest_temp">
                                     <input type="text" class="form-control"  name="codigo" id="codigo" disabled>
                                 </div>
                                 <hr>
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <button class="btn btn-primary btn-block" type="button" onclick="cancelarform()" >
+                                    <button class="btn btn-primary btn-block" type="button" onclick="convertirPresupuesto()" >
                                         Convertir a Presupuesto
                                     </button>
                                 <hr>
                                 </div>
 
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <button class="btn btn-primary btn-block" type="button" onclick="cancelarform()" >
+                                    <button class="btn btn-primary btn-block" type="button" onclick="convertirCompra()" >
                                         Convertir a Orden de Compra
                                     </button>
                                 <hr>
                                 </div>
 
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <button class="btn btn-primary" type="submit" id="btnGuardar">
-                                    <i class="fa fa-save"></i> Guardar</button>
                                 <button class="btn btn-danger" type="button" onclick="cancelarform()">
                                     <i class="fa fa-arrow-circle-left"></i> Cancelar</button>
                                 </div>

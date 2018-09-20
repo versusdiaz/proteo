@@ -46,6 +46,9 @@ function init(){
             unidad:{
                 required: true,
             },
+            servicio:{
+                required: true,
+            },
             decimales:{
                 required: true,
             }
@@ -91,6 +94,8 @@ function limpiar(){
     $("#stock").val("");
     $("#stock_min").val("");
     $("#stock_max").val("");
+    $("#servicio").val("");
+    $("#servicio").selectpicker('refresh');
     $("#unidad").val("");
     $("#detalle").val("");
     $("#unidad").selectpicker('refresh');
@@ -176,6 +181,8 @@ function mostrar(iditems){
         $("#stock").val(data.stock);
         $("#stock_min").val(data.stock_min);
         $("#stock_max").val(data.stock_max);
+        $("#servicio").val(data.servicio);
+        $("#servicio").selectpicker('refresh');
         $("#unidad").val(data.unidad);
         $("#unidad").selectpicker('refresh');
         $("#decimales").val(data.decimales);
