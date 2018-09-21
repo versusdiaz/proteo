@@ -33,8 +33,7 @@ switch ($_GET["op"]){
     case 'guardaryeditar':
 		if (empty($iditems)){
             $rspta=$item->insertar($nombre,$precio_nac,$precio_usd,$stock,$stock_min,$stock_max,$unidad,$decimales,$detalle,$servicio);
-            // echo $rspta ? "Item registrado con exito":"No se pudieron registrar todos los datos del Item";
-            echo $rspta;
+            echo $rspta ? "Item registrado con exito":"No se pudieron registrar todos los datos del Item";
 		}
 		else {
             $rspta=$item->editar($iditems,$nombre,$precio_nac,$precio_usd,$stock,$stock_min,$stock_max,$unidad,$decimales,$detalle,$servicio);

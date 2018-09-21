@@ -96,4 +96,13 @@ class Request_m{
         return Consulta_num($sql);        
     }
 
+    public static function propiedadItem($nombreItem){
+        $sql = "SELECT servicio FROM items WHERE iditems= '$nombreItem' AND servicio=1";
+        return Consulta_num($sql);
+    }
+
+    public static function propiedadRequest($idrequest_temp) {
+        $sql = "SELECT servicio FROM request_temp WHERE idrequest_temp = '$idrequest_temp' AND servicio=1";
+        return Consulta_num($sql);
+    }
 }

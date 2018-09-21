@@ -56,12 +56,14 @@ switch ($_GET["op"]){
     break;
 
     case 'guardaryeditarP':
-        $rspta=$request_temp->insertarItem($idrequest_tempP,$detalle,$nombreItem,$cantidad);
-        // Pregunto si la propiedad del item
-        // uso un consultafila
-        
-        // Si es un servicio entonces, pregunto si la requisicion es de servicios, si no es de materiales
-        echo $rspta ? "Item cargado con exito":"No se pudieron registrar todos los item de la Requisicion";
+        $validarItem = $request_temp->propiedadItem($nombreItem);
+        $validarRequest = $request_temp->propiedadRequest($idrequest_tempP);
+        if( $validarItem == $validarRequest ){
+            $rspta =$request_temp->insertarItem($idrequest_tempP,$detalle,$nombreItem,$cantidad);
+            echo $rspta ? "Item cargado con exito":"No se pudieron registrar todos los item de la Requisicion";
+          } else {
+             echo 'Error el Item y el tipo de Requisicion no coinciden';
+          }
 break;
 
     case 'listar':
@@ -147,13 +149,20 @@ break;
             case 1:
                 # MTTO
                 $dpto = 'request_mtto';
+                $codigo ='';
                 $validarFecha = $request_temp->validarAnterior($reg->iddepartamento,$reg->fecha);
                 $validarFecha2 = $request_temp->validarSiguiente($reg->iddepartamento,$reg->fecha);
                 if( $validarFecha == 0 && $validarFecha2 == 0 ){
 
                     $rspta2 = $request_temp->insertR($reg->idrequest_temp,$dpto,$reg->fecha);
                     if( $rspta2 != "0" ){
-                        $codigo = 'RQ/GGO/MT-00'.$rspta2; /* AGREGAR IF DE 00 */
+                        if( $rspta2 < 10 ){
+                            $codigo = 'RQ/GGO/MT-00'.$rspta2; /* AGREGAR IF DE 00 */
+                        } else if ( $rspta2 < 100 ){
+                            $codigo = 'RQ/GGO/MT-0'.$rspta2; /* AGREGAR IF DE 00 */
+                        } else {
+                            $codigo = 'RQ/GGO/MT-'.$rspta2; /* AGREGAR IF DE 00 */
+                        }
                         $rspta3 = $request_temp->updateR($reg->idrequest_temp,$dpto,$codigo);
                         $rspta4 = $request_temp->vincular($reg->idrequest_temp);
                         echo $rspta3 ? "Requisicion almacenada": "Requisicion no se puede almacenar";
@@ -176,7 +185,13 @@ break;
 
                     $rspta2 = $request_temp->insertR($reg->idrequest_temp,$dpto,$reg->fecha);
                     if( $rspta2 != "0" ){
-                        $codigo = 'RQ/GGO/OP-00'.$rspta2; /* AGREGAR IF DE 00 */
+                        if( $rspta2 < 10 ){
+                            $codigo = 'RQ/GGO/OP-00'.$rspta2; /* AGREGAR IF DE 00 */
+                        } else if ( $rspta2 < 100 ){
+                            $codigo = 'RQ/GGO/OP-0'.$rspta2; /* AGREGAR IF DE 00 */
+                        } else {
+                            $codigo = 'RQ/GGO/OP-'.$rspta2; /* AGREGAR IF DE 00 */
+                        }
                         $rspta3 = $request_temp->updateR($reg->idrequest_temp,$dpto,$codigo);
                         $rspta4 = $request_temp->vincular($reg->idrequest_temp);
                         echo $rspta3 ? "Requisicion almacenada": "Requisicion no se puede almacenar";

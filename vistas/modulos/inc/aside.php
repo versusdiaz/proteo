@@ -55,36 +55,10 @@
             </li>
             <li class="nav-item nav-dropdown">
               <a class="nav-link nav-dropdown-toggle" href="#">
-                <i class="nav-icon icon-layers"></i> Request </a>
+                <i class="nav-icon fa fa-cubes"></i> Requisiciones </a>
               <ul class="nav-dropdown-items">
                 <li class="nav-item">
                   <a class="nav-link" href="request_m">
-                    <i class="nav-icon icon-control-play"></i> Send Request</a>
-                </li>
-                <li class="nav-item nav-dropdown">
-                    <a class="nav-link nav-dropdown-toggle" href="#">
-                        <i class="nav-icon icon-control-forward"></i> Request in File</a>
-                    <ul class="nav-dropdown-items">
-                        <li class="nav-item">
-                            <a class="nav-link" href="request_mtto">
-                                <i class="nav-icon fa fa-wrench"></i> Request MTTO
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="request_op">
-                                <i class="nav-icon fa fa-ship"></i> Request OP
-                            </a>
-                        </li>
-                    </ul>
-                </li>     
-              </ul>
-            </li>
-            <li class="nav-item nav-dropdown">
-              <a class="nav-link nav-dropdown-toggle" href="#">
-                <i class="nav-icon icon-layers"></i> Request Servicios </a>
-              <ul class="nav-dropdown-items">
-                <li class="nav-item">
-                  <a class="nav-link" href="request_s">
                     <i class="nav-icon icon-control-play"></i> Send Request</a>
                 </li>
                 <li class="nav-item nav-dropdown">
