@@ -40,10 +40,6 @@
                     <i class="nav-icon fa fa-shopping-bag"></i> Items</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="servicios">
-                    <i class="nav-icon fa fa-cubes"></i> Servicios</a>
-                </li>
-                <li class="nav-item">
                   <a class="nav-link" href="centro">
                     <i class="nav-icon icon-home"></i> Centro</a>
                 </li>
@@ -110,12 +106,8 @@
                 <i class="nav-icon icon-calculator"></i> Presupuestos</a>
               <ul class="nav-dropdown-items">
                 <li class="nav-item">
-                  <a class="nav-link" href="notifications/alerts.html">
+                  <a class="nav-link" href="pcs">
                     <i class="nav-icon icon-note"></i> Asignar Presupuesto</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="notifications/badge.html">
-                    <i class="nav-icon icon-book-open"></i> All Presupuestos</a>
                 </li>
               </ul>
             </li>

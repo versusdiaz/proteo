@@ -8,8 +8,8 @@ class EnlacesModels{
        $enlaces == "clientes" ||
        $enlaces == "proveedores" ||
        $enlaces == "items" ||
-       $enlaces == "servicios" ||
        $enlaces == "request_m" ||
+       $enlaces == "pcs" ||
        $enlaces == "request_s" ||
        $enlaces == "request_mtto" ||
        $enlaces == "request_op" ||

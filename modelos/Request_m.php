@@ -105,4 +105,9 @@ class Request_m{
         $sql = "SELECT servicio FROM request_temp WHERE idrequest_temp = '$idrequest_temp' AND servicio=1";
         return Consulta_num($sql);
     }
+
+    public static function mostrarItem($idrequest_temp){
+        $sql = "SELECT * FROM request_items_temp WHERE idrequest_temp = '$idrequest_temp'";
+        return Consulta($sql);
+    }
 }

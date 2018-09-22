@@ -1,8 +1,11 @@
 <?php
 session_start();
 require_once("../modelos/Request_mtto.php");
+require_once("../modelos/Request_m.php");
 
 $request_mtto = new Request_mtto();
+
+$request_temp = new Request_m();
 
 /*INICIALIZO VARIABLES*/
 
@@ -60,10 +63,22 @@ switch ($_GET["op"]){
     break;
 
     case 'convertirPresupuesto':
-    // SE POSPONE SOLVENTAR FALLA EN REQUESTMTTO
-     //   $request_mtto->insertPresupuesto($idrequest_mtto);
-    // echo $rspta ? "Requisicion eliminada": "La Requisicion no se puede eliminar, verifique que no este vinculada";
-    echo $idrequest_temp;
+    // OBTENER DATOS DE RQ
+        $rspta = $request_temp->mostrar($idrequest_temp);
+        $codigo = rand( 1 , 2000 );
+        $validarPresupuesto = $request_mtto->validarPresupuesto($idrequest_temp);
+        if( $validarPresupuesto == 0 ){
+            $rspta2 = $request_mtto->convertirPresupuesto(1,$idrequest_temp,$codigo,$rspta['fecha'],1);
+            $rspta3 = $request_temp->mostrarItem($idrequest_temp);
+            while($reg = $rspta3->fetch_object()){
+    
+                $request_mtto->insertItemPresupuesto($rspta2,$reg->iditem,$reg->cantidad,$reg->detalle,1);
+            }
+            echo $rspta ? "Presupuesto creado": "Error, presupuesto ya generado";
+        } else {
+            echo "Error, presupuesto ya generado";
+        }
+
     break;
 
 }
