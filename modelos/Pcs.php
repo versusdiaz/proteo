@@ -44,8 +44,8 @@ class Pcs{
         return Consulta($sql);
     }
 
-    public static function eliminar($idcentro){
-        $sql = "DELETE FROM centro WHERE idcentro='$idcentro'";
+    public static function eliminar($idpcs){
+        $sql = "DELETE T1,T2 FROM pcs_items AS T1 LEFT JOIN pcs AS T2 ON T1.idpcs = T2.idpcs WHERE T1.idpcs = '$idpcs' ";
         return Consulta($sql);
     }
     

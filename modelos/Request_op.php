@@ -30,5 +30,22 @@ class Request_op{
         $sql = "DELETE FROM clientes WHERE idcliente='$idcliente'";
         return Consulta($sql);
     }
+
+    public static function convertirPresupuesto($proveedor,$idrequest_temp,$codigo,$fecha,$condicion){
+        $sql = "INSERT INTO pcs (idproveedor,idrequest_temp,codigo,fecha,condicion) VALUES ('$proveedor','$idrequest_temp','$codigo','$fecha',1)";
+        return Consulta_retornarID($sql);
+    }
+
+    public static function insertItemPresupuesto($idpcs,$iditems,$cantidad,$detalle,$condicion){
+        $sql = "INSERT INTO pcs_items (idpcs,iditems,cantidad,detalle,condicion) VALUES ('$idpcs','$iditems','$cantidad','$detalle',1)";
+        $sw = true;
+        Consulta($sql) or $sw = false;
+        return $sw;
+    }
+
+    public static function validarPresupuesto($idrequest_temp){
+        $sql = "SELECT idpcs FROM pcs WHERE idrequest_temp='$idrequest_temp'";
+        return ConsultaFila($sql);
+    }
     
 }

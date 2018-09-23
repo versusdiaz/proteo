@@ -1,12 +1,17 @@
 <?php
 session_start();
 require_once("../modelos/Request_op.php");
+require_once("../modelos/Request_m.php");
 
 $request_op = new Request_op();
+
+$request_temp = new Request_m();
 
 /*INICIALIZO VARIABLES*/
 
 $idrequest_op=isset($_POST['idrequest_op'])? limpiarCadena($_POST['idrequest_op']):"";
+
+$idrequest_temp=isset($_POST['idrequest_temp'])? limpiarCadena($_POST['idrequest_temp']):"";
 
 switch ($_GET["op"]){
 
@@ -55,6 +60,25 @@ switch ($_GET["op"]){
     case 'eliminar':
     $rspta = $request_op->eliminar($irequest_ops);
     echo $rspta ? "Requisicion eliminada": "La Requisicion no se puede eliminar, verifique que no este vinculada";
+    break;
+
+    case 'convertirPresupuesto':
+    // OBTENER DATOS DE RQ
+        $rspta = $request_temp->mostrar($idrequest_temp);
+        $codigo = rand( 1 , 2000 );
+        $validarPresupuesto = $request_op->validarPresupuesto($idrequest_temp);
+        if( $validarPresupuesto == 0 ){
+            $rspta2 = $request_op->convertirPresupuesto(1,$idrequest_temp,$codigo,$rspta['fecha'],1);
+            $rspta3 = $request_temp->mostrarItem($idrequest_temp);
+            while($reg = $rspta3->fetch_object()){
+    
+                $request_op->insertItemPresupuesto($rspta2,$reg->iditem,$reg->cantidad,$reg->detalle,1);
+            }
+            echo $rspta ? "Presupuesto creado": "Error, presupuesto ya generado";
+        } else {
+            echo "Error, presupuesto ya generado";
+        }
+
     break;
 
 }

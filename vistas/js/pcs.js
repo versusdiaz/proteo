@@ -95,17 +95,17 @@ function mostrar(idpcs){
      });
     }
 
- function eliminar(idcentro){
+ function eliminar(idpcs){
     swal({
         title: "Esta seguro..?"
-        , text: "Al eliminar este item, no podra utilizarse en el sistema"
+        , text: "Al eliminar este presupuesto, no podra utilizarse en el sistema"
         , type: "warning"
         , showCancelButton: true
         , confirmButtonColor: "#da4f49"
-        , confirmButtonText: "Si, deseo eliminarla!"
+        , confirmButtonText: "Si, deseo eliminarlo!"
         , closeOnConfirm: false
         }, function () {
-            $.post('controllers/centro.php?op=eliminar',{idcentro:idcentro},function(e){
+            $.post('controllers/pcs.php?op=eliminar',{idpcs:idpcs},function(e){
             swal("Eliminada!", e , "success");  
             tabla.ajax.reload();
             });

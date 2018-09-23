@@ -47,4 +47,5 @@ class Request_mtto{
         $sql = "SELECT idpcs FROM pcs WHERE idrequest_temp='$idrequest_temp'";
         return ConsultaFila($sql);
     }
+
 }

@@ -63,14 +63,30 @@ function listar(){
 }
 
 function mostrar(idrequest_op){
-     $.post("controllers/request_mtto.php?op=mostrar",{idrequest_op:idrequest_op},function(data,status){
+     $.post("controllers/request_op.php?op=mostrar",{idrequest_op:idrequest_op},function(data,status){
           /*Convertir la cadena enviada desde PHP a un vector de objetos en JavaScript*/
          data = JSON.parse(data);
          mostrarform(true);
         $("#idrequest_op").val(data.idrequest_op);
+        $("#idrequest_temp").val(data.idrequest_temp);
         $("#codigo").val(data.codigo);
      });
     }
+
+ function convertirPresupuesto(){
+    var formData = new FormData($("#formulario")[0]);
+     $.ajax({
+        url:"controllers/request_op.php?op=convertirPresupuesto",
+        type:"POST",
+        data: formData,
+        contentType: false,
+	    processData: false,
+        success: function(respuesta){
+          swal(respuesta, "Presione OK para continuar");
+          mostrarform(false);
+        }
+     });
+}
 
 
 init();

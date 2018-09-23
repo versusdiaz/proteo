@@ -32,7 +32,7 @@ switch ($_GET["op"]){
  					' <button class="btn btn-primary" onclick="imprimirp('.$reg->idpcs.')"><i class="fa fa-print"></i></button>',
                "1"=>$reg->idrequest_temp,
                "2"=>$reg->codigo,
-               "3"=>($reg->condicion)?'<span class="badge badge-success">Activado</span>':'<span class="badge badge-danger">Desactivado</span>'
+               "3"=>$reg->fecha
            );
         }
         /*CARGAMOS LA DATA EN LA VARIABLE USADA PARA EL DATATABLE*/
@@ -60,7 +60,7 @@ switch ($_GET["op"]){
 
     case 'eliminar':
     $rspta = $pcs->eliminar($idpcs);
-    echo $rspta ? "pcs eliminado": "El pcs no se puede eliminar, verifique que no este vinculado";
+    echo $rspta ? "Presupuesto eliminado": "El Presupuesto no se puede eliminar, verifique que no este vinculado";
     break;
         
 
