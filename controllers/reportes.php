@@ -10,6 +10,10 @@ $report = new Reportes();
 
 $idrequest=isset($_POST['idrequest'])? limpiarCadena($_POST['idrequest']):"";
 
+$idrequest_temp=isset($_POST['idrequest_temp'])? limpiarCadena($_POST['idrequest_temp']):"";
+
+$bdDepartamento=isset($_POST['bdDepartamento'])? limpiarCadena($_POST['bdDepartamento']):"";
+
 
 switch ($_GET["op"]){
 
@@ -17,6 +21,8 @@ switch ($_GET["op"]){
         /*ID USUARIO SE ENVIA POR POST ESTA DECLARADO EN LA INICIALIACION*/
         if ($idrequest != ""){
             $codigo = 'ATM-RG-AD-004';
+            $numReq = $report->numReq($idrequest_temp, $bdDepartamento);
+            $dataReq = $report->mostrarRequest($idrequest_temp);
             $pdf = new PDF($codigo);
             $pdf->AddPage();
             // FIJAMOS EL COLOR PARA TODOS LOS RELLENOS
@@ -28,7 +34,7 @@ switch ($_GET["op"]){
 
             $pdf->SetXY(76,42);
             $pdf->SetFont('Arial','B',8);
-            $pdf->Cell(5,5,'X', 1, 0, 'C');
+            $pdf->Cell(5,5,($dataReq['servicio'] != 1 ) ? '': 'X' , 1, 0, 'C');
 
             $pdf->SetXY(106,42);
             $pdf->SetFont('Arial','B',8);
@@ -36,7 +42,7 @@ switch ($_GET["op"]){
 
             $pdf->SetXY(174,42);
             $pdf->SetFont('Arial','B',8);
-            $pdf->Cell(5,5,'X', 1, 0, 'C');
+            $pdf->Cell(5,5,($dataReq['servicio'] != 0 ) ? '': 'X' , 1, 0, 'C');
             // FILA 
 
             $pdf->SetXY(10,47);
@@ -63,11 +69,11 @@ switch ($_GET["op"]){
 
             $pdf->SetXY(10,55);
             $pdf->SetFont('Arial','B',8);
-            $pdf->Cell(48,4,'', 1, 0, 'C');
+            $pdf->Cell(48,4,$numReq['codigo'], 1, 0, 'C');
 
             $pdf->SetXY(58,55);
             $pdf->SetFont('Arial','B',8);
-            $pdf->Cell(48,4,'', 1, 0, 'C');
+            $pdf->Cell(48,4,$dataReq['dpto'], 1, 0, 'C');
 
             $pdf->SetXY(106,55);
             $pdf->SetFont('Arial','B',8);
@@ -75,7 +81,7 @@ switch ($_GET["op"]){
 //
             $pdf->SetXY(117,55);
             $pdf->SetFont('Arial','B',8);
-            $pdf->Cell(3,4,'X', 1, 0, 'C');
+            $pdf->Cell(3,4,($dataReq['prioridad'] != 3 ) ? '': 'X' , 1, 0, 'C');
 
             $pdf->SetXY(106,55);
             $pdf->SetFont('Arial','B',6);
@@ -83,7 +89,7 @@ switch ($_GET["op"]){
 
             $pdf->SetXY(132,55);
             $pdf->SetFont('Arial','B',8);
-            $pdf->Cell(3,4,'X', 1, 0, 'C');
+            $pdf->Cell(3,4,($dataReq['prioridad'] != 2 ) ? '': 'X' , 1, 0, 'C');
 
             $pdf->SetXY(124,55);
             $pdf->SetFont('Arial','B',6);
@@ -91,7 +97,7 @@ switch ($_GET["op"]){
 
             $pdf->SetXY(147,55);
             $pdf->SetFont('Arial','B',8);
-            $pdf->Cell(3,4,'X', 1, 0, 'C');
+            $pdf->Cell(3,4,($dataReq['prioridad'] != 1 ) ? '': 'X' , 1, 0, 'C');
 
             $pdf->SetXY(138,55);
             $pdf->SetFont('Arial','B',6);
@@ -107,11 +113,11 @@ switch ($_GET["op"]){
 
             $pdf->SetXY(170,55);
             $pdf->SetFont('Arial','B',8);
-            $pdf->Cell(3,4,'X', 1, 0, 'C');
+            $pdf->Cell(3,4,($dataReq['calidad'] != 2 ) ? '': 'X', 1, 0, 'C');
 
             $pdf->SetXY(194,55);
             $pdf->SetFont('Arial','B',8);
-            $pdf->Cell(3,4,'X', 1, 0, 'C');
+            $pdf->Cell(3,4,($dataReq['calidad'] != 1 ) ? '': 'X', 1, 0, 'C');
 
             // FILA
 
@@ -129,7 +135,7 @@ switch ($_GET["op"]){
 
             $pdf->SetXY(58,63);
             $pdf->SetFont('Arial','B',8);
-            $pdf->Cell(72,4,'', 1, 0, 'C');
+            $pdf->Cell(72,4,$dataReq['nombre'], 1, 0, 'C');
 
             $pdf->SetXY(130,59);
             $pdf->SetFont('Arial','B',8);
@@ -149,15 +155,15 @@ switch ($_GET["op"]){
 
             $pdf->SetXY(160,63);
             $pdf->SetFont('Arial','B',8);
-            $pdf->Cell(3,4,'X', 1, 0, 'C');
+            $pdf->Cell(3,4,($dataReq['calidad'] != 1 ) ? '': 'X', 1, 0, 'C');
 
             $pdf->SetXY(194,63);
             $pdf->SetFont('Arial','B',8);
-            $pdf->Cell(3,4,'X', 1, 0, 'C');
+            $pdf->Cell(3,4,($dataReq['calidad'] != 2 ) ? '': 'X', 1, 0, 'C');
 
             $pdf->SetXY(10,69);
 
-            $rsptaitem = $report->mostrarItems($idrequest);
+            $rsptaitem = $report->mostrarItems($idrequest_temp);
             $header = array('ITEM', 'DESCRIPCION','CANTIDAD','UNIDAD DE MEDIDA');
             $pdf->tablaReq($header,$rsptaitem);
 

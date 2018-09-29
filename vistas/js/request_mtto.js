@@ -172,9 +172,11 @@ function convertirCompra(){
      });
 }
 
-function imprimir(idrequest){
+function imprimir(idrequest, idrequest_temp){
     var formData = new FormData();
     formData.append("idrequest",idrequest);
+    formData.append("idrequest_temp",idrequest_temp);
+    formData.append("bdDepartamento",'request_mtto'); // NOTA CAMBIAR PARA CADA DPTO
     $.ajax({
         url:"controllers/reportes.php?op=reportRequisicion",
         type:"POST",

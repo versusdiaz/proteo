@@ -20,7 +20,7 @@ switch ($_GET["op"]){
         $data = Array();
         while($reg = $rspta->fetch_object()){
            $data[]=array(
-               "0"=>'<button class="btn btn-danger" onclick="imprimir('.$reg->idrequest_temp.')"><i class="fa fa-print" style="color:white" ></i></button>'.
+               "0"=>'<button class="btn btn-danger" onclick="imprimir('.$reg->idrequest_mtto.','.$reg->idrequest_temp.')"><i class="fa fa-print" style="color:white" ></i></button>'.
  					' <button class="btn btn-primary" onclick="mostrar('.$reg->idrequest_mtto.')"><i class="nav-icon fa fa-spinner fa-pulse"></i></button>',
                "1"=>$reg->codigo,
                "2"=>$reg->lancha,

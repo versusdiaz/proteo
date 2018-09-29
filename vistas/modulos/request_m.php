@@ -113,9 +113,9 @@
                                     <div class="col-sm-12">
                                         <select class="form-control selectpicker" data-live-search="true" name="prioridad" id="prioridad">
                                             <option value="">SELECCIONE</option>
-                                            <option value="1">BAJA</option>
-                                            <option value="2">MEDIA</option>
-                                            <option value="3">AlTA</option>
+                                            <option value="1">NORMAL</option>
+                                            <option value="2">URGENTE</option>
+                                            <option value="3">CRITICO</option>
                                         </select>
                                     </div>
                                 </div>
