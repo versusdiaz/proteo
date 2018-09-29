@@ -13,7 +13,9 @@
             {
                 $X=5;
                 $Y=5;
-                $this->Image('../vistas/img/logoatm.png',15,18,25,20);
+                // FIJAMOS EL COLOR PARA TODOS LOS RELLENOS
+                $this->SetFillColor(198, 198, 247);
+                $this->Image('../vistas/img/logoatm.png',15,18,25,19);
                 if( $this->codigo != '' ){
                 $this->SetXY(10,18);
                 $this->SetFont('Arial','',14);
@@ -43,7 +45,7 @@
                 $this->Cell(16,5,utf8_decode('REVISION'), 1, 0, 'C');
                 $this->SetXY(182,28);
                 $this->SetFont('Arial','',8);
-                $this->Cell(20,5, "00", 1, 0, 'C');
+                $this->Cell(20,5, "02", 1, 0, 'C');
                     
                 $this->SetXY(166,33);
                 $this->SetFont('Arial','',8);
@@ -55,85 +57,75 @@
                     
                 $this->SetXY(10,38);
                 $this->SetFont('Arial','B',8);
-                $this->Cell(192,4,'REQUISICION', 1, 0, 'C');
+                $this->Cell(192,4,'REQUISICION', 1, 0, 'C', true);
                 }
             }
             /*FOOTER UNIVERSAL*/
             function Footer()
             {
-                $this->SetXY(-30,270);
-                $this->SetFont('Arial','I',8);
-                $this->Cell(25,4,'Pag '.$this->PageNo().'/{nb}',0,0,'C');
+                $x = $this->getX();
+                $y = $this->getY();
+                $this->SetXY($x,$y);
+                $this->SetFont('Arial','B',8);
+                $this->Cell(72,5,'ELABORADO POR', 1, 0, 'C', true);
+                $this->Cell(31,5,'FECHA', 1, 0, 'C', true);
+                $this->Cell(58,5,'APROBADO POR', 1, 0, 'C', true);
+                $this->Cell(31,5,'FECHA', 1, 0, 'C', true);
+
+                $this->SetXY($x,$y+5);
+
+                $this->SetFont('Arial','',6);
+                $this->Cell(72,5,'NOMBRE Y APELLIDO:', 1, 0, 'L');
+                $this->Cell(31,5,'25/09/18', 1, 0, 'C');
+                $this->Cell(58,5,'NOMBRE Y APELLIDO:', 1, 0, 'L');
+                $this->Cell(31,5,'25/09/18', 1, 0, 'C');
+
+                $this->SetXY($x,$y+10);
+                $this->Cell(72,5,'CARGO:', 1, 0, 'L');
+                $this->Cell(31,5,'', 1, 0, 'C');
+                $this->Cell(58,5,'CARGO:', 1, 0, 'L');
+                $this->Cell(31,5,'', 1, 0, 'C');
+
+                $this->SetXY($x,$y+15);
+                $this->Cell(72,5,'FIRMA:', 1, 0, 'L');
+                $this->Cell(31,5,'', 1, 0, 'C');
+                $this->Cell(58,5,'FIRMA:', 1, 0, 'L');
+                $this->Cell(31,5,'', 1, 0, 'C');
+
             }
 
-            // // Una tabla más completa
-            // function tablaTSMPP($header, $data, $dctos)
-            // {
-            //     // Anchuras de las columnas
-            //     $w = array(30, 40, 30, 35, 40);
-            //     //Variable que indica si se aplico sustraendo o no
-            //     $nombreISLR = '';
-            //     $subtotal = 0;
-            //     $totalret = 0;
-            //     $verificar = false;
-            //     // Cabeceras
-            //     $this->SetFont('Courier','B',8);
-            //     for($i=0;$i<count($header);$i++)
-            //         $this->Cell($w[$i],7,$header[$i],1,0,'C');
-            //     $this->Ln();
-            //     $this->SetFont('Courier','',8);
-            //     foreach($data as $row)
-            //     {
-            //         $this->Cell($w[0],5,$row['fecha'],'LRB',0,'C');
-            //         $this->Cell($w[1],5,$row['nombre'],'LRB',0,'C');
-            //         $this->Cell($w[2],5,$row['codigo'],'LRB',0,'C');
-            //         $this->Cell($w[3],5,$row['nombrec'],'LRB',0,'C');
-            //         $this->Cell($w[4],5,number_format($row['montop'],2,',','.'),'LRB',0,'R');
-            //         $subtotal = $subtotal + $row['montop'];
-            //         $totalret = $totalret + $row['montoret'];
-            //         $this->Ln();
-            //     }
-            //     // Línea de cierre
-            //     $this->Cell(array_sum($w),0,'','T');
-            //     $this->Ln();
-            //     // Llamo descuentos
-            //     foreach($dctos as $row)
-            //     {
-            //         if($row['iddescuento'] != 1){
-            //             $this->Cell(100,5,'',0,0,'C');
-            //             $this->Cell($w[3],5,$row['nombre'],1,0,'L');
-            //             $this->Cell($w[4],5,number_format($row['montodesc']*-1,2,',','.'),'LRB',0,'R');
-            //             $this->Ln();
-            //             $nombreISLR = 'RET. ISLR:';
-            //             $subtotal = $subtotal - $row['montodesc'];
-            //             $totalret = $totalret - (0.01*$row['montodesc']);
-            //             $verificar = true;
-            //         } else {
-            //             $totalret = $totalret - $row['montodesc'];
-            //             $nombreISLR = 'RET. ISLR (-ST):';
-            //             $verificar = true;
-            //         }
-            //     }
+            function tablaReq($header, $data){
+                // Column widths
+                $w = array(10, 134, 22, 26);
+                // Header
+                $this->SetFont('Arial','B',7);
+                for($i=0;$i<count($header);$i++){
+                    $this->Cell($w[$i],10,$header[$i],1,0,'C', true);
+                }
+                $nitem = 1;
+                $this->Ln();
+                $this->SetFont('Arial','B',8);
+                 // Data
+                foreach($data as $row)
+                {
+                    $this->Cell($w[0],6,$nitem,'LRB',0,'C');
+                    $this->Cell($w[1],6,utf8_encode($row['nombre']),'LRB',0,'L');
+                    $this->Cell($w[2],6,preg_replace('/^(\d+)\.0+$/', '$1',$row['cantidad']),'LRB',0,'C');
+                    $this->Cell($w[3],6,$row['unidad'],'LRB',0,'C');
+                    $this->Ln();
+                    $nitem++;
+                }
 
-            //     //CELDA EN BLANCO PARA EMPUJAR
-            //         $this->SetFont('Courier','B',8);
-            //         $this->Cell(100,5,'',0,0,'C');
-            //         $this->Cell($w[3],5,'SUBTOTAL BS:',1,0,'L');
-            //         $this->Cell($w[4],5,number_format($subtotal,2,',','.'),1,0,'R');
-            //         $this->Ln();
-            //         $this->Cell(100,5,'',0,0,'C');
-            //         if($verificar != false){
-            //             $this->Cell($w[3],5,$nombreISLR,1,0,'L'); 
-            //         }else{
-            //             $this->Cell($w[3],5,'RET. ISLR:',1,0,'L');
-            //         }
-            //         $this->Cell($w[4],5,number_format($totalret,2,',','.'),1,0,'R');
-            //         $this->Ln();
-            //         $this->Cell(100,5,'',0,0,'C');
-            //         $this->Cell($w[3],5,'TOTAL:',1,0,'L');
-            //         $this->Cell($w[4],5,number_format($subtotal - $totalret,2,',','.'),1,0,'R');
-            // }
-
+                for($nitem;$nitem <= 20; $nitem++){
+                    $this->Cell($w[0],6,$nitem,'LRB',0,'C');
+                    $this->Cell($w[1],6,'','LRB',0,'L');
+                    $this->Cell($w[2],6,'','LRB',0,'C');
+                    $this->Cell($w[3],6,'','LRB',0,'C');
+                    $this->Ln();
+                }
+                // Closing line
+                $this->Cell(array_sum($w),0,'','T');
+            }
 
         }
 
