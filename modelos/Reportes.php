@@ -11,6 +11,11 @@ class Reportes{
         return Consulta($sql);
     }
 
+    public static function dataFormato($idcalidad){
+        $sql = "SELECT * FROM formatos WHERE idcalidad = $idcalidad";
+        return ConsultaFila($sql);
+    }
+
     public static function mostrarRequest($idrequest_temp){
         $sql = "SELECT T1.comentario, T2.nombre, T1.responsable, T1.supervisor, T1.fecha, T1.prioridad, T1.calidad, T1.mantenimiento, T1.servicio, T3.nombre AS dpto FROM request_temp AS T1 LEFT JOIN centro AS T2 ON T2.idcentro = T1.idcentro LEFT JOIN departamento AS T3 ON T1.iddepartamento = T3.iddepartamento  WHERE idrequest_temp = $idrequest_temp";
         return ConsultaFila($sql);

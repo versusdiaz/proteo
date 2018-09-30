@@ -20,10 +20,17 @@ switch ($_GET["op"]){
     case 'reportRequisicion':
         /*ID USUARIO SE ENVIA POR POST ESTA DECLARADO EN LA INICIALIACION*/
         if ($idrequest != ""){
-            $codigo = 'ATM-RG-AD-004';
+            $formato = $report->dataFormato(1);
+            $codigo = $formato['codigo'];
+            $fechaf = $formato['fecha'];
+            $titulo = $formato['titulo'];
+            $revision = $formato['revision'];
+
             $numReq = $report->numReq($idrequest_temp, $bdDepartamento);
             $dataReq = $report->mostrarRequest($idrequest_temp);
-            $pdf = new PDF($codigo);
+
+            $pdf = new PDF($codigo,$dataReq['responsable'],$dataReq['supervisor'],$dataReq['fecha'],$fechaf,$titulo,$revision);
+
             $pdf->AddPage();
             // FIJAMOS EL COLOR PARA TODOS LOS RELLENOS
             $pdf->SetFillColor(198, 198, 247);
@@ -162,7 +169,7 @@ switch ($_GET["op"]){
             $pdf->Cell(3,4,($dataReq['calidad'] != 2 ) ? '': 'X', 1, 0, 'C');
 
             $pdf->SetXY(10,69);
-
+            
             $rsptaitem = $report->mostrarItems($idrequest_temp);
             $header = array('ITEM', 'DESCRIPCION','CANTIDAD','UNIDAD DE MEDIDA');
             $pdf->tablaReq($header,$rsptaitem);
@@ -176,13 +183,13 @@ switch ($_GET["op"]){
             $pdf->Cell(192,5,'OBSERVACIONES', 1, 0, 'C', true);
 
             $pdf->SetXY($x,$y+7);
-            $pdf->MultiCell(192,20,'Heres some text for display', 'LRB', 'L', 0);
+            $pdf->MultiCell(192,20,$dataReq['comentario'], 'LRB', 'L', 0);
             $x = $pdf->getX();
             $y = $pdf->getY();
 
             $pdf->SetXY($x,$y);
             $pdf->SetFont('Arial','B',8);
-            $pdf->Cell(192,5,'PROVEEDOR SELECCIONADO', 'LR', 0, 'C', true);
+            $pdf->Cell(192,5,'PROVEEDOR SELECCIONADO', 'LRT', 0, 'C', true);
             $pdf->SetXY($x,$y+5);
             $pdf->SetFont('Arial','B',6);
             $pdf->Cell(192,5,'(SOLO PARA SER UTILIZADO POR EL GERENTE DE ADMINISTRACION)', 'LRB', 0, 'C', true);
@@ -193,7 +200,7 @@ switch ($_GET["op"]){
             $pdf->ln();
 
             /*NOMBRE ARCHIVO*/
-            $narchivo = 'RT_'.round(microtime(true));
+            $narchivo = 'RQ_'.round(microtime(true));
             
             //$pdf->AliasNbPages();
             $pdf->Output('F','../vistas/reportes/req/'.$narchivo.'.pdf',true);

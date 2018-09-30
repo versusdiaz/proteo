@@ -3,9 +3,24 @@
             class PDF extends FPDF{
             
             private $codigo = '';
-            function __construct($numRev){
+            private $elaborador = '';
+            private $supervisor = '';
+            private $fecha = '';
+
+            private $fechaf = '';
+            private $titulo = '';
+            private $revision = '';
+
+            function __construct($numRev,$elaborador,$supervisor,$fecha,$fechaf,$titulo,$revision){
                 parent::__construct();
                 $this->codigo = $numRev;
+                $this->elaborador = $elaborador;
+                $this->supervisor = $supervisor;
+                $this->fecha = $fecha;
+                $this->fechaf = $fechaf;
+                $this->titulo = $titulo;
+                $this->revision = $revision;
+
             }
 
             /*HEADER UNIVERSAL*/    
@@ -38,14 +53,14 @@
                 $this->Cell(16,5,'FECHA:', 1, 0, 'C');
                 $this->SetXY(182,23);
                 $this->SetFont('Arial','',8);
-                $this->Cell(20,5, '14/09/2018', 1, 0, 'C');
+                $this->Cell(20,5, date('d/m/Y',strtotime($this->fechaf)), 1, 0, 'C');
                     
                 $this->SetXY(166,28);
                 $this->SetFont('Arial','',8);
                 $this->Cell(16,5,utf8_decode('REVISION'), 1, 0, 'C');
                 $this->SetXY(182,28);
                 $this->SetFont('Arial','',8);
-                $this->Cell(20,5, "02", 1, 0, 'C');
+                $this->Cell(20,5, $this->revision , 1, 0, 'C');
                     
                 $this->SetXY(166,33);
                 $this->SetFont('Arial','',8);
@@ -57,7 +72,7 @@
                     
                 $this->SetXY(10,38);
                 $this->SetFont('Arial','B',8);
-                $this->Cell(192,4,'REQUISICION', 1, 0, 'C', true);
+                $this->Cell(192,4, utf8_decode($this->titulo) , 1, 0, 'C', true);
                 }
             }
             /*FOOTER UNIVERSAL*/
@@ -75,10 +90,10 @@
                 $this->SetXY($x,$y+5);
 
                 $this->SetFont('Arial','',6);
-                $this->Cell(72,5,'NOMBRE Y APELLIDO:', 1, 0, 'L');
-                $this->Cell(31,5,'25/09/18', 1, 0, 'C');
-                $this->Cell(58,5,'NOMBRE Y APELLIDO:', 1, 0, 'L');
-                $this->Cell(31,5,'25/09/18', 1, 0, 'C');
+                $this->Cell(72,5,'NOMBRE Y APELLIDO: '.$this->elaborador, 1, 0, 'L');
+                $this->Cell(31,5,date('d/m/Y',strtotime($this->fecha)), 1, 0, 'C');
+                $this->Cell(58,5,'NOMBRE Y APELLIDO: '.$this->supervisor, 1, 0, 'L');
+                $this->Cell(31,5,date('d/m/Y',strtotime($this->fecha)), 1, 0, 'C');
 
                 $this->SetXY($x,$y+10);
                 $this->Cell(72,5,'CARGO:', 1, 0, 'L');
@@ -104,12 +119,12 @@
                 }
                 $nitem = 1;
                 $this->Ln();
-                $this->SetFont('Arial','B',8);
+                $this->SetFont('Arial','',8);
                  // Data
                 foreach($data as $row)
                 {
                     $this->Cell($w[0],6,$nitem,'LRB',0,'C');
-                    $this->Cell($w[1],6,utf8_encode($row['nombre']),'LRB',0,'L');
+                    $this->Cell($w[1],6, ($row['detalle'] != '' )? utf8_encode($row['nombre'].' '.$row['detalle']): utf8_encode($row['nombre']) ,'LRB',0,'L');
                     $this->Cell($w[2],6,preg_replace('/^(\d+)\.0+$/', '$1',$row['cantidad']),'LRB',0,'C');
                     $this->Cell($w[3],6,$row['unidad'],'LRB',0,'C');
                     $this->Ln();
