@@ -88,5 +88,31 @@ function mostrar(idrequest_op){
      });
 }
 
+function imprimir(idrequest, idrequest_temp){
+    var formData = new FormData();
+    formData.append("idrequest",idrequest);
+    formData.append("idrequest_temp",idrequest_temp);
+    formData.append("bdDepartamento",'request_op'); // NOTA CAMBIAR PARA CADA DPTO
+    $.ajax({
+        url:"controllers/reportes.php?op=reportRequisicion",
+        type:"POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(respuesta){
+          swal({
+            title: "Reporte Requisicion"
+            , text: "Ha sido generado, continue para imprimir"
+            , type: "info"
+            , showCancelButton: true
+            , confirmButtonColor: "#da4f49"
+            , confirmButtonText: "Imprimir!"
+            , closeOnConfirm: true
+            }, function () {
+                window.open(respuesta,"_blank");
+            });
+        }
+     });
+}
 
 init();

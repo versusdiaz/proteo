@@ -17,7 +17,7 @@ class Request_op{
     }
     
     public static function listar(){
-        $sql = "SELECT T1.idrequest_op, T1.codigo, T1.fecha, T4.nombre, T3.nombre AS lancha FROM request_op AS T1 LEFT JOIN request_temp AS T2 ON T2.idrequest_temp = T1.idrequest_temp LEFT JOIN centro AS T3 ON T3.idcentro = T2.idcentro LEFT JOIN usuarios AS T4 ON T2.idusuario = T4.idusuario";
+        $sql = "SELECT T1.idrequest_op, T1.idrequest_temp, T1.codigo, T1.fecha, T4.nombre, T3.nombre AS lancha FROM request_op AS T1 LEFT JOIN request_temp AS T2 ON T2.idrequest_temp = T1.idrequest_temp LEFT JOIN centro AS T3 ON T3.idcentro = T2.idcentro LEFT JOIN usuarios AS T4 ON T2.idusuario = T4.idusuario";
         return Consulta($sql);
     }
     
