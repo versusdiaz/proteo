@@ -9,6 +9,7 @@ class EnlacesModels{
        $enlaces == "proveedores" ||
        $enlaces == "items" ||
        $enlaces == "request_m" ||
+       $enlaces == "ordenesM" ||
        $enlaces == "pcs" ||
        $enlaces == "request_s" ||
        $enlaces == "request_mtto" ||

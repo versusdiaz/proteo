@@ -69,11 +69,12 @@ switch ($_GET["op"]){
         $validarPresupuesto = $request_mtto->validarPresupuesto($idrequest_temp);
         if( $validarPresupuesto == 0 ){
             $rspta2 = $request_mtto->convertirPresupuesto(1,$idrequest_temp,$codigo,$rspta['fecha'],1);
+            /* DESACTIVADO SE UTILIZARA REQUEST ITEM
             $rspta3 = $request_temp->mostrarItem($idrequest_temp);
-            while($reg = $rspta3->fetch_object()){
+             while($reg = $rspta3->fetch_object()){
     
-                $request_mtto->insertItemPresupuesto($rspta2,$reg->iditem,$reg->cantidad,$reg->detalle,1);
-            }
+             $request_mtto->insertItemPresupuesto($rspta2,$reg->iditem,$reg->cantidad,$reg->detalle,1);
+            } */
             echo $rspta ? "Presupuesto creado": "Error, presupuesto ya generado";
         } else {
             echo "Error, presupuesto ya generado";

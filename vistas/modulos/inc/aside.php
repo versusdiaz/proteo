@@ -55,50 +55,24 @@
               <ul class="nav-dropdown-items">
                 <li class="nav-item">
                   <a class="nav-link" href="request_m">
-                    <i class="nav-icon icon-control-play"></i> Send Request</a>
+                    <i class="nav-icon icon-control-play"></i> Crear Requisicion</a>
                 </li>
                 <li class="nav-item nav-dropdown">
                     <a class="nav-link nav-dropdown-toggle" href="#">
-                        <i class="nav-icon icon-control-forward"></i> Request in File</a>
+                        <i class="nav-icon icon-control-forward"></i> Req. en Archivo</a>
                     <ul class="nav-dropdown-items">
                         <li class="nav-item">
                             <a class="nav-link" href="request_mtto">
-                                <i class="nav-icon fa fa-wrench"></i> Request MTTO
+                                <i class="nav-icon fa fa-wrench"></i> Req. MTTO
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="request_op">
-                                <i class="nav-icon fa fa-ship"></i> Request OP
+                                <i class="nav-icon fa fa-ship"></i> Req. OP
                             </a>
                         </li>
                     </ul>
                 </li>     
-              </ul>
-            </li>
-            <li class="nav-item nav-dropdown">
-              <a class="nav-link nav-dropdown-toggle" href="#">
-                <i class="nav-icon icon-wrench"></i> Orders</a>
-              <ul class="nav-dropdown-items">
-                <li class="nav-item">
-                  <a class="nav-link" href="buttons/buttons.html">
-                    <i class="nav-icon icon-control-play"></i> All Orders</a>
-                </li>
-                <li class="nav-item nav-dropdown">
-                    <a class="nav-link nav-dropdown-toggle" href="#">
-                        <i class="nav-icon icon-control-forward"></i> Orders in File</a>
-                    <ul class="nav-dropdown-items">
-                        <li class="nav-item">
-                            <a class="nav-link" href="request_mtto">
-                                <i class="nav-icon fa fa-wrench"></i> Orders MTTO
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="request_op">
-                                <i class="nav-icon fa fa-ship"></i> Orders OP
-                            </a>
-                        </li>
-                    </ul>
-                </li>
               </ul>
             </li>
             <li class="nav-item nav-dropdown">
@@ -111,6 +85,29 @@
                 </li>
               </ul>
             </li>
+            <li class="nav-item nav-dropdown">
+              <a class="nav-link nav-dropdown-toggle" href="#">
+                <i class="nav-icon icon-wrench"></i> Ordenes Compra</a>
+              <ul class="nav-dropdown-items">
+                <li class="nav-item nav-dropdown">
+                    <a class="nav-link nav-dropdown-toggle" href="#">
+                        <i class="nav-icon icon-control-forward"></i> Ord. en Archivo </a>
+                    <ul class="nav-dropdown-items">
+                        <li class="nav-item">
+                            <a class="nav-link" href="ordenesM">
+                                <i class="nav-icon fa fa-wrench"></i> Ord. MTTO
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="ordenesO">
+                                <i class="nav-icon fa fa-ship"></i> Ord. OP
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+              </ul>
+            </li>
+
             <li class="divider"></li>
             <li class="nav-title">Extras</li>
             <li class="nav-item nav-dropdown">

@@ -66,7 +66,7 @@
 
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <button class="btn btn-primary btn-block" type="button" onclick="convertirCompra()" >
-                                        Convertir a Orden de Compra
+                                        Convertir a Orden de Servicio
                                     </button>
                                 <hr>
                                 </div>

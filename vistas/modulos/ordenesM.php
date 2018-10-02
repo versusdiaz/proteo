@@ -21,7 +21,7 @@
             <div class="col-sm-12 col-xl-12">
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-globe"></i> Presupuestos
+                        <i class="fa fa-globe"></i> Ordenes Compras
                     </div>
                     <div class="card-body">
                         <!-- AQUI VA TABLA -->
@@ -46,7 +46,7 @@
                         <div class="card-body" id="formularioregistros">
                         <form name="formulario" id="formulario" method="POST">
                             <div class="row">
-                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                     <label class="col-sm-12 control-label">Proveedor *:</label>
                                     <div class="col-sm-12">
                                         <input type="hidden" name="idpcs" id="idpcs">
@@ -55,8 +55,6 @@
                                         </select>
                                     </div>
                                 </div>
-
-
                             </div><!-- FIN DEL ROW -->
                             <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <button class="btn btn-primary" type="submit" id="btnGuardar">
@@ -79,6 +77,6 @@
 <!-- SCRIPT UNICOS-->
 <script src="vistas/plugins/datatables/jquery.dataTables.min.js"></script>    
 <script src="vistas/plugins/datatables/buttons.colVis.min.js"></script>
-<script type="text/javascript" src="vistas/js/pcs.js"></script>
+<script type="text/javascript" src="vistas/js/ordenesM.js"></script>
 
 <?php ob_end_flush(); ?>

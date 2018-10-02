@@ -185,7 +185,7 @@ function imprimir(idrequest, idrequest_temp){
         processData: false,
         success: function(respuesta){
           swal({
-            title: "Reporte de Entrega"
+            title: "Reporte de Presupuesto"
             , text: "Ha sido generado, continue para imprimir"
             , type: "info"
             , showCancelButton: true

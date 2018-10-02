@@ -112,4 +112,47 @@ function mostrar(idpcs){
         });
  }
 
+ function imprimir(idpcs,idrequest_temp){
+    var formData = new FormData();
+    formData.append("idpcs",idpcs);
+    formData.append("idrequest_temp",idrequest_temp);
+    formData.append("bdDepartamento",'request_mtto'); // NOTA CAMBIAR PARA CADA DPTO
+    $.ajax({
+        url:"controllers/reportes.php?op=reportPresupuesto",
+        type:"POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(respuesta){
+          swal({
+            title: "Reporte de Entrega"
+            , text: "Ha sido generado, continue para imprimir"
+            , type: "info"
+            , showCancelButton: true
+            , confirmButtonColor: "#da4f49"
+            , confirmButtonText: "Imprimir!"
+            , closeOnConfirm: true
+            }, function () {
+                window.open(respuesta,"_blank");
+            });
+        }
+     });
+}
+
+function convertirOrdenC(idrequest_temp){
+    var formData = new FormData();
+    formData.append("idrequest_temp",idrequest_temp);
+    formData.append("bdDepartamento",'odc_mtto'); // NOTA CAMBIAR PARA CADA DPTO
+    $.ajax({
+        url:"controllers/pcs.php?op=convertirOrdenC",
+        type:"POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(respuesta){
+            swal(respuesta, "Presione OK para continuar");
+          }
+     });
+}
+
 init();
