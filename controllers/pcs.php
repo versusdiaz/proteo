@@ -37,7 +37,7 @@ switch ($_GET["op"]){
         while($reg = $rspta->fetch_object()){
            $data[]=array(
                "0"=>'<button class="btn btn-warning" onclick="mostrar('.$reg->idpcs.')"><i class="nav-icon icon-pencil" style="color:white" ></i></button> <button class="btn btn-danger" onclick="eliminar('.$reg->idpcs.')"><i class="fa fa-trash"></i></button>'.
- 					' <button class="btn btn-primary" onclick="imprimirp('.$reg->idpcs.','.$reg->idrequest_temp.')"><i class="fa fa-print"></i></button> <button class="btn btn-primary" onclick="convertirOrdenC('.$reg->idrequest_temp.')"><i class="nav-icon fa fa-spinner fa-pulse"></i></button>',
+ 					' <button class="btn btn-primary" onclick="imprimirp('.$reg->idpcs.','.$reg->idrequest_temp.')"><i class="fa fa-print"></i></button>',
                "1"=>$reg->idrequest_temp,
                "2"=>$reg->codigo,
                "3"=>$reg->fecha
@@ -69,30 +69,6 @@ switch ($_GET["op"]){
     case 'eliminar':
     $rspta = $pcs->eliminar($idpcs);
     echo $rspta ? "Presupuesto eliminado": "El Presupuesto no se puede eliminar, verifique que no este vinculado";
-    break;
-
-    case 'convertirOrdenC':
-
-        $rspta = $request_temp->mostrar($idrequest_temp);
-
-        // VALIDAR SI YA EXISTE
-
-        $rspta2 = $pcs->insertOrdenC($idrequest_temp,$bdDepartamento,$rspta['fecha']);
-        if( $rspta2 != "0" ){
-            if( $rspta2 < 10 ){
-                $codigo = 'OC/GGO/MT-00'.$rspta2; /* AGREGAR IF DE 00 */
-            } else if ( $rspta2 < 100 ){
-                $codigo = 'OC/GGO/MT-0'.$rspta2; /* AGREGAR IF DE 00 */
-            } else {
-                $codigo = 'OC/GGO/MT-'.$rspta2; /* AGREGAR IF DE 00 */
-            }
-            $rspta3 = $pcs->updateO($idrequest_temp,$bdDepartamento,$codigo);
-            echo $rspta3 ? "Orden almacenada": "Orden no se puede almacenar";
-            break;
-           
-        } else {
-            echo 'Error al insertar orden ya existe';
-        }
     break;
 
 }

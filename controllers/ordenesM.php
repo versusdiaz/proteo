@@ -15,7 +15,7 @@ switch ($_GET["op"]){
         $data = Array();
         while($reg = $rspta->fetch_object()){
            $data[]=array(
-               "0"=>'<button class="btn btn-primary" onclick="imprimirp('.$reg->idodc_mtto.')"><i class="fa fa-print"></i></button>',
+               "0"=>'<button class="btn btn-primary" onclick="imprimir('.$reg->idodc.','.$reg->idrequest_temp.')"><i class="fa fa-print"></i></button>',
                "1"=>$reg->idrequest_temp,
                "2"=>$reg->codigo,
                "3"=>$reg->fecha

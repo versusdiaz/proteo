@@ -26,4 +26,9 @@ class Reportes{
         return ConsultaFila($sql);
     }
 
+    public static function mostrarOC($idodc,$bdDepartamento,$bdReq){
+        $sql = "SELECT T1.codigo, T1.cotizacion, T1.fecha, T2.nombre, T3.codigo FROM $bdDepartamento AS T1 LEFT JOIN proveedores AS T2 ON T1.idproveedor = T2.idproveedor LEFT JOIN $bdReq AS T3 ON T1.idrequest_temp = T3.idrequest_temp WHERE idodc = $idodc";
+        return ConsultaFila($sql);
+    }
+
 }

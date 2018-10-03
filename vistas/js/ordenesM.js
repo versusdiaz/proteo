@@ -61,13 +61,14 @@ function listar(){
 	}).DataTable();
 }
 
- function imprimir(idpcs){
+ function imprimir(idodc, idrequest_temp){
     var formData = new FormData();
-    formData.append("idpcs",idpcs);
+    formData.append("idodc",idodc);
     formData.append("idrequest_temp",idrequest_temp);
-    formData.append("bdDepartamento",'request_mtto'); // NOTA CAMBIAR PARA CADA DPTO
+    formData.append("bdDepartamento",'odc_mtto'); // NOTA CAMBIAR PARA CADA DPTO
+    formData.append("bdReq",'request_mtto'); // NOTA CAMBIAR PARA CADA DPTO
     $.ajax({
-        url:"controllers/reportes.php?op=reportOrdenesC",
+        url:"controllers/reportes.php?op=reportOC",
         type:"POST",
         data: formData,
         contentType: false,

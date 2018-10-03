@@ -49,15 +49,4 @@ class Pcs{
         return Consulta($sql);
     }
 
-    public static function insertOrdenC($idrequest_temp,$bdDepartamento,$fecha){
-        $sql = "INSERT INTO $bdDepartamento (idrequest_temp ,fecha) VALUES ('$idrequest_temp','$fecha')";
-        return Consulta_retornarID($sql);
-        
-    }
-
-    public static function updateO($idrequest_temp,$bdDepartamento,$codigo){
-        $sql = "UPDATE $bdDepartamento SET codigo = '$codigo' WHERE idrequest_temp = '$idrequest_temp'";
-        return Consulta($sql);      
-    }
-
 }

@@ -110,4 +110,15 @@ class Request_m{
         $sql = "SELECT * FROM request_items_temp WHERE idrequest_temp = '$idrequest_temp'";
         return Consulta($sql);
     }
+
+    public static function insertOC($idrequest_temp,$dpto,$fecha){
+        $sql = "INSERT INTO $dpto (idrequest_temp ,fecha, idproveedor) VALUES ('$idrequest_temp','$fecha',1)";
+        return Consulta_retornarID($sql);   
+    }
+
+    public static function updateOC($idrequest_temp,$dpto,$codigo,$idproveedor){
+        $sql = "UPDATE $dpto SET codigo = '$codigo', idproveedor = '$idproveedor' WHERE idrequest_temp = '$idrequest_temp'";
+        return Consulta($sql);
+    }
+
 }
