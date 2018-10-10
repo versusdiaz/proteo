@@ -49,4 +49,9 @@ class Pcs{
         return Consulta($sql);
     }
 
+    public static function updateOC($idrequest_temp,$idproveedor,$cotizacion,$dpto){
+        $sql = "UPDATE $dpto SET idproveedor='$idproveedor', cotizacion ='$cotizacion' WHERE idrequest_temp = '$idrequest_temp'";
+        return Consulta($sql);
+    }
+
 }

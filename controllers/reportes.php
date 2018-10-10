@@ -258,19 +258,19 @@ switch ($_GET["op"]){
 
                 $pdf->SetXY(10,47);
                 $pdf->SetFont('Arial','',6);
-                $pdf->Cell(44,5,'DATOS BASICOS', 1, 0, 'C');
+                $pdf->Cell(44,5,utf8_decode($numReq['codigo']), 1, 0, 'C');
 
                 $pdf->SetXY(54,47);
                 $pdf->SetFont('Arial','',6);
-                $pdf->Cell(44,5,utf8_decode('Nº REQUISICION'), 1, 0, 'C');
+                $pdf->Cell(44,5,utf8_decode($dataOC['codigo']), 1, 0, 'C');
 
                 $pdf->SetXY(98,47);
                 $pdf->SetFont('Arial','',6);
-                $pdf->Cell(82,5,'NOMBRE DEL P', 1, 0, 'C');
+                $pdf->Cell(82,5,utf8_decode($dataOC['nombre']), 1, 0, 'C');
 
                 $pdf->SetXY(180,47);
                 $pdf->SetFont('Arial','',6);
-                $pdf->Cell(22,5,'', 1, 0, 'C');
+                $pdf->Cell(22,5,date('d/m/Y',strtotime($dataReq['fecha'])), 1, 0, 'C');
 
 //             FILA
 
@@ -313,7 +313,7 @@ switch ($_GET["op"]){
 
                $pdf->SetXY(155,76);
                $pdf->SetFont('Arial','B',5);
-               $pdf->Cell(24,6,utf8_decode(''), 1, 0, 'C');
+               $pdf->Cell(24,6,($dataOC['cotizacion'] == null )? 'POR CONFIRMAR': utf8_decode($dataOC['cotizacion']), 1, 0, 'C');
 
                $pdf->SetXY(179,72);
                $pdf->SetFont('Arial','B',6);
@@ -321,7 +321,7 @@ switch ($_GET["op"]){
 
                $pdf->SetXY(179,76);
                $pdf->SetFont('Arial','B',5);
-               $pdf->Cell(23,6,utf8_decode(''), 1, 0, 'C');
+               $pdf->Cell(23,6,date('d/m/Y',strtotime($dataReq['fecha'])), 1, 0, 'C');
 // FILA
                $pdf->SetXY(10,82);
                $pdf->SetFont('Arial','B',6);
@@ -359,7 +359,11 @@ switch ($_GET["op"]){
                $pdf->SetFont('Arial','B',6);
                $pdf->MultiCell(23, 14, 'VALOR TOTAL', 1, 'C', true);
 
+               $rsptaitem = $report->mostrarItems($idrequest_temp);
+               $pdf->tablaOC($rsptaitem);
+
                $pdf->ln();
+
                $x = $pdf->getX();
                $y = $pdf->getY();
    

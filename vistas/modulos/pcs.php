@@ -50,6 +50,8 @@
                                     <label class="col-sm-12 control-label">Proveedor *:</label>
                                     <div class="col-sm-12">
                                         <input type="hidden" name="idpcs" id="idpcs">
+                                        <input type="hidden" name="idrequest_temp" id="idrequest_temp">
+                                        <input type="hidden" name="codigo" id="codigo">
                                         <select class="form-control selectpicker" data-live-search="true" name="idproveedor" id="idproveedor">
                                            
                                         </select>

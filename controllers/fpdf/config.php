@@ -142,6 +142,38 @@
                 $this->Cell(array_sum($w),0,'','T');
             }
 
+            function tablaOC($data){
+                // Column widths
+                $w = array(10, 20, 20, 95, 24, 23);
+                // Header
+                $nitem = 1;
+                $this->SetFont('Arial','',6);
+                 // Data
+                foreach($data as $row)
+                {
+                    $this->Cell($w[0],6,$nitem,'LRB',0,'C');
+                    $this->Cell($w[1],6,preg_replace('/^(\d+)\.0+$/', '$1',$row['cantidad']),'LRB',0,'C');
+                    $this->Cell($w[2],6,$row['unidad'],'LRB',0,'C');
+                    $this->Cell($w[3],6, ($row['detalle'] != '' )? utf8_encode($row['nombre'].' '.$row['detalle']): utf8_encode($row['nombre']) ,'LRB',0,'L');
+                    $this->Cell($w[4],6,'','LRB',0,'C');
+                    $this->Cell($w[5],6,'','LRB',0,'C');
+                    $this->Ln();
+                    $nitem++;
+                }
+
+                for($nitem;$nitem <= 13; $nitem++){
+                    $this->Cell($w[0],6,$nitem,'LRB',0,'C');
+                    $this->Cell($w[1],6,'','LRB',0,'L');
+                    $this->Cell($w[2],6,'','LRB',0,'C');
+                    $this->Cell($w[3],6,'','LRB',0,'C');
+                    $this->Cell($w[4],6,'','LRB',0,'C');
+                    $this->Cell($w[5],6,'','LRB',0,'C');
+                    $this->Ln();
+                }
+                // Closing line
+                $this->Cell(array_sum($w),0,'','T');
+            }
+
         }
 
 

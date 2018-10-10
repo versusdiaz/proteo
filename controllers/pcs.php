@@ -13,6 +13,8 @@ $idpcs=isset($_POST['idpcs'])? limpiarCadena($_POST['idpcs']):"";
 
 $idrequest_temp=isset($_POST['idrequest_temp'])? limpiarCadena($_POST['idrequest_temp']):"";
 
+$cotizacion=isset($_POST['codigo'])? limpiarCadena($_POST['codigo']):"";
+
 $proveedor=isset($_POST["idproveedor"])? limpiarCadena($_POST["idproveedor"]):"";
 
 $bdDepartamento=isset($_POST['bdDepartamento'])? limpiarCadena($_POST['bdDepartamento']):"";
@@ -23,10 +25,20 @@ switch ($_GET["op"]){
     case 'guardaryeditar':
 		if (empty($idpcs)){
             $rspta=$pcs->insertar($proveedor);
-            echo $rspta ? "pcs registrado con exito":"No se pudieron registrar todos los datos del pcs";
+            echo $rspta ? "Presupuesto registrado con exito":"No se pudieron registrar todos los datos del pcs";
 		}
 		else {
             $rspta=$pcs->editar($idpcs,$proveedor);
+            $rsptaDpto = $request_temp->mostrar($idrequest_temp);
+            $dpto = "";
+            if( $rsptaDpto['iddepartamento'] == 1){
+                $dpto = 'odc_mtto';
+            } 
+            
+            elseif ( $rsptaDpto['iddepartamento'] == 2 ){
+                $dpto = 'odc_op';
+            }
+            $pcs->updateOC($idrequest_temp,$proveedor,$cotizacion,$dpto);
 			echo $rspta ? "Presupuesto actualizado con exito":"No se pudo actualizar el Presupuesto";
 		}
     break;

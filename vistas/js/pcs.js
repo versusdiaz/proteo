@@ -18,6 +18,8 @@ function init(){
 function limpiar(){
     $("#idpcs").val("");
     $("#idproveedor").val("");
+    $("#idrequest_temp").val("");
+    $("#codigo").val("");
 }
 
 function mostrarform(flag){
@@ -90,7 +92,9 @@ function mostrar(idpcs){
          data = JSON.parse(data);
          mostrarform(true);
         $("#idpcs").val(idpcs);
+        $("#idrequest_temp").val(data.idrequest_temp);
         $("#idproveedor").val(data.idproveedor);
+        $("#codigo").val(data.codigo);
         $("#idproveedor").selectpicker('refresh');
      });
     }
