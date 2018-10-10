@@ -34,6 +34,7 @@
                                         <th>Codigo</th>
                                         <th>Lancha</th>
                                         <th>Por</th>
+                                        <th>Numero Interno</th>
                                         <th>Fecha</th>
                                         </tfoot>
                                     </thead>
@@ -44,6 +45,7 @@
                                         <th>Codigo</th>
                                         <th>Lancha</th>
                                         <th>Por</th>
+                                        <th>Numero Interno</th>
                                         <th>Fecha</th>
                                     </tfoot>
                                 </table>
@@ -63,14 +65,6 @@
                                     </button>
                                 <hr>
                                 </div>
-
-                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <button class="btn btn-primary btn-block" type="button" onclick="convertirCompra()" >
-                                        Convertir a Orden de Compra
-                                    </button>
-                                <hr>
-                                </div>
-
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <button class="btn btn-primary btn-block" type="button" onclick="cancelarform()" >
                                         Convertir a Orden de Servicio

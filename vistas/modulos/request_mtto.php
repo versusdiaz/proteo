@@ -34,6 +34,7 @@
                                         <th>Codigo</th>
                                         <th>Lancha</th>
                                         <th>Por</th>
+                                        <th>Numero Interno</th>
                                         <th>Fecha</th>
                                         </tfoot>
                                     </thead>
@@ -44,6 +45,7 @@
                                         <th>Codigo</th>
                                         <th>Lancha</th>
                                         <th>Por</th>
+                                        <th>Numero Interno</th>
                                         <th>Fecha</th>
                                     </tfoot>
                                 </table>

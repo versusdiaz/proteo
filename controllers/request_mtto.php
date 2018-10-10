@@ -25,8 +25,9 @@ switch ($_GET["op"]){
                "1"=>$reg->codigo,
                "2"=>$reg->lancha,
                "3"=>$reg->nombre,
-               "4"=>$reg->fecha,
-               "5"=>'<span class="badge badge-dark">Numero: '.$reg->idrequest_mtto.'</span>'
+               "4"=>$reg->idrequest_temp,
+               "5"=>$reg->fecha,
+               "6"=>'<span class="badge badge-dark">Numero: '.$reg->idrequest_mtto.'</span>'
            );
         }
         /*CARGAMOS LA DATA EN LA VARIABLE USADA PARA EL DATATABLE*/
