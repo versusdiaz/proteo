@@ -96,6 +96,11 @@ class Request_m{
         return Consulta_num($sql);        
     }
 
+    public static function validarItem($idrequest_temp){
+        $sql = "SELECT idrequest_temp FROM request_items_temp WHERE idrequest_temp = '$idrequest_temp'";
+        return Consulta_num($sql);        
+    }
+
     public static function propiedadItem($nombreItem){
         $sql = "SELECT servicio FROM items WHERE iditems= '$nombreItem' AND servicio=1";
         return Consulta_num($sql);

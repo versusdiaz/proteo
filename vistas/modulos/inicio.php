@@ -1,4 +1,4 @@
-<body class="app flex-row align-items-center">
+<body class="app flex-row align-items-center fondoATM">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-8">

@@ -201,36 +201,45 @@ break;
                 $validarFecha2 = $request_temp->validarSiguiente($reg->iddepartamento,$reg->fecha);
                 if( $validarFecha == 0 && $validarFecha2 == 0 ){
 
-                    $rspta2 = $request_temp->insertR($reg->idrequest_temp,$dpto,$reg->fecha);
-                    $rspta5 = $request_temp->insertOC($reg->idrequest_temp,$dptoOC,$reg->fecha);
+                    $validarItem = $request_temp->validarItem($reg->idrequest_temp);
 
-                    if( $rspta2 != "0" ){
-                        if( $rspta2 < 10 ){
-                            $codigo = 'RQ/GGO/OP-00'.$rspta2; /* AGREGAR IF DE 00 */
-                        } else if ( $rspta2 < 100 ){
-                            $codigo = 'RQ/GGO/OP-0'.$rspta2; /* AGREGAR IF DE 00 */
+                    if( $validarItem != 0 ){
+
+                        $rspta2 = $request_temp->insertR($reg->idrequest_temp,$dpto,$reg->fecha);
+                        $rspta5 = $request_temp->insertOC($reg->idrequest_temp,$dptoOC,$reg->fecha);
+    
+                        if( $rspta2 != "0" ){
+                            if( $rspta2 < 10 ){
+                                $codigo = 'RQ/GGO/OP-00'.$rspta2; /* AGREGAR IF DE 00 */
+                            } else if ( $rspta2 < 100 ){
+                                $codigo = 'RQ/GGO/OP-0'.$rspta2; /* AGREGAR IF DE 00 */
+                            } else {
+                                $codigo = 'RQ/GGO/OP-'.$rspta2; /* AGREGAR IF DE 00 */
+                            }
+    
+                            if( $rspta5 < 10 ){
+                                $codigoOC = 'OC/GGO/OP-00'.$rspta2; /* AGREGAR IF DE 00 */
+                            } else if ( $rspta2 < 100 ){
+                                $codigoOC = 'OC/GGO/OP-0'.$rspta2; /* AGREGAR IF DE 00 */
+                            } else {
+                                $codigoOC = 'OC/GGO/OP-'.$rspta2; /* AGREGAR IF DE 00 */
+                            }
+    
+                            $rspta3 = $request_temp->updateR($reg->idrequest_temp,$dpto,$codigo);
+                            $rspta6 = $request_temp->updateOC($reg->idrequest_temp,$dptoOC,$codigoOC,1);
+                            $rspta4 = $request_temp->vincular($reg->idrequest_temp);
+    
+                            echo $rspta3 ? "Requisicion almacenada": "Requisicion no se puede almacenar";
+                            break;
+                           
                         } else {
-                            $codigo = 'RQ/GGO/OP-'.$rspta2; /* AGREGAR IF DE 00 */
+                            echo 'Error al insertar requisicion ya existe';
                         }
 
-                        if( $rspta5 < 10 ){
-                            $codigoOC = 'OC/GGO/OP-00'.$rspta2; /* AGREGAR IF DE 00 */
-                        } else if ( $rspta2 < 100 ){
-                            $codigoOC = 'OC/GGO/OP-0'.$rspta2; /* AGREGAR IF DE 00 */
-                        } else {
-                            $codigoOC = 'OC/GGO/OP-'.$rspta2; /* AGREGAR IF DE 00 */
-                        }
-
-                        $rspta3 = $request_temp->updateR($reg->idrequest_temp,$dpto,$codigo);
-                        $rspta6 = $request_temp->updateOC($reg->idrequest_temp,$dptoOC,$codigoOC,1);
-                        $rspta4 = $request_temp->vincular($reg->idrequest_temp);
-
-                        echo $rspta3 ? "Requisicion almacenada": "Requisicion no se puede almacenar";
-                        break;
-                       
                     } else {
-                        echo 'Error al insertar requisicion ya existe';
+                        echo 'Error esta requisicion no tiene items asociados';
                     }
+
                 } else {
                     echo 'Error existe una requisicion pendiente para la fecha';
                 }
