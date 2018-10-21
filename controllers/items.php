@@ -32,11 +32,11 @@ $servicio=isset($_POST['servicio'])? limpiarCadena($_POST['servicio']):"";
 switch ($_GET["op"]){
     case 'guardaryeditar':
 		if (empty($iditems)){
-            $rspta=$item->insertar($nombre,$precio_nac,$precio_usd,$stock,$stock_min,$stock_max,$unidad,$decimales,$detalle,$servicio);
+            $rspta=$item->insertar($nombre,$precio_nac,$precio_usd,$unidad,$decimales,$detalle,$servicio);
             echo $rspta ? "Item registrado con exito":"No se pudieron registrar todos los datos del Item";
 		}
 		else {
-            $rspta=$item->editar($iditems,$nombre,$precio_nac,$precio_usd,$stock,$stock_min,$stock_max,$unidad,$decimales,$detalle,$servicio);
+            $rspta=$item->editar($iditems,$nombre,$precio_nac,$precio_usd,$unidad,$decimales,$detalle,$servicio);
 			echo $rspta ? "Item actualizado con exito":"No se pudieron actualizar los datos del Item";
 		}
     break;
@@ -50,10 +50,9 @@ switch ($_GET["op"]){
  					' <button class="btn btn-danger" onclick="desactivar('.$reg->iditems.')"><i class="fa fa-times"></i></button>':'<button class="btn btn-warning" onclick="mostrar('.$reg->iditems.')"><i class="nav-icon icon-pencil"  style="color:white" ></i></button> <button class="btn btn-danger" onclick="eliminar('.$reg->iditems.')"><i class="fa fa-trash"></i></button>'.
  					' <button class="btn btn-primary" onclick="activar('.$reg->iditems.')"><i class="fa fa-check"></i></button>',
                "1"=>$reg->nombre,
-               "2"=>$reg->stock.' '.$reg->unidad,
-               "3"=>$reg->precio_nac.' Bs.S',
-               "4"=>$reg->precio_usd.' $ ',
-               "5"=>($reg->condicion)?'<span class="badge badge-success">Activado</span>':'<span class="badge badge-danger">Desactivado</span>'
+               "2"=>$reg->precio_nac.' Bs.S',
+               "3"=>$reg->precio_usd.' $ ',
+               "4"=>($reg->condicion)?'<span class="badge badge-success">Activado</span>':'<span class="badge badge-danger">Desactivado</span>'
            );
         }
         /*CARGAMOS LA DATA EN LA VARIABLE USADA PARA EL DATATABLE*/

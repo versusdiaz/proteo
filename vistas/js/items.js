@@ -28,21 +28,6 @@ function init(){
                 number: true,
                 min: 0
             },
-            stock:{
-                required: true,
-                number: true,
-                min: 0
-            },
-            stock_min:{
-                required: true,
-                number: true,
-                min: 0
-            },
-            stock_max:{
-                required: true,
-                number:true,
-                min: 0
-            },
             unidad:{
                 required: true,
             },
@@ -91,9 +76,6 @@ function limpiar(){
     $("#nombre").val("");
     $("#precio_nac").val("");
     $("#precio_usd").val("");
-    $("#stock").val("");
-    $("#stock_min").val("");
-    $("#stock_max").val("");
     $("#servicio").val("");
     $("#servicio").selectpicker('refresh');
     $("#unidad").val("");
@@ -178,9 +160,6 @@ function mostrar(iditems){
         $("#nombre").val(data.nombre);
         $("#precio_nac").val(data.precio_nac);
         $("#precio_usd").val(data.precio_usd);
-        $("#stock").val(data.stock);
-        $("#stock_min").val(data.stock_min);
-        $("#stock_max").val(data.stock_max);
         $("#servicio").val(data.servicio);
         $("#servicio").selectpicker('refresh');
         $("#unidad").val(data.unidad);

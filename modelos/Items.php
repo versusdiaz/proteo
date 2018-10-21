@@ -5,16 +5,16 @@ class Items{
     function __construct(){
         
     }
-    public static function insertar($nombre,$precio_nac,$precio_usd,$stock,$stock_min,$stock_max,$unidad,$decimales,$detalle,$servicio){
-        $sql = "INSERT INTO items (nombre,precio_nac,precio_usd,stock,stock_min,stock_max,unidad,decimales,detalle,servicio,condicion) VALUES ('$nombre','$precio_nac','$precio_usd','$stock','$stock_min','$stock_max','$unidad','$decimales','$detalle','$servicio',1)";
+    public static function insertar($nombre,$precio_nac,$precio_usd,$unidad,$decimales,$detalle,$servicio){
+        $sql = "INSERT INTO items (nombre,precio_nac,precio_usd,unidad,decimales,detalle,servicio,condicion) VALUES ('$nombre','$precio_nac','$precio_usd','$unidad','$decimales','$detalle','$servicio',1)";
         $sw = true;
         Consulta($sql) or $sw = false;
         return $sw;
         
     }
     
-    public static function editar($iditems,$nombre,$precio_nac,$precio_usd,$stock,$stock_min,$stock_max,$unidad,$decimales,$detalle,$servicio){
-        $sql = "UPDATE items SET nombre='$nombre',precio_nac='$precio_nac',precio_usd='$precio_usd',stock='$stock',stock_min='$stock_min',stock_max='$stock_max',unidad='$unidad',decimales='$decimales',detalle='$detalle',servicio='$servicio' WHERE iditems = '$iditems'";
+    public static function editar($iditems,$nombre,$precio_nac,$precio_usd,$unidad,$decimales,$detalle,$servicio){
+        $sql = "UPDATE items SET nombre='$nombre',precio_nac='$precio_nac',precio_usd='$precio_usd',unidad='$unidad',decimales='$decimales',detalle='$detalle',servicio='$servicio' WHERE iditems = '$iditems'";
         $sw = true;
         Consulta($sql) or $sw = false;
         return $sw;

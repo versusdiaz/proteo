@@ -120,7 +120,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                    <label class="col-sm-12 control-label">Comentario *:</label>
+                                    <label class="col-sm-12 control-label">Observacion *:</label>
                                     <div class="col-sm-12">
                                         <input type="text" class="form-control" name="comentario" id="comentario">
                                     </div>

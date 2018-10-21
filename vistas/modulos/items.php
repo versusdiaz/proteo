@@ -32,7 +32,6 @@
                                     <thead>
                                         <th>Opciones</th>
                                         <th>Nombre</th>
-                                        <th>Stock</th>
                                         <th>Precio Nacional</th>
                                         <th>Precio USD</th>
                                         <th>Status</th>
@@ -43,7 +42,6 @@
                                     <tfoot>
                                         <th>Opciones</th>
                                         <th>Nombre</th>
-                                        <th>Stock</th>
                                         <th>Precio Nacional</th>
                                         <th>Precio USD</th>
                                         <th>Status</th>
@@ -79,24 +77,6 @@
                         <option value="1">SI</option>
                         <option value="0">NO</option>
                         </select>
-                        </div>
-                        </div>
-                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <label class="col-sm-12 control-label">Stock *:</label>
-                        <div class="col-sm-12">
-                        <input type="number" class="form-control" name="stock" id="stock" step="0.01" required>
-                        </div>
-                        </div>
-                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <label class="col-sm-12 control-label">Stock Minimo *:</label>
-                        <div class="col-sm-12">
-                        <input type="number" class="form-control" name="stock_min" id="stock_min" step="0.01" required>
-                        </div>
-                        </div>
-                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <label class="col-sm-12 control-label">Stock Maximo *:</label>
-                        <div class="col-sm-12">
-                        <input type="number" class="form-control" name="stock_max" id="stock_max" step="0.01" required>
                         </div>
                         </div>
                         <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
