@@ -45,7 +45,7 @@ class Pcs{
     }
 
     public static function eliminar($idpcs){
-        $sql = "DELETE T1,T2 FROM pcs_items AS T1 LEFT JOIN pcs AS T2 ON T1.idpcs = T2.idpcs WHERE T1.idpcs = '$idpcs' ";
+        $sql = "DELETE FROM pcs WHERE idpcs = '$idpcs' ";
         return Consulta($sql);
     }
 

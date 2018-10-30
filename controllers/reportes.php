@@ -2,7 +2,6 @@
 session_start();
 require_once("../modelos/Reportes.php");
 require_once("fpdf/fpdf.php");
-require_once("fpdf/config.php");
 
 $report = new Reportes();
 
@@ -22,6 +21,7 @@ $idodc=isset($_POST['idodc'])? limpiarCadena($_POST['idodc']):"";
 switch ($_GET["op"]){
 
     case 'reportRequisicion':
+    require_once("fpdf/config.php");
         /*ID USUARIO SE ENVIA POR POST ESTA DECLARADO EN LA INICIALIACION*/
         if ($idrequest != ""){
             $formato = $report->dataFormato(1);
@@ -124,11 +124,11 @@ switch ($_GET["op"]){
 
             $pdf->SetXY(170,55);
             $pdf->SetFont('Arial','B',8);
-            $pdf->Cell(3,4,($dataReq['calidad'] != 2 ) ? '': 'X', 1, 0, 'C');
+            $pdf->Cell(3,4,($dataReq['calidad'] != 1 ) ? '': 'X', 1, 0, 'C');
 
             $pdf->SetXY(194,55);
             $pdf->SetFont('Arial','B',8);
-            $pdf->Cell(3,4,($dataReq['calidad'] != 1 ) ? '': 'X', 1, 0, 'C');
+            $pdf->Cell(3,4,($dataReq['calidad'] != 2 ) ? '': 'X', 1, 0, 'C');
 
             // FILA
 
@@ -166,11 +166,11 @@ switch ($_GET["op"]){
 
             $pdf->SetXY(160,63);
             $pdf->SetFont('Arial','B',8);
-            $pdf->Cell(3,4,($dataReq['calidad'] != 1 ) ? '': 'X', 1, 0, 'C');
+            $pdf->Cell(3,4,($dataReq['mantenimiento'] != 1 ) ? '': 'X', 1, 0, 'C');
 
             $pdf->SetXY(194,63);
             $pdf->SetFont('Arial','B',8);
-            $pdf->Cell(3,4,($dataReq['calidad'] != 2 ) ? '': 'X', 1, 0, 'C');
+            $pdf->Cell(3,4,($dataReq['mantenimiento'] != 2 ) ? '': 'X', 1, 0, 'C');
 
             $pdf->SetXY(10,69);
             
@@ -218,6 +218,7 @@ switch ($_GET["op"]){
     break;
 
     case 'reportOC':
+    require_once("fpdf/config-nf.php");
         /*ID USUARIO SE ENVIA POR POST ESTA DECLARADO EN LA INICIALIACION*/
         if ($idodc != ""){
             $formato = $report->dataFormato(2);
@@ -289,16 +290,16 @@ switch ($_GET["op"]){
 //             FILA
 
                $pdf->SetXY(10,57);
-               $pdf->SetFont('Arial','B',8);
-               $pdf->Cell(88,15,'', 1, 0, 'C');
+               $pdf->SetFont('Arial','',8);
+               $pdf->Cell(88,15,'INMEDIATA', 1, 0, 'C');
 
                $pdf->SetXY(98,57);
-               $pdf->SetFont('Arial','B',8);
-               $pdf->Cell(68,15,'', 1, 0, 'C');
+               $pdf->SetFont('Arial','',8);
+               $pdf->Cell(68,15,'PUERTO LA CRUZ -'.date('d/m/Y',strtotime($dataReq['fecha'])), 1, 0, 'C');
 
                $pdf->SetXY(166,57);
-               $pdf->SetFont('Arial','B',8);
-               $pdf->Cell(36,15,'', 1, 0, 'C');
+               $pdf->SetFont('Arial','',8);
+               $pdf->Cell(36,15,'CREDITO - 7 DIAS', 1, 0, 'C');
 
 //             FILA
 
