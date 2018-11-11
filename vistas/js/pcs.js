@@ -116,7 +116,7 @@ function mostrar(idpcs){
         });
  }
 
- function imprimir(idpcs,idrequest_temp){
+ function imprimirp(idpcs,idrequest_temp){
     var formData = new FormData();
     formData.append("idpcs",idpcs);
     formData.append("idrequest_temp",idrequest_temp);

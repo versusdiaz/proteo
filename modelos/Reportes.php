@@ -31,4 +31,9 @@ class Reportes{
         return ConsultaFila($sql);
     }
 
+    public static function mostrarPCS($idpcs){
+        $sql = "SELECT T1.codigo, T1.fecha, T2.nombre, T2.nfiscal, T2.direccion, T2.telefono FROM pcs AS T1 LEFT JOIN proveedores AS T2 ON T1.idproveedor = T2.idproveedor WHERE idpcs = $idpcs";
+        return ConsultaFila($sql);
+    }
+
 }

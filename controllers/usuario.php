@@ -148,22 +148,23 @@ switch ($_GET["op"]){
 	    	//Declaramos el array para almacenar todos los permisos marcados
 			$valores=array();
 
+			// ACTIVAR PARA DEFINIR PERMISOS
 			//Almacenamos los permisos marcados en el array
-			while ($per = $marcados->fetch_object())
-				{
-					array_push($valores, $per->idpermiso);
-				}
+			// while ($per = $marcados->fetch_object())
+			// 	{
+			// 		array_push($valores, $per->idpermiso);
+			// 	}
 
-			//Determinamos los accesos del usuario
-			in_array(1,$valores)?$_SESSION['escritorio']=1:$_SESSION['escritorio']=0;
-			in_array(2,$valores)?$_SESSION['boletas']=1:$_SESSION['boletas']=0;
-			in_array(3,$valores)?$_SESSION['ingresar']=1:$_SESSION['ingresar']=0;
-			in_array(4,$valores)?$_SESSION['documentos']=1:$_SESSION['documentos']=0;
-			in_array(5,$valores)?$_SESSION['carteleras']=1:$_SESSION['carteleras']=0;
-			in_array(6,$valores)?$_SESSION['alertas']=1:$_SESSION['alertas']=0;
-			in_array(7,$valores)?$_SESSION['permisos']=1:$_SESSION['permisos']=0;
-			in_array(8,$valores)?$_SESSION['prontopago']=1:$_SESSION['prontopago']=0;			
-			in_array(9,$valores)?$_SESSION['reportes']=1:$_SESSION['reportes']=0;
+			// //Determinamos los accesos del usuario
+			// in_array(1,$valores)?$_SESSION['escritorio']=1:$_SESSION['escritorio']=0;
+			// in_array(2,$valores)?$_SESSION['boletas']=1:$_SESSION['boletas']=0;
+			// in_array(3,$valores)?$_SESSION['ingresar']=1:$_SESSION['ingresar']=0;
+			// in_array(4,$valores)?$_SESSION['documentos']=1:$_SESSION['documentos']=0;
+			// in_array(5,$valores)?$_SESSION['carteleras']=1:$_SESSION['carteleras']=0;
+			// in_array(6,$valores)?$_SESSION['alertas']=1:$_SESSION['alertas']=0;
+			// in_array(7,$valores)?$_SESSION['permisos']=1:$_SESSION['permisos']=0;
+			// in_array(8,$valores)?$_SESSION['prontopago']=1:$_SESSION['prontopago']=0;			
+			// in_array(9,$valores)?$_SESSION['reportes']=1:$_SESSION['reportes']=0;
 	}
 	echo json_encode($fetch); 
 

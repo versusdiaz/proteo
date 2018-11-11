@@ -17,6 +17,7 @@ $bdReq=isset($_POST['bdReq'])? limpiarCadena($_POST['bdReq']):"";
 
 $idodc=isset($_POST['idodc'])? limpiarCadena($_POST['idodc']):"";
 
+$idpcs=isset($_POST['idpcs'])? limpiarCadena($_POST['idpcs']):"";
 
 switch ($_GET["op"]){
 
@@ -460,11 +461,11 @@ switch ($_GET["op"]){
         }
     break;
 
-    case 'reportOC':
-    require_once("fpdf/config-nf.php");
+    case 'reportPresupuesto':
+    require_once("fpdf/config-n0f.php");
         /*ID USUARIO SE ENVIA POR POST ESTA DECLARADO EN LA INICIALIACION*/
-        if ($idodc != ""){
-            $formato = $report->dataFormato(2);
+        if ($idpcs != ""){
+            $formato = $report->dataFormato(3);
             $codigo = $formato['codigo'];
             $fechaf = $formato['fecha'];
             $titulo = $formato['titulo'];
@@ -472,11 +473,11 @@ switch ($_GET["op"]){
 
             $subtotal = 0;
 
-            $numReq = $report->numReq($idrequest_temp, $bdDepartamento);
+            // $numReq = $report->numReq($idrequest_temp, $bdDepartamento); ACTIVAR SI SE NECESITA MOSTRAR NUMREQ
 
             $dataReq = $report->mostrarRequest($idrequest_temp);
 
-            $dataOC = $report->mostrarOC($idodc,$bdDepartamento,$bdReq);
+            $dataPCS = $report->mostrarPCS($idpcs);
 
             $pdf = new PDF($codigo,$dataReq['responsable'],$dataReq['supervisor'],$dataReq['fecha'],$fechaf,$titulo,$revision);
 
@@ -486,15 +487,15 @@ switch ($_GET["op"]){
 
                $pdf->SetXY(10,42);
                $pdf->SetFont('Arial','B',6);
-               $pdf->Cell(44,5,utf8_decode('Nº ORDEN DE COMPRA'), 1, 0, 'C', true);
+               $pdf->Cell(44,5,utf8_decode('Nº COTIZACION'), 1, 0, 'C', true);
 
                $pdf->SetXY(54,42);
                $pdf->SetFont('Arial','B',6);
-               $pdf->Cell(44,5,utf8_decode('Nº REQUISICION'), 1, 0, 'C', true);
+               $pdf->Cell(82,5,utf8_decode('NOMBRE DE PROVEEDOR'), 1, 0, 'C', true);
 
-               $pdf->SetXY(98,42);
+               $pdf->SetXY(136,42);
                $pdf->SetFont('Arial','B',6);
-               $pdf->Cell(82,5,'NOMBRE DEL PROVEEDOR', 1, 0, 'C', true);
+               $pdf->Cell(44,5,'COD. PROVEEDOR', 1, 0, 'C', true);
 
                $pdf->SetXY(180,42);
                $pdf->SetFont('Arial','B',6);
@@ -504,15 +505,15 @@ switch ($_GET["op"]){
 
                 $pdf->SetXY(10,47);
                 $pdf->SetFont('Arial','',6);
-                $pdf->Cell(44,5,utf8_decode($numReq['codigo']), 1, 0, 'C');
+                $pdf->Cell(44,5,utf8_decode($dataPCS['codigo']), 1, 0, 'C');
 
                 $pdf->SetXY(54,47);
                 $pdf->SetFont('Arial','',6);
-                $pdf->Cell(44,5,utf8_decode($dataOC['codigo']), 1, 0, 'C');
+                $pdf->Cell(82,5,utf8_decode($dataPCS['nombre']), 1, 0, 'C');
 
-                $pdf->SetXY(98,47);
+                $pdf->SetXY(136,47);
                 $pdf->SetFont('Arial','',6);
-                $pdf->Cell(82,5,utf8_decode($dataOC['nombre']), 1, 0, 'C');
+                $pdf->Cell(44,5,utf8_decode($dataPCS['nfiscal']), 1, 0, 'C');
 
                 $pdf->SetXY(180,47);
                 $pdf->SetFont('Arial','',6);
@@ -522,86 +523,42 @@ switch ($_GET["op"]){
 
                $pdf->SetXY(10,52);
                $pdf->SetFont('Arial','B',6);
-               $pdf->Cell(88,5,'CONDICIONES DE ENTREGA', 1, 0, 'C', true);
+               $pdf->Cell(192,10,'NOSOTROS LE COTIZAMOS LOS SIGUIENTES PRODUCTOS Y/O SERVICIOS', 1, 0, 'C', true);
 
-               $pdf->SetXY(98,52);
-               $pdf->SetFont('Arial','B',6);
-               $pdf->Cell(68,5,'LUGAR Y FECHA DE ENTREGA', 1, 0, 'C', true);
-
-               $pdf->SetXY(166,52);
-               $pdf->SetFont('Arial','B',6);
-               $pdf->Cell(36,5,'CONDICIONES DE PAGO', 1, 0, 'C', true);
-
-//             FILA
-
-               $pdf->SetXY(10,57);
-               $pdf->SetFont('Arial','',8);
-               $pdf->Cell(88,15,'INMEDIATA', 1, 0, 'C');
-
-               $pdf->SetXY(98,57);
-               $pdf->SetFont('Arial','',8);
-               $pdf->Cell(68,15,'PUERTO LA CRUZ -'.date('d/m/Y',strtotime($dataReq['fecha'])), 1, 0, 'C');
-
-               $pdf->SetXY(166,57);
-               $pdf->SetFont('Arial','',8);
-               $pdf->Cell(36,15,'CREDITO - 7 DIAS', 1, 0, 'C');
-
-//             FILA
-
-               $pdf->SetXY(10,72);
-               $pdf->SetFont('Arial','B',6);
-               $pdf->Cell(145,10,'LE SOLICITAMOS LOS SIGUIENTES PRODUCTOS, CUYOS PRECIOS CORRESPONDEN AL', 1, 0, 'C', true);
-
-
-               $pdf->SetXY(155,72);
-               $pdf->SetFont('Arial','B',6);
-               $pdf->Cell(24,4,utf8_decode('Nº COTIZACION'), 1, 0, 'C', true);
-
-               $pdf->SetXY(155,76);
-               $pdf->SetFont('Arial','B',5);
-               $pdf->Cell(24,6,($dataOC['cotizacion'] == null )? 'POR CONFIRMAR': utf8_decode($dataOC['cotizacion']), 1, 0, 'C');
-
-               $pdf->SetXY(179,72);
-               $pdf->SetFont('Arial','B',6);
-               $pdf->Cell(23,4,utf8_decode('FECHA'), 1, 0, 'C', true);
-
-               $pdf->SetXY(179,76);
-               $pdf->SetFont('Arial','B',5);
-               $pdf->Cell(23,6,date('d/m/Y',strtotime($dataReq['fecha'])), 1, 0, 'C');
 // FILA
-               $pdf->SetXY(10,82);
+               $pdf->SetXY(10,62);
                $pdf->SetFont('Arial','B',6);
                $pdf->MultiCell(10, 14, 'ITEM', 1, 'C', true);
 
-               $pdf->SetXY(20,82);
+               $pdf->SetXY(20,62);
                $pdf->MultiCell(20, 14, 'CANTIDAD', 1, 'C', true);
 
-               $pdf->SetXY(40,82);
+               $pdf->SetXY(40,62);
                $pdf->SetFont('Arial','B',5);
                $pdf->MultiCell(20, 14, 'UNIDAD DE MEDIDA', 1, 'C', true);
 
-               $pdf->SetXY(60,82);
+               $pdf->SetXY(60,62);
                $pdf->SetFont('Arial','B',6);
                $pdf->MultiCell(95, 4, 'DESCRIPCION DEL PRODUCTO', 'LTR', 'C', true);
 
-               $pdf->SetXY(60,86);
+               $pdf->SetXY(60,66);
                $pdf->SetFont('Arial','',5);
                $pdf->MultiCell(95, 2, '(TIPO, REFERENCIA, MODELO,CLASE,GRADO,CARACTERISTICAS', 'LR', 'C', true);
 
-               $pdf->SetXY(60,88);
+               $pdf->SetXY(60,68);
                $pdf->MultiCell(95, 2, '(TECNICAS,PLANOS,ESQUEMAS,ESPECIFICACIONES,REQUISITOS DEL PROCESO Y', 'LR', 'C', true);
 
-               $pdf->SetXY(60,90);
+               $pdf->SetXY(60,70);
                $pdf->MultiCell(95, 2, 'CUALQUIER OTRA DESCRIPCION)', 'LR', 'C', true);
 
-               $pdf->SetXY(60,92);
+               $pdf->SetXY(60,72);
                $pdf->MultiCell(95, 4, '', 'LRB', 'C', true);
 
-               $pdf->SetXY(155,82);
+               $pdf->SetXY(155,62);
                $pdf->SetFont('Arial','B',6);
                $pdf->MultiCell(24, 14, 'VALOR UNITARIO', 1, 'C', true);
 
-               $pdf->SetXY(179,82);
+               $pdf->SetXY(179,62);
                $pdf->SetFont('Arial','B',6);
                $pdf->MultiCell(23, 14, 'VALOR TOTAL', 1, 'C', true);
 
@@ -622,70 +579,57 @@ switch ($_GET["op"]){
                $pdf->Cell(23,5,number_format($subtotal,2,',','.'), 1, 0, 'R');
 
                $pdf->SetXY($x,$y+7);
-               $pdf->Cell(169,5,'IVA 16 %', 'LR', 0, 'R');
+               $pdf->Cell(169,5,'IVA  %', 'LR', 0, 'R');
                $pdf->SetXY($x+169,$y+7);
-               $pdf->Cell(23,5,number_format($subtotal * 0.16 ,2,',','.'), 1, 0, 'R');
+               $pdf->Cell(23,5,'', 1, 0, 'R');
 
                $pdf->SetXY($x,$y+12);
                $pdf->Cell(169,5,'Total', 'LR', 0, 'R');
                $pdf->SetXY($x+169,$y+12);
-               $pdf->Cell(23,5,number_format($subtotal * 1.16 ,2,',','.'), 1, 0, 'R');
+               $pdf->Cell(23,5,'', 1, 0, 'R');
+
+                // FILA
+
+                $pdf->SetXY($x,$y+17);
+                $pdf->SetFont('Arial','B',6);
+                $pdf->Cell(88,5,'DIRECCION / TELEFONO', 1, 0, 'C', true);
+
+                $pdf->SetXY($x+88,$y+17);
+                $pdf->SetFont('Arial','B',6);
+                $pdf->Cell(68,5,'SELLO DEL PROVEEDOR', 1, 0, 'C', true);
+
+                $pdf->SetXY($x+156,$y+17);
+                $pdf->SetFont('Arial','B',6);
+                $pdf->Cell(36,5,'CONDICIONES DE PAGO', 1, 0, 'C', true);
+
+
+            // FILA
 
                $pdf->SetXY($x,$y+17);
-               $pdf->SetFont('Arial','B',8);
-               $pdf->Cell(192,5,'REQUISITOS DE CALIDAD', 1, 0, 'C', true);
+               $pdf->SetFont('Arial','',6);
+               $pdf->Cell(88,20,$dataPCS['direccion'].' / '.$dataPCS['telefono'], 1, 0, 'L');
 
-               $pdf->SetXY($x,$y+22);
-               $pdf->SetFont('Arial','B',6);
-               $pdf->Cell(30,5,'URGENTE', 1, 0, 'C', true);
+               $pdf->SetXY($x+88,$y+17);
+               $pdf->SetFont('Arial','',8);
+               $pdf->Cell(68,20,'', 1, 0, 'C');
 
-               $pdf->SetXY($x+30,$y+22);
-               $pdf->Cell(76,5,'NORMATIVA DOCUMENTOS APLICABLES', 1, 0, 'C', true);
+               $pdf->SetXY($x+156,$y+17);
+               $pdf->SetFont('Arial','',8);
+               $pdf->Cell(36,20,'CREDITO - 7 DIAS', 1, 0, 'C');
 
-               $pdf->SetXY($x+106,$y+22);
-               $pdf->Cell(86,5,'ESPECIFICACIONES DE EMBALAJE Y ENVIO', 1, 0, 'C', true);
+               //LINEA
 
-               // LINEA
+                $pdf->SetXY($x,$y+37);
+                $pdf->SetFont('Arial','B',8);
+                $pdf->Cell(192,5,'OBSERVACIONES', 1, 0, 'C', true);
 
-               $pdf->SetXY($x,$y+27);
-               $pdf->Cell(30,5,'SI__ NO_X_', 1, 0, 'C');
-
-               $pdf->SetXY($x,$y+32);
-               $pdf->Cell(30,5,'CERIF. CALIDAD', 1, 0, 'C', true);
-
-               $pdf->SetXY($x,$y+37);
-               $pdf->Cell(30,5,'SI__ NO_X_', 1, 0, 'C');
-
-               $pdf->SetXY($x+30,$y+27);
-               $pdf->Cell(76,15,'NO APLICA', 1, 0, 'C');
-
-               $pdf->SetXY($x+106,$y+27);
-               $pdf->Cell(86,10,'NO APLICA', 1, 0, 'C');
-
-               $pdf->SetXY($x+106,$y+37);
-               $pdf->Cell(86,5,'CONDICIONES DE SEGURIDAD', 1, 0, 'C', true);
-
-                // LINEA
-
-               $pdf->SetXY($x,$y+42);
-               $pdf->Cell(106,5,'CARGO AUTORIZADO PARA LA INSPECCION EN RECEPCION', 1, 0, 'C', true);
-
-               $pdf->SetXY($x,$y+47);
-               $pdf->Cell(106,5,'NO APLICA', 1, 0, 'C');
-
-               $pdf->SetXY($x+106,$y+42);
-               $pdf->Cell(86,10,'NO APLICA', 1, 0, 'C');
-
-               $pdf->SetXY($x,$y+52);
-               $pdf->SetFont('Arial','B',8);
-               $pdf->Cell(192,5,'OBSERVACIONES', 1, 0, 'C', true);
-
-               $pdf->SetXY($x,$y+57);
-               $pdf->Cell(192,5,'', 1, 0, 'C');
-               $pdf->SetXY($x,$y+62);
-               $pdf->Cell(192,5,'', 1, 0, 'C');
-               $pdf->SetXY($x,$y+67);
-               $pdf->Cell(192,5,'', 1, 0, 'C');
+                $pdf->SetXY($x,$y+42);
+                $pdf->SetFont('Arial','',6);
+                $pdf->Cell(192,5,'PRECIO SUJETO A CAMBIO SIN PREVIO AVISO', 1, 0, 'C');
+                $pdf->SetXY($x,$y+47);
+                $pdf->Cell(192,5,'SUBTOTAL NO INCLUYE IVA', 1, 0, 'C');
+                $pdf->SetXY($x,$y+52);
+                $pdf->Cell(192,5,'', 1, 0, 'C');
 
                $pdf->ln();
 
