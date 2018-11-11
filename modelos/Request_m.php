@@ -45,7 +45,7 @@ class Request_m{
     }
 
     public static function listarP($idrequest_temp){
-        $sql = "SELECT T1.idrequest_items_temp, T1.detalle, T2.nombre, T1.cantidad FROM request_items_temp AS T1 LEFT JOIN items AS T2 ON T1.iditem = T2.iditems WHERE T1.idrequest_temp = $idrequest_temp";
+        $sql = "SELECT T1.idrequest_items_temp, T1.detalle, T2.nombre, T1.cantidad, T1.precio FROM request_items_temp AS T1 LEFT JOIN items AS T2 ON T1.iditem = T2.iditems WHERE T1.idrequest_temp = $idrequest_temp";
         return Consulta($sql);
     }
     
@@ -64,8 +64,8 @@ class Request_m{
         return Consulta($sql);
     }
 
-    public static function insertarItem($idrequest_tempP,$detalle,$nombreItem,$cantidad){
-        $sql = "INSERT INTO request_items_temp (idrequest_temp,detalle,iditem,cantidad) VALUES ('$idrequest_tempP','$detalle','$nombreItem','$cantidad')";
+    public static function insertarItem($idrequest_tempP,$detalle,$nombreItem,$cantidad,$precio){
+        $sql = "INSERT INTO request_items_temp (idrequest_temp,detalle,iditem,cantidad,precio) VALUES ('$idrequest_tempP','$detalle','$nombreItem','$cantidad','$precio')";
         $sw = true;
         Consulta($sql) or $sw = false;
         return $sw;

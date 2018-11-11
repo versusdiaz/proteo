@@ -24,6 +24,8 @@ $nombreItem=isset($_POST['nombreItem'])? limpiarCadena($_POST['nombreItem']):"";
 
 $cantidad=isset($_POST['cantidad'])? limpiarCadena($_POST['cantidad']):"";
 
+$precio=isset($_POST['precio'])? limpiarCadena($_POST['precio']):"";
+
 $supervisor=isset($_POST['supervisor'])? limpiarCadena($_POST['supervisor']):"";
 
 $fecha=isset($_POST['fecha'])? limpiarCadena($_POST['fecha']):"";
@@ -59,7 +61,7 @@ switch ($_GET["op"]){
         $validarItem = $request_temp->propiedadItem($nombreItem);
         $validarRequest = $request_temp->propiedadRequest($idrequest_tempP);
         if( $validarItem == $validarRequest ){
-            $rspta =$request_temp->insertarItem($idrequest_tempP,$detalle,$nombreItem,$cantidad);
+            $rspta =$request_temp->insertarItem($idrequest_tempP,$detalle,$nombreItem,$cantidad,$precio);
             echo $rspta ? "Item cargado con exito":"No se pudieron registrar todos los item de la Requisicion";
           } else {
              echo 'Error el Item y el tipo de Requisicion no coinciden';
@@ -130,7 +132,8 @@ break;
        $data[]=array(
            "0"=>'<button class="btn btn-danger" onclick="eliminarItem('.$reg->idrequest_items_temp.')"><i class="fa fa-trash"></i></button>',
            "1"=>($reg->detalle) ? $reg->nombre.' '.$reg->detalle : $reg->nombre,
-           "2"=>$reg->cantidad
+           "2"=>$reg->cantidad,
+           "3"=>$reg->precio
        );
     }
     /*CARGAMOS LA DATA EN LA VARIABLE USADA PARA EL DATATABLE*/

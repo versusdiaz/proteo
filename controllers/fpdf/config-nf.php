@@ -147,6 +147,7 @@
                 $w = array(10, 20, 20, 95, 24, 23);
                 // Header
                 $nitem = 1;
+                $subtotal = 0;
                 $this->SetFont('Arial','',6);
                  // Data
                 foreach($data as $row)
@@ -155,10 +156,11 @@
                     $this->Cell($w[1],6,preg_replace('/^(\d+)\.0+$/', '$1',$row['cantidad']),'LRB',0,'C');
                     $this->Cell($w[2],6,$row['unidad'],'LRB',0,'C');
                     $this->Cell($w[3],6, ($row['detalle'] != '' )? utf8_encode($row['nombre'].' '.$row['detalle']): utf8_encode($row['nombre']) ,'LRB',0,'L');
-                    $this->Cell($w[4],6,'','LRB',0,'C');
-                    $this->Cell($w[5],6,'','LRB',0,'C');
+                    $this->Cell($w[4],6,number_format($row['precio'],2,',','.'),'LRB',0,'C');
+                    $this->Cell($w[5],6,number_format($row['precio']*$row['cantidad'],2,',','.'),'LRB',0,'C');
                     $this->Ln();
                     $nitem++;
+                    $subtotal = $subtotal + ( $row['precio']*$row['cantidad'] );
                 }
 
                 for($nitem;$nitem <= 13; $nitem++){
@@ -172,6 +174,7 @@
                 }
                 // Closing line
                 $this->Cell(array_sum($w),0,'','T');
+                return $subtotal;
             }
 
         }

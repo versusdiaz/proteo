@@ -122,6 +122,8 @@ function limpiarP(){
     $("#nombre").val("");
     $("#cantidad").val("");
     $("#detalle").val("");
+    $("#precio").val("");
+
 }
 
 function mostrarform(flag){
