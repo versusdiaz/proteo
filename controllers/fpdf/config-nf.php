@@ -82,30 +82,26 @@
                 $y = $this->getY();
                 $this->SetXY($x,$y);
                 $this->SetFont('Arial','B',8);
-                $this->Cell(72,5,'ELABORADO POR', 1, 0, 'C', true);
-                $this->Cell(31,5,'FECHA', 1, 0, 'C', true);
-                $this->Cell(58,5,'APROBADO POR', 1, 0, 'C', true);
-                $this->Cell(31,5,'FECHA', 1, 0, 'C', true);
+                $this->Cell(103,5,'ELABORADO POR', 1, 0, 'C', true);
+                $this->Cell(89,5,'APROBADO POR', 1, 0, 'C', true);
 
                 $this->SetXY($x,$y+5);
 
                 $this->SetFont('Arial','',6);
-                $this->Cell(72,5,'NOMBRE Y APELLIDO: '.$this->elaborador, 1, 0, 'L');
-                $this->Cell(31,5,date('d/m/Y',strtotime($this->fecha)), 1, 0, 'C');
-                $this->Cell(58,5,'NOMBRE Y APELLIDO: LIDDA TOUSSAINT', 1, 0, 'L');
-                $this->Cell(31,5,date('d/m/Y',strtotime($this->fecha)), 1, 0, 'C');
+                $this->Cell(103,5,'NOMBRE Y APELLIDO: '.$this->elaborador, 1, 0, 'L');
+                $this->Cell(89,5,'NOMBRE Y APELLIDO: LIDDA TOUSSAINT', 1, 0, 'L');
 
                 $this->SetXY($x,$y+10);
-                $this->Cell(72,5,'CARGO:', 1, 0, 'L');
-                $this->Cell(31,5,'', 1, 0, 'C');
-                $this->Cell(58,5,'CARGO:', 1, 0, 'L');
-                $this->Cell(31,5,'', 1, 0, 'C');
+                $this->Cell(103,5,'CARGO:', 1, 0, 'L');
+                $this->Cell(89,5,'CARGO:', 1, 0, 'L');
 
                 $this->SetXY($x,$y+15);
-                $this->Cell(72,5,'FIRMA:', 1, 0, 'L');
-                $this->Cell(31,5,'', 1, 0, 'C');
-                $this->Cell(58,5,'FIRMA:', 1, 0, 'L');
-                $this->Cell(31,5,'', 1, 0, 'C');
+                $this->Cell(103,5,'FIRMA:', 1, 0, 'L');
+                $this->Cell(89,5,'FIRMA:', 1, 0, 'L');
+
+                $this->SetXY($x,$y+20);
+                $this->Cell(103,5,'FECHA:  '.date('d/m/Y',strtotime($this->fecha)), 1, 0, 'L');
+                $this->Cell(89,5,'FECHA:  '.date('d/m/Y',strtotime($this->fecha)), 1, 0, 'L');
 
             }
 
