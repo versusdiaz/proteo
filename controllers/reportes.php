@@ -111,7 +111,7 @@ switch ($_GET["op"]){
 
             $pdf->SetXY(30,63);
             $pdf->SetFont('Arial','B',8);
-            $pdf->Cell(3,4,($dataReq['prioridad'] != 3 ) ? '': 'X' , 1, 0, 'C');
+            $pdf->Cell(3,4,($dataReq['stock'] != 3 ) ? '': 'X' , 1, 0, 'C');
 
             $pdf->SetXY(14,63);
             $pdf->SetFont('Arial','B',7);
@@ -119,7 +119,7 @@ switch ($_GET["op"]){
 
             $pdf->SetXY(60,63);
             $pdf->SetFont('Arial','B',8);
-            $pdf->Cell(3,4,($dataReq['prioridad'] != 2 ) ? '': 'X' , 1, 0, 'C');
+            $pdf->Cell(3,4,($dataReq['stock'] != 2 ) ? '': 'X' , 1, 0, 'C');
 
             $pdf->SetXY(44,63);
             $pdf->SetFont('Arial','B',7);
@@ -127,7 +127,7 @@ switch ($_GET["op"]){
 
             $pdf->SetXY(90,63);
             $pdf->SetFont('Arial','B',8);
-            $pdf->Cell(3,4,($dataReq['prioridad'] != 1 ) ? '': 'X' , 1, 0, 'C');
+            $pdf->Cell(3,4,($dataReq['stock'] != 1 ) ? '': 'X' , 1, 0, 'C');
 
             $pdf->SetXY(74,63);
             $pdf->SetFont('Arial','B',7);

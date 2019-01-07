@@ -44,15 +44,16 @@ $detalle=isset($_POST['detalle'])? limpiarCadena($_POST['detalle']):"";
 
 $servicio=isset($_POST['servicio'])? limpiarCadena($_POST['servicio']):"";
 
+$stock=isset($_POST['stock'])? limpiarCadena($_POST['stock']):"";
 
 switch ($_GET["op"]){
     case 'guardaryeditar':
 		if (empty($idrequest_temps)){
-            $rspta=$request_temp->insertar($idusuario,$iddepartamento,$idcentro,$comentario,$responsable,$supervisor,$prioridad,$calidad,$mantenimiento,$fecha,$servicio);
+            $rspta=$request_temp->insertar($idusuario,$iddepartamento,$idcentro,$comentario,$responsable,$supervisor,$prioridad,$calidad,$mantenimiento,$fecha,$servicio,$stock);
             echo $rspta ? "Requisicion registrada con exito":"No se pudieron registrar todos los datos de la Requisicion";
 		}
 		else {
-            $rspta=$request_temp->editar($idrequest_temps,$idusuario,$iddepartamento,$idcentro,$comentario,$responsable,$supervisor,$prioridad,$calidad,$mantenimiento,$fecha,$servicio);
+            $rspta=$request_temp->editar($idrequest_temps,$idusuario,$iddepartamento,$idcentro,$comentario,$responsable,$supervisor,$prioridad,$calidad,$mantenimiento,$fecha,$servicio,$stock);
 			echo $rspta ? "Requisicion actualizada con exito":"No se pudieron actualizar los datos de la requisicion";
 		}
     break;

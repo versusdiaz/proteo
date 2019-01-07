@@ -43,6 +43,9 @@ function init(){
             },
             comentario:{
                 required: true,
+            },
+            stock:{
+                required: true,
             }
         },
         messages: {
@@ -112,6 +115,9 @@ function limpiar(){
 
     $("#servicio").val("");
     $("#servicio").selectpicker('refresh');
+
+    $("#stock").val("");
+    $("#stock").selectpicker('refresh');
 
     $("#comentario").val("");
 
@@ -247,6 +253,8 @@ function mostrar(idrequest_temp){
         $("#prioridad").selectpicker('refresh');
         $("#servicio").val(data.servicio);
         $("#servicio").selectpicker('refresh');
+        $("#stock").val(data.stock);
+        $("#stock").selectpicker('refresh');
      });
     }
 

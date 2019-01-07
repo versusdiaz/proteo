@@ -135,6 +135,17 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <label class="col-sm-12 control-label">Stock *:</label>
+                                    <div class="col-sm-12">
+                                    <select class="form-control selectpicker" data-live-search="true" name="stock" id="stock">
+                                            <option value="">SELECCIONE</option>
+                                            <option value="1">NO APLICA</option>
+                                            <option value="2">REPOSICION</option>
+                                            <option value="3">SALIDA</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div><!-- FIN DEL ROW -->
                             <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <button class="btn btn-primary" type="submit" id="btnGuardar">
