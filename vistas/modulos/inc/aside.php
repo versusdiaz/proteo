@@ -71,6 +71,11 @@
                                 <i class="nav-icon fa fa-ship"></i> Req. OP
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="request_al">
+                                <i class="nav-icon fa fa-home"></i> Req. AL
+                            </a>
+                        </li>
                     </ul>
                 </li>     
               </ul>
@@ -101,6 +106,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="ordenesO">
                                 <i class="nav-icon fa fa-ship"></i> Ord. OP
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="ordenesA">
+                                <i class="nav-icon fa fa-home"></i> Ord. AL
                             </a>
                         </li>
                     </ul>

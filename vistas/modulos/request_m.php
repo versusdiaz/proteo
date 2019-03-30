@@ -60,6 +60,7 @@
                                             <option value="">SELECCIONE</option>
                                             <option value="1">MANTENIMIENTO</option>
                                             <option value="2">OPERACIONES</option>
+                                            <option value="3">ALMACEN</option>
                                         </select>
                                     </div>
                                 </div>

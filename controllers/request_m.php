@@ -248,6 +248,60 @@ break;
                     echo 'Error existe una requisicion pendiente para la fecha';
                 }
                  break;
+        
+            case 3:
+                # ALMACEN
+                $dpto = 'request_al';
+                $dptoOC = 'odc_al';
+                $codigo = '';
+                $codigoOC = '';
+                $validarFecha = $request_temp->validarAnterior($reg->iddepartamento,$reg->fecha);
+                $validarFecha2 = $request_temp->validarSiguiente($reg->iddepartamento,$reg->fecha);
+                if( $validarFecha == 0 && $validarFecha2 == 0 ){
+ 
+                     $validarItem = $request_temp->validarItem($reg->idrequest_temp);
+ 
+                     if( $validarItem != 0 ){
+ 
+                         $rspta2 = $request_temp->insertR($reg->idrequest_temp,$dpto,$reg->fecha);
+                         $rspta5 = $request_temp->insertOC($reg->idrequest_temp,$dptoOC,$reg->fecha);
+     
+                         if( $rspta2 != "0" ){
+                             if( $rspta2 < 10 ){
+                                 $codigo = 'RQ/GGO/AL-00'.$rspta2; /* AGREGAR IF DE 00 */
+                             } else if ( $rspta2 < 100 ){
+                                 $codigo = 'RQ/GGO/AL-0'.$rspta2; /* AGREGAR IF DE 00 */
+                             } else {
+                                 $codigo = 'RQ/GGO/AL-'.$rspta2; /* AGREGAR IF DE 00 */
+                             }
+     
+                             if( $rspta5 < 10 ){
+                                 $codigoOC = 'OC/GGO/AL-00'.$rspta2; /* AGREGAR IF DE 00 */
+                             } else if ( $rspta2 < 100 ){
+                                 $codigoOC = 'OC/GGO/AL-0'.$rspta2; /* AGREGAR IF DE 00 */
+                             } else {
+                                 $codigoOC = 'OC/GGO/AL-'.$rspta2; /* AGREGAR IF DE 00 */
+                             }
+     
+                             $rspta3 = $request_temp->updateR($reg->idrequest_temp,$dpto,$codigo);
+                             $rspta6 = $request_temp->updateOC($reg->idrequest_temp,$dptoOC,$codigoOC,1);
+                             $rspta4 = $request_temp->vincular($reg->idrequest_temp);
+     
+                             echo $rspta3 ? "Requisicion almacenada": "Requisicion no se puede almacenar";
+                             break;
+                            
+                         } else {
+                             echo 'Error al insertar requisicion ya existe';
+                         }
+ 
+                     } else {
+                         echo 'Error esta requisicion no tiene items asociados';
+                     }
+ 
+                 } else {
+                     echo 'Error existe una requisicion pendiente para la fecha';
+                 }
+                  break;
         }
     }
 

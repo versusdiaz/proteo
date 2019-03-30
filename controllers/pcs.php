@@ -34,7 +34,11 @@ switch ($_GET["op"]){
             if( $rsptaDpto['iddepartamento'] == 1){
                 $dpto = 'odc_mtto';
             } 
-            
+
+            if( $rsptaDpto['iddepartamento'] == 3){
+                $dpto = 'odc_al';
+            } 
+
             elseif ( $rsptaDpto['iddepartamento'] == 2 ){
                 $dpto = 'odc_op';
             }

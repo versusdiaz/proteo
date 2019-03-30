@@ -11,10 +11,12 @@ class EnlacesModels{
        $enlaces == "request_m" ||
        $enlaces == "ordenesM" ||
        $enlaces == "ordenesO" ||
+       $enlaces == "ordenesA" ||
        $enlaces == "pcs" ||
        $enlaces == "request_s" ||
        $enlaces == "request_mtto" ||
        $enlaces == "request_op" ||
+       $enlaces == "request_al" ||
        $enlaces == "centro" ||
        $enlaces == "imprimirc"){
        /*MODULO A CARGAR SERA*/
