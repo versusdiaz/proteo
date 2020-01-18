@@ -45,7 +45,7 @@
                 $this->SetFont('Arial','',8);
                 $this->Cell(16,5,'CODIGO:', 1, 0, 'C');
                 $this->SetXY(182,18);
-                $this->SetFont('Arial','',7);
+                $this->SetFont('Arial','',6);
                 $this->Cell(20,5, $this->codigo , 1, 0, 'C');
                     
                 $this->SetXY(166,23);
@@ -80,28 +80,34 @@
             {
                 $x = $this->getX();
                 $y = $this->getY();
+   
                 $this->SetXY($x,$y);
                 $this->SetFont('Arial','B',8);
-                $this->Cell(103,5,'ELABORADO POR', 1, 0, 'C', true);
-                $this->Cell(89,5,'APROBADO POR', 1, 0, 'C', true);
+                $this->Cell(30,5,'', 'LRT', 0, 'L');
+                $this->Cell(81,5,'ELABORADO POR', 1, 0, 'C', true);
+                $this->Cell(81,5,'APROBADO POR', 1, 0, 'C', true);
 
                 $this->SetXY($x,$y+5);
 
                 $this->SetFont('Arial','',6);
-                $this->Cell(103,5,'NOMBRE Y APELLIDO: '.$this->elaborador, 1, 0, 'L');
-                $this->Cell(89,5,'NOMBRE Y APELLIDO: '.$this->supervisor, 1, 0, 'L');
+                $this->Cell(30,5,'NOMBRE Y APELLIDO:', 'LRT', 0, 'L');
+                $this->Cell(81,5,''.$this->elaborador, 1, 0, 'L');
+                $this->Cell(81,5,''.$this->supervisor, 1, 0, 'L');
 
                 $this->SetXY($x,$y+10);
-                $this->Cell(103,5,'CARGO:', 1, 0, 'L');
-                $this->Cell(89,5,'CARGO:', 1, 0, 'L');
+                $this->Cell(30,5,'CARGO:', 'LRT', 0, 'L');
+                $this->Cell(81,5,'', 1, 0, 'L');
+                $this->Cell(81,5,'', 1, 0, 'L');
 
                 $this->SetXY($x,$y+15);
-                $this->Cell(103,5,'FIRMA:', 1, 0, 'L');
-                $this->Cell(89,5,'FIRMA:', 1, 0, 'L');
+                $this->Cell(30,5,'FIRMA:', 'LRT', 0, 'L');
+                $this->Cell(81,5,'', 1, 0, 'L');
+                $this->Cell(81,5,'', 1, 0, 'L');
 
                 $this->SetXY($x,$y+20);
-                $this->Cell(103,5,'FECHA:  '.date('d/m/Y',strtotime($this->fecha)), 1, 0, 'L');
-                $this->Cell(89,5,'FECHA:  '.date('d/m/Y',strtotime($this->fecha)), 1, 0, 'L');
+                $this->Cell(30,5,'FECHA:', 1, 0, 'L');
+                $this->Cell(81,5,''.date('d/m/Y',strtotime($this->fecha)), 1, 0, 'L');
+                $this->Cell(81,5,''.date('d/m/Y',strtotime($this->fecha)), 1, 0, 'L');
             }
 
             function tablaReq($header, $data){
@@ -126,7 +132,7 @@
                     $nitem++;
                 }
 
-                for($nitem;$nitem <= 20; $nitem++){
+                for($nitem;$nitem <= 15; $nitem++){
                     $this->Cell($w[0],6,$nitem,'LRB',0,'C');
                     $this->Cell($w[1],6,'','LRB',0,'L');
                     $this->Cell($w[2],6,'','LRB',0,'C');

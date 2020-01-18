@@ -161,7 +161,7 @@ break;
                 if( $validarFecha == 0 && $validarFecha2 == 0 ){
 
                     $rspta2 = $request_temp->insertR($reg->idrequest_temp,$dpto,$reg->fecha);
-                    $rspta5 = $request_temp->insertOC($reg->idrequest_temp,$dptoOC,$reg->fecha);
+                    // $rspta5 = $request_temp->insertOC($reg->idrequest_temp,$dptoOC,$reg->fecha);
 
                     if( $rspta2 != "0" ){
                         if( $rspta2 < 10 ){
@@ -172,16 +172,16 @@ break;
                             $codigo = 'RQ/GGO/MT-'.$rspta2; /* AGREGAR IF DE 00 */
                         }
 
-                        if( $rspta5 < 10 ){
-                            $codigoOC = 'OC/GGO/MT-00'.$rspta2; /* AGREGAR IF DE 00 */
-                        } else if ( $rspta2 < 100 ){
-                            $codigoOC = 'OC/GGO/MT-0'.$rspta2; /* AGREGAR IF DE 00 */
-                        } else {
-                            $codigoOC = 'OC/GGO/MT-'.$rspta2; /* AGREGAR IF DE 00 */
-                        }
+                        //if( $rspta5 < 10 ){
+                        //    $codigoOC = 'OC/GGO/MT-00'.$rspta2; /* AGREGAR IF DE 00 */
+                        // } else if ( $rspta2 < 100 ){
+                        //    $codigoOC = 'OC/GGO/MT-0'.$rspta2; /* AGREGAR IF DE 00 */
+                        // } else {
+                        //    $codigoOC = 'OC/GGO/MT-'.$rspta2; /* AGREGAR IF DE 00 */
+                        // }
 
                         $rspta3 = $request_temp->updateR($reg->idrequest_temp,$dpto,$codigo);
-                        $rspta6 = $request_temp->updateOC($reg->idrequest_temp,$dptoOC,$codigoOC,1);
+                        // $rspta6 = $request_temp->updateOC($reg->idrequest_temp,$dptoOC,$codigoOC,1);
                         $rspta4 = $request_temp->vincular($reg->idrequest_temp);
 
                         echo $rspta3 ? "Requisicion almacenada": "Requisicion no se puede almacenar";

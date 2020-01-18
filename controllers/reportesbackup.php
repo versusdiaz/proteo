@@ -216,70 +216,16 @@ switch ($_GET["op"]){
             $x = $pdf->getX();
             $y = $pdf->getY();
 
-            $pdf->ln();
-
             $pdf->SetXY($x,$y);
             $pdf->SetFont('Arial','B',8);
-            $pdf->Cell(192,2,'', 'LRT', 0, 'C');
-
-            $pdf->SetXY($x,$y+2);
-            $pdf->SetFont('Arial','B',8);
             $pdf->Cell(192,5,'PROVEEDOR SELECCIONADO', 'LRT', 0, 'C', true);
-            $pdf->SetXY($x,$y+7);
+            $pdf->SetXY($x,$y+5);
             $pdf->SetFont('Arial','B',6);
-            $pdf->Cell(192,5,'( SOLO PARA SER UTILIZADO POR EL ANALISTA DE PROCURA, SEGUN ITEM )', 'LRB', 0, 'C', true);
+            $pdf->Cell(192,5,'(SOLO PARA SER UTILIZADO POR EL GERENTE DE ADMINISTRACION)', 'LRB', 0, 'C', true);
 
-            $pdf->SetXY($x,$y+12);
+            $pdf->SetXY($x,$y+10);
             $pdf->SetFont('Arial','B',8);
-            $pdf->Cell(98,5,'EMPRESA', 'LRT', 0, 'C', true);
-            $pdf->Cell(69,5,'RIF', 'LRT', 0, 'C', true);
-            $pdf->Cell(25,5,utf8_decode('Nº COTIZACION'), 'LRT', 0, 'C', true);
-
-            $pdf->SetXY($x,$y+17);
-            $pdf->SetFont('Arial','B',8);
-            $pdf->Cell(98,5,'', 'LRT', 0, 'C');
-            $pdf->Cell(69,5,'', 'LRT', 0, 'C');
-            $pdf->Cell(25,5,'', 'LRT', 0, 'C');
-
-            $pdf->SetXY($x,$y+22);
-            $pdf->SetFont('Arial','B',8);
-            $pdf->Cell(30,5,'', 'LRT', 0, 'C');
-            $pdf->Cell(54,5,'UNIDAD SOLICITANTE', 'LRT', 0, 'C', true);
-            $pdf->Cell(54,5,'UNIDAD DE PROCURA', 'LRT', 0, 'C', true);
-            $pdf->Cell(54,5,utf8_decode('GERENCIA APROBATORIA'), 'LRT', 0, 'C', true);
-
-            $pdf->SetXY($x,$y+27);
-            $pdf->SetFont('Arial','',6);
-            $pdf->Cell(30,5,'NOMBRE Y APELLIDO:', 'LRT', 0, 'L');
-            $pdf->Cell(54,5,'', 'LRT', 0, 'C');
-            $pdf->Cell(54,5,'', 'LRT', 0, 'C');
-            $pdf->Cell(54,5,utf8_decode(''), 'LRT', 0, 'C');
-
-            $pdf->SetXY($x,$y+32);
-            $pdf->SetFont('Arial','',6);
-            $pdf->Cell(30,5,'CARGO:', 'LRT', 0, 'L');
-            $pdf->Cell(54,5,'', 'LRT', 0, 'C');
-            $pdf->Cell(54,5,'', 'LRT', 0, 'C');
-            $pdf->Cell(54,5,utf8_decode(''), 'LRT', 0, 'C');
-
-            $pdf->SetXY($x,$y+37);
-            $pdf->SetFont('Arial','',6);
-            $pdf->Cell(30,5,'FIRMA:', 'LRT', 0, 'L');
-            $pdf->Cell(54,5,'', 'LRT', 0, 'C');
-            $pdf->Cell(54,5,'', 'LRT', 0, 'C');
-            $pdf->Cell(54,5,utf8_decode(''), 'LRT', 0, 'C');
-
-            $pdf->SetXY($x,$y+42);
-            $pdf->SetFont('Arial','',6);
-            $pdf->Cell(30,5,'FECHA:', 'LRT', 0, 'L');
-            $pdf->Cell(54,5,'', 'LRT', 0, 'C');
-            $pdf->Cell(54,5,'', 'LRT', 0, 'C');
-            $pdf->Cell(54,5,utf8_decode(''), 'LRT', 0, 'C');
-
-            $pdf->SetXY($x,$y+47);
-            $pdf->SetFont('Arial','B',8);
-            $pdf->Cell(192,2,'', 'LRT', 0, 'C');
-
+            $pdf->Cell(192,15,'', 1, 0, 'C');
             $pdf->ln();
 
             /*NOMBRE ARCHIVO*/
